@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Series Astana | Корейская чистота</title>
+    <title>K-Series | Корейская чистота в вашем доме</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -20,7 +20,6 @@
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             background: #0a0a0a;
-            color: white;
         }
         
         .font-playfair {
@@ -35,61 +34,44 @@
             background: #0a0a0a;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #f97316, #eab308);
+            background: linear-gradient(180deg, #60a5fa, #a78bfa);
             border-radius: 4px;
         }
         
-        /* Animations */
+        /* Floating Animation */
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(3deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
         }
         
-        @keyframes float-slow {
-            0%, 100% { transform: translateY(0px) translateX(0px); }
-            33% { transform: translateY(-20px) translateX(10px); }
-            66% { transform: translateY(10px) translateX(-10px); }
+        @keyframes float-reverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(20px) rotate(-2deg); }
         }
         
         @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.4), 0 0 40px rgba(234, 179, 8, 0.2); }
-            50% { box-shadow: 0 0 40px rgba(249, 115, 22, 0.8), 0 0 80px rgba(234, 179, 8, 0.4); }
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        
-        @keyframes spin-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            0%, 100% { box-shadow: 0 0 20px rgba(96, 165, 250, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(167, 139, 250, 0.8); }
         }
         
         @keyframes bubble-rise {
             0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
             100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
         }
         
-        @keyframes wave {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(1deg); }
-            50% { transform: translateY(0) rotate(0deg); }
-            75% { transform: translateY(10px) rotate(-1deg); }
-        }
-        
-        @keyframes morph {
-            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-        }
-        
         .float-anim { animation: float 6s ease-in-out infinite; }
-        .float-slow { animation: float-slow 8s ease-in-out infinite; }
+        .float-anim-reverse { animation: float-reverse 5s ease-in-out infinite; }
         .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
-        .spin-slow { animation: spin-slow 20s linear infinite; }
-        .wave-anim { animation: wave 4s ease-in-out infinite; }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.1));
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
         
         /* Glassmorphism */
         .glass {
@@ -98,63 +80,34 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .glass-orange {
-            background: rgba(249, 115, 22, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(249, 115, 22, 0.2);
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         /* Text Gradients */
-        .text-gradient-orange {
-            background: linear-gradient(135deg, #f97316, #eab308);
+        .text-gradient-blue {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
-        .text-gradient-fire {
-            background: linear-gradient(90deg, #ef4444, #f97316, #eab308, #f97316, #ef4444);
-            background-size: 200% auto;
+        .text-gradient-purple {
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shimmer 3s linear infinite;
         }
         
-        /* Buttons */
-        .btn-magic {
-            background: linear-gradient(135deg, #f97316, #ea580c);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
+        .text-gradient-cyan {
+            background: linear-gradient(135deg, #22d3ee, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
-        .btn-magic::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.5s;
-        }
-        
-        .btn-magic:hover::before {
-            left: 100%;
-        }
-        
-        .btn-magic:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.5);
-        }
-        
-        /* Bubbles */
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.1));
-            backdrop-filter: blur(2px);
-            border: 1px solid rgba(255,255,255,0.3);
-            pointer-events: none;
+        /* Magnetic Button */
+        .magnetic-btn {
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
         /* Product Card 3D */
@@ -168,8 +121,28 @@
             transform-style: preserve-3d;
         }
         
-        .product-card-3d:hover .product-inner {
-            transform: rotateY(10deg) rotateX(5deg) translateZ(20px);
+        /* Cursor */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid white;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s;
+        }
+        
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
         }
         
         /* Loading Screen */
@@ -188,13 +161,17 @@
         }
         
         .loader-text {
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 900;
-            background: linear-gradient(90deg, #f97316, #eab308, #f97316);
+            background: linear-gradient(90deg, #60a5fa, #a78bfa, #22d3ee);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shimmer 2s linear infinite;
+            animation: shine 3s linear infinite;
+        }
+        
+        @keyframes shine {
+            to { background-position: 200% center; }
         }
         
         /* Particle Canvas */
@@ -208,174 +185,50 @@
             z-index: 1;
         }
         
-        /* Cursor */
-        .custom-cursor {
-            width: 30px;
-            height: 30px;
-            border: 2px solid #f97316;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.2s;
-        }
-        
-        .cursor-dot {
-            width: 6px;
-            height: 6px;
-            background: #f97316;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-        }
-        
-        /* Astana Badge */
-        .astana-badge {
-            background: linear-gradient(135deg, #00afca, #0095b6);
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-        
-        /* Plate Demo */
-        .plate-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            margin: 0 auto;
-        }
-        
-        .plate {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-        
-        .plate-before {
-            background: radial-gradient(circle at 30% 30%, #5c4033, #3d2817);
-            position: absolute;
-            inset: 0;
-        }
-        
-        .plate-after {
-            background: radial-gradient(circle at 30% 30%, #ffffff, #e5e5e5);
-            position: absolute;
-            inset: 0;
-            clip-path: circle(0% at 50% 50%);
-            transition: clip-path 1s ease;
-        }
-        
-        .grease-spot {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(60,40,20,0.9), rgba(40,25,10,0.7));
-            filter: blur(2px);
-        }
-        
-        .shine {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.8), transparent);
-            filter: blur(10px);
-        }
-        
-        /* Slider Handle */
-        .slider-handle-plate {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #f97316, #eab308);
-            border-radius: 50%;
-            cursor: ew-resize;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.5);
-            z-index: 10;
-            transition: transform 0.2s;
-        }
-        
-        .slider-handle-plate:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-        
-        /* Foam effect */
-        .foam {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.3));
-            box-shadow: 0 0 10px rgba(255,255,255,0.3);
-        }
-        
-        /* Navigation */
-        .nav-blur {
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(249, 115, 22, 0.2);
-        }
-        
-        /* Section reveal */
+        /* Section transitions */
         .section-reveal {
             opacity: 0;
             transform: translateY(50px);
         }
         
-        /* Magnetic button */
-        .magnetic-btn {
-            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        /* Notification */
-        .notification {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-            border: 1px solid rgba(249, 115, 22, 0.3);
-            padding: 20px 30px;
-            border-radius: 20px;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 1000;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-        
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        /* Telegram button */
-        .tg-btn {
-            background: linear-gradient(135deg, #0088cc, #0099dd);
-            transition: all 0.3s;
-        }
-        
-        .tg-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 136, 204, 0.4);
-        }
-        
-        /* Morphing blob */
-        .blob {
+        /* Water ripple effect */
+        .ripple {
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, rgba(249, 115, 22, 0.3), rgba(234, 179, 8, 0.2));
-            animation: morph 8s ease-in-out infinite;
-            filter: blur(60px);
-            z-index: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: scale(0);
+            animation: ripple-anim 1s ease-out;
         }
+        
+        @keyframes ripple-anim {
+            to { transform: scale(4); opacity: 0; }
+        }
+        
+        /* Glow text */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3);
+        }
+        
+        /* Sticky nav blur */
+        .nav-blur {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        
+        /* Product hover glow */
+        .product-hover-glow:hover {
+            box-shadow: 0 0 60px rgba(96, 165, 250, 0.4);
+        }
+        
+        /* Price tag animation */
+        @keyframes price-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .price-tag { animation: price-pulse 2s ease-in-out infinite; }
     </style>
 </head>
-<body>
+<body class="text-white">
 
     <!-- Custom Cursor -->
     <div class="custom-cursor" id="cursor"></div>
@@ -383,11 +236,11 @@
 
     <!-- Loading Screen -->
     <div class="loader" id="loader">
-        <div class="loader-text mb-6">K-SERIES</div>
-        <div class="w-64 h-2 bg-gray-800 rounded-full overflow-hidden">
-            <div class="h-full bg-gradient-to-r from-orange-500 to-yellow-500 w-0 transition-all duration-2000" id="loader-bar"></div>
+        <div class="loader-text mb-4">K-SERIES</div>
+        <div class="w-64 h-1 bg-gray-800 rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 w-0 transition-all duration-3000" id="loader-bar"></div>
         </div>
-        <p class="mt-6 text-gray-500 text-sm tracking-[0.3em] uppercase animate-pulse">Загрузка магии чистоты...</p>
+        <p class="mt-4 text-gray-400 text-sm tracking-widest">ЗАГРУЗКА КОРЕЙСКОЙ ЧИСТОТЫ...</p>
     </div>
 
     <!-- Particle Canvas -->
@@ -396,419 +249,375 @@
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6" id="navbar">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <div class="text-3xl font-black tracking-tighter magnetic-btn cursor-pointer" data-magnetic>
-                    K-SERIES<span class="text-orange-500">.</span>
-                </div>
-                <span class="astana-badge px-4 py-1 rounded-full text-xs font-bold text-white">АСТАНА</span>
+            <div class="text-2xl font-black tracking-tighter cursor-pointer magnetic-btn" data-magnetic>
+                K-SERIES<span class="text-blue-400">.</span>
             </div>
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#demo" class="magnetic-btn hover:text-orange-400 transition-colors text-sm font-semibold tracking-wider uppercase">Демо</a>
-                <a href="#products" class="magnetic-btn hover:text-orange-400 transition-colors text-sm font-semibold tracking-wider uppercase">Продукты</a>
-                <a href="#reviews" class="magnetic-btn hover:text-orange-400 transition-colors text-sm font-semibold tracking-wider uppercase">Отзывы</a>
-                <a href="https://t.me/your_channel" target="_blank" class="tg-btn px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 magnetic-btn">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.751-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.121.099.154.232.17.325.015.093.034.305.019.471z"/></svg>
-                    Telegram
-                </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#products" class="magnetic-btn hover:text-blue-400 transition-colors text-sm tracking-widest uppercase">Продукты</a>
+                <a href="#features" class="magnetic-btn hover:text-purple-400 transition-colors text-sm tracking-widest uppercase">Преимущества</a>
+                <a href="#reviews" class="magnetic-btn hover:text-cyan-400 transition-colors text-sm tracking-widest uppercase">Отзывы</a>
+                <a href="#order" class="magnetic-btn px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full hover:shadow-lg hover:shadow-blue-500/50 transition-all text-sm font-bold">КУПИТЬ СЕЙЧАС</a>
             </div>
+            <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="fixed inset-0 bg-black/95 z-40 transform translate-x-full transition-transform duration-500" id="mobile-menu">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
+            <a href="#products" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">Продукты</a>
+            <a href="#features" onclick="toggleMobileMenu()" class="hover:text-purple-400 transition-colors">Преимущества</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition-colors">Отзывы</a>
+            <a href="#order" onclick="toggleMobileMenu()" class="text-blue-400 font-bold">КУПИТЬ</a>
+        </div>
+    </div>
+
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        <!-- Animated Background -->
-        <div class="absolute inset-0 bg-gradient-to-br from-orange-900/20 via-black to-yellow-900/20"></div>
-        <div class="blob top-20 left-10 float-slow"></div>
-        <div class="blob bottom-20 right-10 float-slow" style="animation-delay: -4s; background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(249, 115, 22, 0.1));"></div>
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Dynamic Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(96,165,250,0.1),transparent_50%)]"></div>
         
         <!-- Floating Elements -->
-        <div class="absolute top-1/4 left-10 w-32 h-32 bg-orange-500/20 rounded-full blur-3xl float-anim"></div>
-        <div class="absolute bottom-1/4 right-10 w-48 h-48 bg-yellow-500/20 rounded-full blur-3xl float-anim" style="animation-delay: -3s;"></div>
+        <div class="absolute top-20 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl float-anim"></div>
+        <div class="absolute bottom-20 right-10 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl float-anim-reverse"></div>
         
         <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
             <!-- Text Content -->
             <div class="space-y-8 hero-text">
-                <div class="inline-flex items-center gap-3 px-5 py-2 glass-orange rounded-full">
-                    <span class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
-                    <span class="text-orange-300 text-sm font-semibold tracking-wider">УЖЕ В АСТАНЕ</span>
+                <div class="overflow-hidden">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight hero-title opacity-0 transform translate-y-full">
+                        ПОПРОБУЙ<br>
+                        <span class="text-gradient-blue">КАЧЕСТВО</span><br>
+                        <span class="font-playfair italic text-gradient-purple">Кореи!</span>
+                    </h1>
                 </div>
                 
-                <h1 class="text-6xl md:text-7xl lg:text-8xl font-black leading-none">
-                    <span class="block text-gradient-fire">КОРЕЙСКАЯ</span>
-                    <span class="block text-white mt-2">ЧИСТОТА</span>
-                    <span class="block font-playfair italic text-gradient-orange mt-2 text-5xl md:text-6xl">в твоём доме</span>
-                </h1>
-                
-                <p class="text-xl text-gray-400 max-w-lg leading-relaxed glass p-6 rounded-2xl">
-                    Революционные средства, которые превращают уборку в магию. 
-                    Жир, налёт, пятна — исчезают за секунды.
+                <p class="text-xl md:text-2xl text-gray-300 max-w-lg hero-subtitle opacity-0">
+                    Революционная линейка средств для уборки с натуральными ингредиентами. Чистота, которая обнимает каждую нить.
                 </p>
                 
-                <div class="flex flex-wrap gap-4">
-                    <button onclick="scrollToSection('demo')" class="btn-magic px-10 py-5 rounded-full text-white font-bold text-lg magnetic-btn pulse-glow">
-                        УВИДЕТЬ МАГИЮ →
+                <div class="flex flex-wrap gap-4 hero-buttons opacity-0">
+                    <button onclick="scrollToSection('products')" class="magnetic-btn group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50">
+                        <span class="relative z-10 font-bold text-lg">СМОТРЕТЬ ПРОДУКТЫ</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </button>
-                    <button onclick="scrollToSection('products')" class="px-10 py-5 border-2 border-orange-500/50 rounded-full font-semibold hover:bg-orange-500/10 transition-all magnetic-btn flex items-center gap-2">
-                        <span>ВЫБРАТЬ СРЕДСТВО</span>
+                    
+                    <button onclick="scrollToSection('video')" class="magnetic-btn px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all flex items-center gap-2 group">
+                        <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
+                        <span class="font-semibold">СМОТРЕТЬ ВИДЕО</span>
                     </button>
                 </div>
                 
-                <div class="flex items-center gap-8 pt-4">
-                    <div class="text-center">
-                        <div class="text-4xl font-black text-gradient-orange counter" data-target="1247">0</div>
-                        <div class="text-sm text-gray-500 mt-1">семей в Астане</div>
+                <div class="flex items-center gap-6 pt-4 hero-stats opacity-0">
+                    <div>
+                        <div class="text-3xl font-bold text-gradient-cyan">50K+</div>
+                        <div class="text-sm text-gray-400">Довольных клиентов</div>
                     </div>
-                    <div class="w-px h-12 bg-gray-800"></div>
-                    <div class="text-center">
-                        <div class="text-4xl font-black text-gradient-orange">4.9</div>
-                        <div class="text-sm text-gray-500 mt-1">рейтинг</div>
+                    <div class="w-px h-12 bg-gray-700"></div>
+                    <div>
+                        <div class="text-3xl font-bold text-gradient-purple">99%</div>
+                        <div class="text-sm text-gray-400">Положительных отзывов</div>
                     </div>
-                    <div class="w-px h-12 bg-gray-800"></div>
-                    <div class="text-center">
-                        <div class="text-4xl font-black text-gradient-orange">2ч</div>
-                        <div class="text-sm text-gray-500 mt-1">доставка</div>
+                    <div class="w-px h-12 bg-gray-700"></div>
+                    <div>
+                        <div class="text-3xl font-bold text-gradient-blue">24ч</div>
+                        <div class="text-sm text-gray-400">Свежести</div>
                     </div>
                 </div>
             </div>
             
-            <!-- Hero Image with Effects -->
-            <div class="relative flex items-center justify-center">
-                <!-- Orbiting Rings -->
+            <!-- Hero Image Composition -->
+            <div class="relative h-[600px] flex items-center justify-center hero-image-container">
+                <!-- Main Product Showcase -->
+                <div class="relative z-10 float-anim cursor-pointer" onclick="showProductDetail('all')">
+                    <img src="/mnt/kimi/upload/Gemini_Generated_Image_q8fykpq8fykpq8fy.png" alt="K-Series Products" class="w-full max-w-md drop-shadow-2xl hover:scale-105 transition-transform duration-700">
+                </div>
+                
+                <!-- Orbiting Elements -->
                 <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div class="w-[500px] h-[500px] border border-orange-500/20 rounded-full absolute spin-slow"></div>
-                    <div class="w-[400px] h-[400px] border border-yellow-500/10 rounded-full absolute spin-slow" style="animation-direction: reverse; animation-duration: 15s;"></div>
-                    <div class="w-[600px] h-[600px] border border-orange-500/10 rounded-full absolute spin-slow" style="animation-duration: 25s;"></div>
+                    <div class="w-[500px] h-[500px] border border-white/10 rounded-full absolute animate-spin-slow" style="animation-duration: 20s;"></div>
+                    <div class="w-[400px] h-[400px] border border-white/5 rounded-full absolute animate-spin-slow" style="animation-duration: 15s; animation-direction: reverse;"></div>
                 </div>
                 
-                <!-- Main Product Image -->
-                <div class="relative z-10 float-anim cursor-pointer group" onclick="createExplosion(event)">
-                    <img src="Gemini_Generated_Image_q8fykpq8fykpq8fy.png" alt="K-Series" class="w-full max-w-lg drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-700 rounded-3xl">
-                    
-                    <!-- Glow Effect -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-orange-500/20 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <!-- Floating Product Cards -->
+                <div class="absolute top-10 right-0 glass p-4 rounded-2xl float-anim-reverse cursor-pointer hover:scale-110 transition-transform" onclick="showProductDetail('kfresh')" style="animation-delay: 1s;">
+                    <div class="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mb-2">
+                        <span class="text-2xl">🌸</span>
+                    </div>
+                    <p class="text-xs font-bold text-purple-300">K-FRESH</p>
                 </div>
                 
-                <!-- Floating Badges -->
-                <div class="absolute top-10 right-0 glass p-4 rounded-2xl float-anim" style="animation-delay: 1s;">
-                    <div class="text-3xl mb-1">🇰🇷</div>
-                    <div class="text-xs font-bold text-orange-400">ИЗ КОРЕИ</div>
-                </div>
-                
-                <div class="absolute bottom-20 left-0 glass p-4 rounded-2xl float-anim" style="animation-delay: 2s;">
-                    <div class="text-3xl mb-1">🚚</div>
-                    <div class="text-xs font-bold text-orange-400">2 ЧАСА</div>
-                </div>
-                
-                <div class="absolute top-1/2 -right-10 glass p-4 rounded-2xl float-anim" style="animation-delay: 0.5s;">
-                    <div class="text-3xl mb-1">✨</div>
-                    <div class="text-xs font-bold text-orange-400">ВАУ ЭФФЕКТ</div>
+                <div class="absolute bottom-20 left-0 glass p-4 rounded-2xl float-anim cursor-pointer hover:scale-110 transition-transform" onclick="showProductDetail('kbubble')" style="animation-delay: 2s;">
+                    <div class="w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center mb-2">
+                        <span class="text-2xl">🫧</span>
+                    </div>
+                    <p class="text-xs font-bold text-blue-300">K-BUBBLE</p>
                 </div>
             </div>
         </div>
         
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-            <span class="text-xs text-gray-500 tracking-widest">ЛИСТАЙ</span>
-            <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-        </div>
-    </section>
-
-    <!-- WOW Demo Section - Plate Before/After -->
-    <section id="demo" class="relative py-32 overflow-hidden">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 section-reveal">
-                <h2 class="text-5xl md:text-6xl font-black mb-6">
-                    <span class="text-gradient-fire">ПОВЕРЬ СВОИМ</span><br>
-                    <span class="font-playfair italic text-white">глазам</span>
-                </h2>
-                <p class="text-gray-400 text-xl max-w-2xl mx-auto">
-                    Перетащи ползунок и увидь, как K-CLEASTAR справляется с застарелым жиром за 30 секунд
-                </p>
-            </div>
-            
-            <!-- Interactive Plate Demo -->
-            <div class="max-w-4xl mx-auto section-reveal">
-                <div class="glass rounded-3xl p-8 md:p-12 relative overflow-hidden">
-                    <!-- Background Effects -->
-                    <div class="absolute inset-0 bg-gradient-to-br from-orange-900/10 to-yellow-900/10"></div>
-                    
-                    <div class="relative z-10 flex flex-col md:flex-row items-center gap-12">
-                        <!-- Plate Visualization -->
-                        <div class="plate-container" id="plateDemo">
-                            <div class="plate">
-                                <!-- Dirty Side -->
-                                <div class="plate-before" id="plateBefore">
-                                    <!-- Grease spots -->
-                                    <div class="grease-spot" style="width: 120px; height: 80px; top: 30%; left: 20%;"></div>
-                                    <div class="grease-spot" style="width: 80px; height: 60px; top: 50%; left: 50%;"></div>
-                                    <div class="grease-spot" style="width: 100px; height: 70px; top: 60%; left: 30%;"></div>
-                                    <div class="grease-spot" style="width: 60px; height: 40px; top: 40%; left: 60%;"></div>
-                                    
-                                    <!-- Food remnants -->
-                                    <div class="absolute top-1/3 left-1/3 w-16 h-16 bg-red-900/60 rounded-full blur-sm"></div>
-                                    <div class="absolute top-1/2 right-1/3 w-12 h-12 bg-yellow-900/60 rounded-full blur-sm"></div>
-                                    
-                                    <!-- Text -->
-                                    <div class="absolute inset-0 flex items-center justify-center">
-                                        <div class="text-center text-white/30 font-bold text-2xl">
-                                            <div class="text-6xl mb-2">🍖</div>
-                                            <div>3 ДНЯ ЖИРА</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Clean Side -->
-                                <div class="plate-after" id="plateAfter">
-                                    <!-- Shine effects -->
-                                    <div class="shine" style="width: 100px; height: 100px; top: 20%; left: 30%;"></div>
-                                    <div class="shine" style="width: 80px; height: 80px; top: 60%; left: 60%;"></div>
-                                    <div class="shine" style="width: 60px; height: 60px; top: 40%; left: 70%;"></div>
-                                    
-                                    <!-- Text -->
-                                    <div class="absolute inset-0 flex items-center justify-center">
-                                        <div class="text-center">
-                                            <div class="text-6xl mb-2">✨</div>
-                                            <div class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">ИДЕАЛЬНО!</div>
-                                            <div class="text-gray-500 mt-2">после K-CLEASTAR</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Slider Handle -->
-                                <div class="slider-handle-plate" id="plateSlider">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                                </div>
-                            </div>
-                            
-                            <!-- Bubbles around plate -->
-                            <div class="absolute -top-4 -left-4 w-8 h-8 bg-white/20 rounded-full float-anim"></div>
-                            <div class="absolute -bottom-4 -right-4 w-6 h-6 bg-orange-400/30 rounded-full float-anim" style="animation-delay: 1s;"></div>
-                            <div class="absolute top-1/2 -left-8 w-4 h-4 bg-yellow-400/40 rounded-full float-anim" style="animation-delay: 0.5s;"></div>
-                        </div>
-                        
-                        <!-- Controls -->
-                        <div class="flex-1 space-y-6">
-                            <div class="flex items-center gap-4">
-                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-3xl pulse-glow">
-                                    🧼
-                                </div>
-                                <div>
-                                    <h3 class="text-2xl font-bold">K-CLEASTAR</h3>
-                                    <p class="text-gray-400">Сила активного кислорода</p>
-                                </div>
-                            </div>
-                            
-                            <div class="space-y-4">
-                                <div class="flex items-center gap-3 text-gray-300">
-                                    <span class="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400">1</span>
-                                    <span>Нанеси каплю на губку</span>
-                                </div>
-                                <div class="flex items-center gap-3 text-gray-300">
-                                    <span class="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400">2</span>
-                                    <span>Потри 30 секунд</span>
-                                </div>
-                                <div class="flex items-center gap-3 text-gray-300">
-                                    <span class="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400">3</span>
-                                    <span>Смой водой — ВАУ!</span>
-                                </div>
-                            </div>
-                            
-                            <button onclick="addToCart('K-CLEASTAR')" class="btn-magic w-full py-4 rounded-xl font-bold text-lg">
-                                ХОЧУ ТАКУЮ ЧИСТОТУ — 4 500 ₸
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
         </div>
     </section>
 
     <!-- Products Section -->
     <section id="products" class="relative py-32 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-black via-orange-950/10 to-black"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-20 section-reveal">
                 <h2 class="text-5xl md:text-6xl font-black mb-6">
-                    <span class="text-gradient-fire">ТРИ ЛЕГЕНДЫ</span><br>
-                    <span class="font-playfair italic text-white">чистоты</span>
+                    <span class="text-gradient-blue">ТРИ</span> 
+                    <span class="font-playfair italic text-white">столпа</span><br>
+                    <span class="text-gradient-purple">чистоты</span>
                 </h2>
-                <p class="text-gray-400 text-xl max-w-2xl mx-auto">
-                    Каждый продукт — это результат 10 лет исследований в Корее
-                </p>
+                <p class="text-gray-400 text-xl max-w-2xl mx-auto">Каждый продукт создан для особой задачи. Вместе они создают идеальную гармонию чистоты в вашем доме.</p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <!-- Product Cards Grid -->
+            <div class="grid md:grid-cols-3 gap-8">
                 <!-- K-CLEASTAR -->
-                <div class="product-card-3d group section-reveal" onclick="addToCart('K-CLEASTAR')">
-                    <div class="product-inner glass rounded-3xl p-8 h-full cursor-pointer hover:border-orange-500/50 transition-all duration-500 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-orange-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
-                        <div class="relative z-10">
-                            <div class="flex justify-between items-start mb-6">
-                                <span class="px-4 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-bold">ДЛЯ ПОСУДЫ</span>
-                                <span class="text-2xl font-black text-gradient-orange">4 500 ₸</span>
+                <div class="product-card-3d group section-reveal" onclick="flipCard(this)">
+                    <div class="product-inner relative h-[600px] w-full">
+                        <!-- Front -->
+                        <div class="absolute inset-0 glass-strong rounded-3xl p-8 flex flex-col items-center justify-between product-hover-glow transition-all duration-500 backface-hidden">
+                            <div class="w-full flex justify-between items-start">
+                                <span class="px-4 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs font-bold tracking-wider">ДЛЯ ПОСУДЫ</span>
+                                <span class="price-tag px-4 py-1 bg-white/10 rounded-full text-lg font-bold">₽890</span>
                             </div>
                             
-                            <div class="relative h-64 mb-6 flex items-center justify-center">
-                                <div class="absolute inset-0 bg-gradient-to-t from-cyan-500/10 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
-                                <img src="Gemini_Generated_Image_1ktc421ktc421ktc.png" alt="K-CLEASTAR" class="h-full object-contain transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-500 drop-shadow-2xl">
-                                
-                                <!-- Floating bubbles -->
-                                <div class="absolute top-0 right-0 w-4 h-4 bg-white/30 rounded-full float-anim"></div>
-                                <div class="absolute bottom-10 left-0 w-3 h-3 bg-cyan-400/50 rounded-full float-anim" style="animation-delay: 0.5s;"></div>
+                            <div class="relative flex-1 flex items-center justify-center w-full">
+                                <div class="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-transparent rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                                <img src="/mnt/kimi/upload/Gemini_Generated_Image_1ktc421ktc421ktc.png" alt="K-CLEASTAR" class="w-full max-w-xs transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-700 drop-shadow-2xl">
                             </div>
                             
-                            <h3 class="text-3xl font-black mb-2 group-hover:text-cyan-400 transition-colors">K-CLEASTAR</h3>
-                            <p class="text-gray-400 text-sm mb-4">Уничтожает застарелый жир без усилий. Блеск без разводов.</p>
-                            
-                            <button class="w-full py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl font-bold group-hover:shadow-lg group-hover:shadow-cyan-500/50 transition-all">
-                                В КОРЗИНУ →
-                            </button>
+                            <div class="text-center space-y-4">
+                                <h3 class="text-3xl font-black text-gradient-cyan">K-CLEASTAR</h3>
+                                <p class="text-gray-300 text-sm leading-relaxed">Чистота в каждой капле. Мощная формула для безупречной чистоты посуды.</p>
+                                <button class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl font-bold hover:shadow-lg hover:shadow-cyan-500/50 transition-all transform hover:scale-105">
+                                    В КОРЗИНУ →
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- K-BUBBLE -->
-                <div class="product-card-3d group section-reveal" style="transition-delay: 0.2s;" onclick="addToCart('K-BUBBLE')">
-                    <div class="product-inner glass rounded-3xl p-8 h-full cursor-pointer hover:border-blue-500/50 transition-all duration-500 relative overflow-hidden">
-                        <div class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full z-20">ХИТ</div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
-                        <div class="relative z-10">
-                            <div class="flex justify-between items-start mb-6">
-                                <span class="px-4 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs font-bold">УНИВЕРСАЛЬНЫЙ</span>
-                                <span class="text-2xl font-black text-gradient-orange">3 900 ₸</span>
+                <div class="product-card-3d group section-reveal" style="transition-delay: 0.2s;" onclick="flipCard(this)">
+                    <div class="product-inner relative h-[600px] w-full">
+                        <div class="absolute inset-0 glass-strong rounded-3xl p-8 flex flex-col items-center justify-between product-hover-glow transition-all duration-500">
+                            <div class="w-full flex justify-between items-start">
+                                <span class="px-4 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs font-bold tracking-wider">УНИВЕРСАЛЬНЫЙ</span>
+                                <span class="price-tag px-4 py-1 bg-white/10 rounded-full text-lg font-bold">₽790</span>
                             </div>
                             
-                            <div class="relative h-64 mb-6 flex items-center justify-center">
-                                <div class="absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
-                                <img src="Gemini_Generated_Image_pxx921pxx921pxx9.png" alt="K-BUBBLE" class="h-full object-contain transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-500 drop-shadow-2xl">
-                                
-                                <!-- Floating bubbles -->
-                                <div class="absolute top-10 left-0 w-6 h-6 bg-blue-400/40 rounded-full float-anim"></div>
-                                <div class="absolute bottom-0 right-10 w-4 h-4 bg-white/30 rounded-full float-anim" style="animation-delay: 1s;"></div>
+                            <div class="relative flex-1 flex items-center justify-center w-full">
+                                <div class="absolute inset-0 bg-gradient-to-t from-blue-500/20 to-transparent rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                                <img src="/mnt/kimi/upload/Gemini_Generated_Image_pxx921pxx921pxx9.png" alt="K-BUBBLE" class="w-full max-w-xs transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-700 drop-shadow-2xl">
                             </div>
                             
-                            <h3 class="text-3xl font-black mb-2 group-hover:text-blue-400 transition-colors">K-BUBBLE</h3>
-                            <p class="text-gray-400 text-sm mb-4">Мыльные пузыри проникают везде. 99.9% бактерий уничтожено.</p>
-                            
-                            <button class="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl font-bold group-hover:shadow-lg group-hover:shadow-blue-500/50 transition-all">
-                                В КОРЗИНУ →
-                            </button>
+                            <div class="text-center space-y-4">
+                                <h3 class="text-3xl font-black text-gradient-blue">K-BUBBLE</h3>
+                                <p class="text-gray-300 text-sm leading-relaxed">Объятия свежести для каждой вещи. Ультраконцентрат для безупречной чистоты.</p>
+                                <button class="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl font-bold hover:shadow-lg hover:shadow-blue-500/50 transition-all transform hover:scale-105">
+                                    В КОРЗИНУ →
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- K-FRESH -->
-                <div class="product-card-3d group section-reveal" style="transition-delay: 0.4s;" onclick="addToCart('K-FRESH')">
-                    <div class="product-inner glass rounded-3xl p-8 h-full cursor-pointer hover:border-purple-500/50 transition-all duration-500 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
-                        <div class="relative z-10">
-                            <div class="flex justify-between items-start mb-6">
-                                <span class="px-4 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs font-bold">ДЛЯ БЕЛЬЯ</span>
-                                <span class="text-2xl font-black text-gradient-orange">3 500 ₸</span>
+                <div class="product-card-3d group section-reveal" style="transition-delay: 0.4s;" onclick="flipCard(this)">
+                    <div class="product-inner relative h-[600px] w-full">
+                        <div class="absolute inset-0 glass-strong rounded-3xl p-8 flex flex-col items-center justify-between product-hover-glow transition-all duration-500">
+                            <div class="w-full flex justify-between items-start">
+                                <span class="px-4 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs font-bold tracking-wider">ДЛЯ БЕЛЬЯ</span>
+                                <span class="price-tag px-4 py-1 bg-white/10 rounded-full text-lg font-bold">₽690</span>
                             </div>
                             
-                            <div class="relative h-64 mb-6 flex items-center justify-center">
-                                <div class="absolute inset-0 bg-gradient-to-t from-purple-500/10 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
-                                <img src="Gemini_Generated_Image_l641pml641pml641.png" alt="K-FRESH" class="h-full object-contain transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-500 drop-shadow-2xl">
-                                
-                                <!-- Floating bubbles -->
-                                <div class="absolute top-0 left-10 w-5 h-5 bg-pink-400/40 rounded-full float-anim"></div>
-                                <div class="absolute bottom-10 right-0 w-3 h-3 bg-purple-400/50 rounded-full float-anim" style="animation-delay: 0.7s;"></div>
+                            <div class="relative flex-1 flex items-center justify-center w-full">
+                                <div class="absolute inset-0 bg-gradient-to-t from-purple-500/20 to-transparent rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                                <img src="/mnt/kimi/upload/Gemini_Generated_Image_l641pml641pml641.png" alt="K-FRESH" class="w-full max-w-xs transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-700 drop-shadow-2xl">
                             </div>
                             
-                            <h3 class="text-3xl font-black mb-2 group-hover:text-purple-400 transition-colors">K-FRESH</h3>
-                            <p class="text-gray-400 text-sm mb-4">Аромат свежести 24 часа. Мягкость без кондиционера.</p>
-                            
-                            <button class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-all">
-                                В КОРЗИНУ →
-                            </button>
+                            <div class="text-center space-y-4">
+                                <h3 class="text-3xl font-black text-gradient-purple">K-FRESH</h3>
+                                <p class="text-gray-300 text-sm leading-relaxed">Аромат, который остаётся с собой. Запах, который обнимает каждую нить.</p>
+                                <button class="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl font-bold hover:shadow-lg hover:shadow-purple-500/50 transition-all transform hover:scale-105">
+                                    В КОРЗИНУ →
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Bundle -->
-            <div class="mt-16 max-w-4xl mx-auto section-reveal">
-                <div class="glass rounded-3xl p-8 md:p-12 relative overflow-hidden group cursor-pointer" onclick="addToCart('Набор Трио')">
-                    <div class="absolute inset-0 bg-gradient-to-r from-orange-600/20 via-yellow-600/20 to-orange-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-orange-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
-                    
-                    <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                        <div class="flex items-center gap-6">
-                            <div class="text-6xl group-hover:scale-110 transition-transform duration-500">🎁</div>
-                            <div>
-                                <span class="inline-block px-4 py-1 bg-gradient-to-r from-orange-500 to-yellow-500 text-black font-bold rounded-full text-sm mb-2">ВЫГОДА 25%</span>
-                                <h3 class="text-3xl font-black">НАБОР «ТРИО ЧИСТОТЫ»</h3>
-                                <p class="text-gray-400">Все три средства + бесплатная доставка</p>
-                            </div>
+            <!-- Bundle Offer -->
+            <div class="mt-20 glass-strong rounded-3xl p-8 md:p-12 section-reveal relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20"></div>
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="text-center md:text-left">
+                        <span class="inline-block px-4 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold rounded-full text-sm mb-4">ВЫГОДНО!</span>
+                        <h3 class="text-3xl md:text-4xl font-black mb-2">НАБОР «ТРИО ЧИСТОТЫ»</h3>
+                        <p class="text-gray-300">Все три продукта со скидкой 25%</p>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <div class="text-right">
+                            <div class="text-gray-400 line-through text-lg">₽2 370</div>
+                            <div class="text-4xl font-black text-gradient-cyan">₽1 777</div>
                         </div>
-                        <div class="flex items-center gap-6">
-                            <div class="text-right">
-                                <div class="text-gray-500 line-through text-lg">11 900 ₸</div>
-                                <div class="text-5xl font-black text-gradient-fire">8 900 ₸</div>
-                            </div>
-                            <button class="btn-magic px-8 py-4 rounded-full font-bold text-lg pulse-glow">
-                                КУПИТЬ НАБОР
-                            </button>
-                        </div>
+                        <button onclick="addBundleToCart()" class="magnetic-btn px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all animate-pulse">
+                            КУПИТЬ НАБОР
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Reviews Section -->
-    <section id="reviews" class="relative py-32 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-black via-orange-950/5 to-black"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 section-reveal">
-                <h2 class="text-5xl md:text-6xl font-black mb-6">
-                    <span class="text-gradient-fire">АСТАНА</span> ГОВОРИТ
-                </h2>
-                <p class="text-gray-400 text-xl">Реальные отзывы из наших чатов</p>
+    <!-- Features Section -->
+    <section id="features" class="relative py-32 bg-black/50">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8 section-reveal">
+                    <h2 class="text-5xl font-black leading-tight">
+                        Почему выбирают<br>
+                        <span class="text-gradient-blue">K-Series</span>?
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4 group cursor-pointer feature-item">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">🇰🇷</div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Корейское качество</h4>
+                                <p class="text-gray-400">Разработано в Корее с использованием передовых технологий и натуральных ингредиентов.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4 group cursor-pointer feature-item">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">🌿</div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">Эко-формула</h4>
+                                <p class="text-gray-400">Биоразлагаемые компоненты безопасны для семьи, питомцев и природы.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4 group cursor-pointer feature-item">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">✨</div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">Долговременный эффект</h4>
+                                <p class="text-gray-400">Аромат и чистота сохраняются до 24 часов после использования.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4 group cursor-pointer feature-item">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">💧</div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2 group-hover:text-pink-400 transition-colors">Ультраконцентрат</h4>
+                                <p class="text-gray-400">Одной капли достаточно для идеального результата. Экономия до 3 месяцев!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative section-reveal">
+                    <div class="relative rounded-3xl overflow-hidden aspect-square">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 animate-pulse"></div>
+                        <img src="/mnt/kimi/upload/Gemini_Generated_Image_q8fykpq8fykpq8fy.png" alt="Products" class="w-full h-full object-cover mix-blend-overlay opacity-50">
+                        
+                        <!-- Floating Stats -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="glass-strong p-8 rounded-3xl text-center transform hover:scale-110 transition-transform cursor-pointer">
+                                <div class="text-6xl font-black text-gradient-cyan mb-2 counter" data-target="50000">0</div>
+                                <div class="text-gray-300">Семей уже выбрали<br>K-Series</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative Elements -->
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/30 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500/30 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section class="relative py-32 overflow-hidden">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-5xl font-black mb-16 section-reveal">
+                <span class="text-gradient-purple">Почувствуй</span> разницу
+            </h2>
+            
+            <!-- Before/After Slider -->
+            <div class="relative max-w-4xl mx-auto h-[500px] rounded-3xl overflow-hidden section-reveal cursor-ew-resize" id="comparison-slider">
+                <div class="absolute inset-0 bg-gray-800 flex items-center justify-center">
+                    <div class="text-6xl opacity-20">ДО</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center w-1/2 overflow-hidden" id="after-layer">
+                    <div class="text-6xl text-white font-bold">ПОСЛЕ</div>
+                </div>
+                <div class="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-20" style="left: 50%" id="slider-handle">
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-2xl">
+                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                    </div>
+                </div>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                <!-- Review 1 -->
-                <div class="glass rounded-2xl p-6 section-reveal hover:border-orange-500/30 transition-all duration-300 hover:transform hover:-translate-y-2">
-                    <div class="flex gap-1 mb-4 text-2xl">⭐⭐⭐⭐⭐</div>
-                    <p class="text-gray-300 mb-6">"Живу в Нурлы Тау. Плита была вся в жиру 2 года — K-CLEASTAR отмыл за минуту без усилий. Это реально магия!"</p>
-                    <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-red-400 flex items-center justify-center font-bold">А</div>
+            <p class="mt-8 text-gray-400 text-lg section-reveal">Перетащите ползунок, чтобы увидеть эффект до и после использования K-Series</p>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="relative py-32 bg-gradient-to-b from-black to-blue-900/20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-black text-center mb-16 section-reveal">
+                Что говорят <span class="text-gradient-cyan">клиенты</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-3xl section-reveal hover:transform hover:scale-105 transition-all duration-500">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">"Невероятный аромат K-FRESH! Белье пахнет свежестью целую неделю. Никогда не думала, что буду в восторге от средства для стирки."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-400"></div>
                         <div>
-                            <div class="font-bold">Айгуль Н.</div>
-                            <div class="text-sm text-gray-500">ЖК Нурлы Тау</div>
+                            <div class="font-bold">Анна М.</div>
+                            <div class="text-sm text-gray-500">Москва</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Review 2 -->
-                <div class="glass rounded-2xl p-6 section-reveal hover:border-blue-500/30 transition-all duration-300 hover:transform hover:-translate-y-2" style="transition-delay: 0.1s;">
-                    <div class="flex gap-1 mb-4 text-2xl">⭐⭐⭐⭐⭐</div>
-                    <p class="text-gray-300 mb-6">"K-BUBBLE отмыл следы от обуви на ламинате после ремонта. Думала придётся менять полы — спасли!"</p>
-                    <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center font-bold">М</div>
+                <div class="glass p-8 rounded-3xl section-reveal hover:transform hover:scale-105 transition-all duration-500" style="transition-delay: 0.2s;">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">"K-CLEASTAR справляется с жиром лучше любого средства. Одна капля — и сковорода как новая! Экономично и эффективно."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400"></div>
                         <div>
-                            <div class="font-bold">Марат К.</div>
-                            <div class="text-sm text-gray-500">р-н Есиль</div>
+                            <div class="font-bold">Сергей К.</div>
+                            <div class="text-sm text-gray-500">Санкт-Петербург</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Review 3 -->
-                <div class="glass rounded-2xl p-6 section-reveal hover:border-purple-500/30 transition-all duration-300 hover:transform hover:-translate-y-2" style="transition-delay: 0.2s;">
-                    <div class="flex gap-1 mb-4 text-2xl">⭐⭐⭐⭐⭐</div>
-                    <p class="text-gray-300 mb-6">"K-FRESH — это любовь. Постель пахнет свежестью неделю. Муж спрашивает, что за новый парфюм 😂"</p>
-                    <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center font-bold">Д</div>
+                <div class="glass p-8 rounded-3xl section-reveal hover:transform hover:scale-105 transition-all duration-500" style="transition-delay: 0.4s;">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">"K-BUBBLE — это магия! Пятна с детской одежды уходят мгновенно. Наконец-то нашла универсальное средство для всего дома."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-green-400"></div>
                         <div>
-                            <div class="font-bold">Дана С.</div>
-                            <div class="text-sm text-gray-500">ЖК London</div>
+                            <div class="font-bold">Марина Д.</div>
+                            <div class="text-sm text-gray-500">Казань</div>
                         </div>
                     </div>
                 </div>
@@ -817,120 +626,136 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="relative py-32 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-orange-900/30 via-black to-yellow-900/30"></div>
-        <div class="blob top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="width: 800px; height: 800px;"></div>
+    <section id="order" class="relative py-32 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
         
-        <div class="container mx-auto px-6 relative z-10 text-center">
-            <div class="max-w-3xl mx-auto section-reveal">
-                <h2 class="text-6xl md:text-7xl font-black mb-8">
-                    <span class="text-gradient-fire">ГОТОВ К ВАУ?</span>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="max-w-4xl mx-auto glass-strong rounded-3xl p-12 section-reveal">
+                <h2 class="text-5xl md:text-6xl font-black mb-6">
+                    Готовы к <span class="text-gradient-blue">революции</span><br>
+                    <span class="font-playfair italic text-gradient-purple">чистоты?</span>
                 </h2>
-                <p class="text-xl text-gray-300 mb-10">
-                    Доставим за 2 часа по Астане. Оплата при получении. 
-                    Не понравится — вернём деньги.
-                </p>
+                <p class="text-xl text-gray-300 mb-8">Закажите сейчас и получите бесплатную доставку при заказе от ₽1 500</p>
                 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                    <button onclick="openOrderModal()" class="btn-magic px-12 py-6 rounded-full text-white font-bold text-xl pulse-glow magnetic-btn">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                    <button onclick="showOrderModal()" class="magnetic-btn px-12 py-5 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all animate-pulse">
                         ЗАКАЗАТЬ СЕЙЧАС
                     </button>
-                    <a href="https://t.me/your_channel" target="_blank" class="tg-btn px-12 py-6 rounded-full font-bold text-xl flex items-center justify-center gap-3 magnetic-btn">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.751-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.121.099.154.232.17.325.015.093.034.305.019.471z"/></svg>
-                        НАПИСАТЬ В TELEGRAM
-                    </a>
                 </div>
                 
-                <div class="flex justify-center gap-8 text-sm text-gray-500">
-                    <span class="flex items-center gap-2">⚡ Доставка 2 часа</span>
-                    <span class="flex items-center gap-2">🛡️ Гарантия 14 дней</span>
-                    <span class="flex items-center gap-2">💰 Оплата при получении</span>
+                <div class="flex justify-center gap-8 text-sm text-gray-400">
+                    <span class="flex items-center gap-2">✓ Бесплатная доставка</span>
+                    <span class="flex items-center gap-2">✓ Гарантия возврата</span>
+                    <span class="flex items-center gap-2">✓ Оплата при получении</span>
+                </div>
+                
+                <!-- Countdown Timer -->
+                <div class="mt-8 pt-8 border-t border-white/10">
+                    <p class="text-sm text-gray-400 mb-4">До конца акции осталось:</p>
+                    <div class="flex justify-center gap-4" id="countdown">
+                        <div class="text-center">
+                            <div class="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl font-bold" id="hours">04</div>
+                            <div class="text-xs text-gray-500 mt-1">часов</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl font-bold" id="minutes">32</div>
+                            <div class="text-xs text-gray-500 mt-1">минут</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl font-bold" id="seconds">15</div>
+                            <div class="text-xs text-gray-500 mt-1">секунд</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-white/10 py-12 bg-black">
+    <footer class="bg-black border-t border-white/10 py-12">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
-                    <div class="text-3xl font-black mb-4">K-SERIES<span class="text-orange-500">.</span></div>
-                    <p class="text-gray-500 text-sm">Официальный дистрибьютор в Казахстане. Корейское качество для вашего дома.</p>
+                    <div class="text-2xl font-black mb-4">K-SERIES<span class="text-blue-400">.</span></div>
+                    <p class="text-gray-400 text-sm">Корейская чистота в каждом доме. Натуральные ингредиенты, максимальная эффективность.</p>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4 text-orange-400">Продукты</h4>
-                    <ul class="space-y-2 text-sm text-gray-500">
-                        <li class="hover:text-white cursor-pointer">K-CLEASTAR</li>
-                        <li class="hover:text-white cursor-pointer">K-BUBBLE</li>
-                        <li class="hover:text-white cursor-pointer">K-FRESH</li>
-                        <li class="hover:text-white cursor-pointer">Наборы</li>
+                    <h4 class="font-bold mb-4">Продукты</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">K-CLEASTAR</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">K-BUBBLE</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">K-FRESH</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Наборы</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4 text-orange-400">Контакты</h4>
-                    <ul class="space-y-2 text-sm text-gray-500">
-                        <li>Астана, Кабанбай батыра 11</li>
-                        <li>+7 (777) 123-45-67</li>
-                        <li>+7 (771) 987-65-43 (WhatsApp)</li>
+                    <h4 class="font-bold mb-4">Поддержка</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Доставка</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Возврат</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Контакты</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4 text-orange-400">Мы в соцсетях</h4>
-                    <a href="https://t.me/your_channel" target="_blank" class="tg-btn inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.751-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.121.099.154.232.17.325.015.093.034.305.019.471z"/></svg>
-                        Telegram
-                    </a>
+                    <h4 class="font-bold mb-4">Контакты</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>support@k-series.ru</li>
+                        <li>8 (800) 555-35-35</li>
+                        <li class="flex gap-4 mt-4">
+                            <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">TG</a>
+                            <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">VK</a>
+                            <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">WA</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-600">
-                <p>© 2024 K-Series Kazakhstan. Все права защищены.</p>
+            <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-500">
+                © 2024 K-Series. Все права защищены. Попробуй качество Кореи!
             </div>
         </div>
     </footer>
 
     <!-- Order Modal -->
-    <div id="orderModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-4 backdrop-blur-sm">
-        <div class="glass rounded-3xl p-8 max-w-md w-full relative transform scale-95 opacity-0 transition-all duration-300" id="modalContent">
-            <button onclick="closeOrderModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors text-2xl">×</button>
+    <div id="order-modal" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
+        <div class="glass-strong rounded-3xl p-8 max-w-md w-full relative transform scale-95 opacity-0 transition-all duration-300" id="modal-content">
+            <button onclick="closeOrderModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">✕</button>
             
-            <h3 class="text-3xl font-black mb-2 text-gradient-fire">Оформить заказ</h3>
-            <p class="text-gray-400 mb-6">Заполни форму — мы перезвоним за 5 минут</p>
+            <h3 class="text-3xl font-bold mb-2">Оформление заказа</h3>
+            <p class="text-gray-400 mb-6">Заполните форму и мы свяжемся с вами</p>
             
-            <form onsubmit="submitOrder(event)" class="space-y-4">
+            <form class="space-y-4" onsubmit="submitOrder(event)">
                 <div>
-                    <label class="block text-sm text-gray-400 mb-1">Имя</label>
-                    <input type="text" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-orange-500 focus:outline-none text-white" placeholder="Айгуль">
+                    <label class="block text-sm text-gray-400 mb-2">Ваше имя</label>
+                    <input type="text" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-blue-500 focus:outline-none transition-colors" placeholder="Иван Иванов">
                 </div>
                 <div>
-                    <label class="block text-sm text-gray-400 mb-1">Телефон</label>
-                    <input type="tel" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-orange-500 focus:outline-none text-white" placeholder="+7 (777) 000-00-00">
+                    <label class="block text-sm text-gray-400 mb-2">Телефон</label>
+                    <input type="tel" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-blue-500 focus:outline-none transition-colors" placeholder="+7 (999) 999-99-99">
                 </div>
                 <div>
-                    <label class="block text-sm text-gray-400 mb-1">Район</label>
-                    <select class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-orange-500 focus:outline-none text-white">
-                        <option class="bg-gray-900">Есиль</option>
-                        <option class="bg-gray-900">Алматинский</option>
-                        <option class="bg-gray-900">Сарыарка</option>
-                        <option class="bg-gray-900">Байконур</option>
-                        <option class="bg-gray-900">Нура</option>
+                    <label class="block text-sm text-gray-400 mb-2">Выберите продукт</label>
+                    <select class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-blue-500 focus:outline-none transition-colors">
+                        <option>K-CLEASTAR - ₽890</option>
+                        <option>K-BUBBLE - ₽790</option>
+                        <option>K-FRESH - ₽690</option>
+                        <option>Набор Трио - ₽1 777</option>
                     </select>
                 </div>
-                <button type="submit" class="btn-magic w-full py-4 rounded-xl font-bold text-lg mt-4">
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl font-bold hover:shadow-lg transition-all">
                     ОТПРАВИТЬ ЗАКАЗ
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Notification -->
-    <div id="notification" class="notification">
-        <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-full flex items-center justify-center text-2xl">✓</div>
-            <div>
-                <div class="font-bold text-lg">Добавлено!</div>
-                <div class="text-gray-400" id="notifText">Товар в корзине</div>
-            </div>
+    <!-- Success Notification -->
+    <div id="notification" class="fixed bottom-8 right-8 glass-strong px-6 py-4 rounded-2xl transform translate-y-20 opacity-0 transition-all duration-500 z-50 flex items-center gap-3">
+        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">✓</div>
+        <div>
+            <div class="font-bold">Успешно!</div>
+            <div class="text-sm text-gray-400">Товар добавлен в корзину</div>
         </div>
     </div>
 
@@ -941,9 +766,9 @@
         // Loading Screen
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
-            const bar = document.getElementById('loader-bar');
+            const loaderBar = document.getElementById('loader-bar');
             
-            bar.style.width = '100%';
+            loaderBar.style.width = '100%';
             
             setTimeout(() => {
                 gsap.to(loader, {
@@ -958,17 +783,37 @@
         });
         
         function initAnimations() {
-            // Hero text animation
-            gsap.from('.hero-text > *', {
-                y: 100,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.2,
+            // Hero animations
+            gsap.to('.hero-title', {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
                 ease: "power4.out"
             });
             
+            gsap.to('.hero-subtitle', {
+                opacity: 1,
+                duration: 1,
+                delay: 0.3,
+                ease: "power3.out"
+            });
+            
+            gsap.to('.hero-buttons', {
+                opacity: 1,
+                duration: 1,
+                delay: 0.5,
+                ease: "power3.out"
+            });
+            
+            gsap.to('.hero-stats', {
+                opacity: 1,
+                duration: 1,
+                delay: 0.7,
+                ease: "power3.out"
+            });
+            
             // Scroll reveals
-            gsap.utils.toArray('.section-reveal').forEach((element) => {
+            gsap.utils.toArray('.section-reveal').forEach((element, i) => {
                 gsap.to(element, {
                     scrollTrigger: {
                         trigger: element,
@@ -1005,13 +850,13 @@
         
         document.addEventListener('mousemove', (e) => {
             gsap.to(cursor, {
-                x: e.clientX - 15,
-                y: e.clientY - 15,
+                x: e.clientX - 10,
+                y: e.clientY - 10,
                 duration: 0.1
             });
             gsap.to(cursorDot, {
-                x: e.clientX - 3,
-                y: e.clientY - 3,
+                x: e.clientX - 2,
+                y: e.clientY - 2,
                 duration: 0.5
             });
         });
@@ -1039,109 +884,76 @@
             });
         });
         
-        // Navbar scroll
+        // Navbar scroll effect
+        let lastScroll = 0;
         window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('nav-blur');
+            const navbar = document.getElementById('navbar');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('nav-blur');
+                navbar.classList.remove('py-6');
+                navbar.classList.add('py-3');
             } else {
-                nav.classList.remove('nav-blur');
+                navbar.classList.remove('nav-blur');
+                navbar.classList.remove('py-3');
+                navbar.classList.add('py-6');
             }
+            
+            lastScroll = currentScroll;
         });
+        
+        // Mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('translate-x-full')) {
+                menu.classList.remove('translate-x-full');
+            } else {
+                menu.classList.add('translate-x-full');
+            }
+        }
         
         // Smooth scroll
         function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Plate Slider Demo
-        const plateSlider = document.getElementById('plateSlider');
-        const plateAfter = document.getElementById('plateAfter');
-        let isDraggingPlate = false;
-        
-        plateSlider.addEventListener('mousedown', () => isDraggingPlate = true);
-        window.addEventListener('mouseup', () => isDraggingPlate = false);
-        window.addEventListener('mousemove', (e) => {
-            if (!isDraggingPlate) return;
-            
-            const plate = document.getElementById('plateDemo');
-            const rect = plate.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
-            
-            plateAfter.style.clipPath = `circle(${percent}% at 50% 50%)`;
-            plateSlider.style.left = percent + '%';
-            
-            // Create bubbles on drag
-            if (Math.random() > 0.7) {
-                createBubble(e.clientX, e.clientY);
-            }
-        });
-        
-        // Touch support for plate
-        plateSlider.addEventListener('touchstart', () => isDraggingPlate = true);
-        window.addEventListener('touchend', () => isDraggingPlate = false);
-        window.addEventListener('touchmove', (e) => {
-            if (!isDraggingPlate) return;
-            const touch = e.touches[0];
-            const plate = document.getElementById('plateDemo');
-            const rect = plate.getBoundingClientRect();
-            const x = touch.clientX - rect.left;
-            const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
-            
-            plateAfter.style.clipPath = `circle(${percent}% at 50% 50%)`;
-            plateSlider.style.left = percent + '%';
-        });
-        
-        // Create explosion effect
-        function createExplosion(e) {
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    createBubble(e.clientX + (Math.random() - 0.5) * 100, e.clientY + (Math.random() - 0.5) * 100);
-                }, i * 50);
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
             }
         }
         
-        // Bubble creation
-        function createBubble(x, y) {
-            const bubble = document.createElement('div');
-            bubble.className = 'bubble';
-            const size = Math.random() * 30 + 10;
-            bubble.style.width = size + 'px';
-            bubble.style.height = size + 'px';
-            bubble.style.left = x + 'px';
-            bubble.style.top = y + 'px';
-            bubble.style.animation = `bubble-rise ${Math.random() * 3 + 2}s ease-out forwards`;
-            document.body.appendChild(bubble);
-            
-            setTimeout(() => bubble.remove(), 5000);
+        // Product detail modal
+        function showProductDetail(product) {
+            showNotification('Открыта детальная информация о продукте');
         }
         
-        // Auto create bubbles
-        setInterval(() => {
-            createBubble(Math.random() * window.innerWidth, window.innerHeight + 50);
-        }, 300);
-        
-        // Cart functionality
-        function addToCart(product) {
-            const notif = document.getElementById('notification');
-            document.getElementById('notifText').textContent = product + ' добавлен в корзину!';
-            notif.classList.add('show');
-            
-            // Create celebration bubbles
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    createBubble(window.innerWidth / 2 + (Math.random() - 0.5) * 200, window.innerHeight - 100);
-                }, i * 100);
-            }
-            
-            setTimeout(() => notif.classList.remove('show'), 3000);
+        // Flip card
+        function flipCard(card) {
+            const inner = card.querySelector('.product-inner');
+            gsap.to(inner, {
+                rotationY: 180,
+                duration: 0.6,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    setTimeout(() => {
+                        gsap.to(inner, {
+                            rotationY: 0,
+                            duration: 0.6,
+                            ease: "power2.inOut"
+                        });
+                    }, 1000);
+                }
+            });
         }
         
-        // Modal
-        function openOrderModal() {
-            const modal = document.getElementById('orderModal');
-            const content = document.getElementById('modalContent');
+        // Add bundle to cart
+        function addBundleToCart() {
+            showNotification('Набор "Трио Чистоты" добавлен в корзину!');
+        }
+        
+        // Order modal
+        function showOrderModal() {
+            const modal = document.getElementById('order-modal');
+            const content = document.getElementById('modal-content');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             setTimeout(() => {
@@ -1151,8 +963,8 @@
         }
         
         function closeOrderModal() {
-            const modal = document.getElementById('orderModal');
-            const content = document.getElementById('modalContent');
+            const modal = document.getElementById('order-modal');
+            const content = document.getElementById('modal-content');
             content.classList.remove('scale-100', 'opacity-100');
             content.classList.add('scale-95', 'opacity-0');
             setTimeout(() => {
@@ -1165,9 +977,66 @@
             e.preventDefault();
             closeOrderModal();
             setTimeout(() => {
-                addToCart('Заказ оформлен! Мы перезвоним');
+                showNotification('Заказ успешно оформлен! Мы свяжемся с вами.');
             }, 500);
         }
+        
+        // Notification
+        function showNotification(text) {
+            const notif = document.getElementById('notification');
+            notif.querySelector('.text-gray-400').textContent = text;
+            notif.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                notif.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+        
+        // Comparison slider
+        const slider = document.getElementById('comparison-slider');
+        const afterLayer = document.getElementById('after-layer');
+        const handle = document.getElementById('slider-handle');
+        let isDragging = false;
+        
+        slider.addEventListener('mousedown', () => isDragging = true);
+        window.addEventListener('mouseup', () => isDragging = false);
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const rect = slider.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percent = (x / rect.width) * 100;
+            const clamped = Math.max(0, Math.min(100, percent));
+            
+            afterLayer.style.width = clamped + '%';
+            handle.style.left = clamped + '%';
+        });
+        
+        // Countdown timer
+        function updateCountdown() {
+            const hours = document.getElementById('hours');
+            const minutes = document.getElementById('minutes');
+            const seconds = document.getElementById('seconds');
+            
+            let h = parseInt(hours.textContent);
+            let m = parseInt(minutes.textContent);
+            let s = parseInt(seconds.textContent);
+            
+            s--;
+            if (s < 0) {
+                s = 59;
+                m--;
+                if (m < 0) {
+                    m = 59;
+                    h--;
+                    if (h < 0) h = 23;
+                }
+            }
+            
+            hours.textContent = h.toString().padStart(2, '0');
+            minutes.textContent = m.toString().padStart(2, '0');
+            seconds.textContent = s.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
         
         // Particle System
         const canvas = document.getElementById('particles-canvas');
@@ -1176,15 +1045,15 @@
         canvas.height = window.innerHeight;
         
         const particles = [];
-        const particleCount = 60;
+        const particleCount = 50;
         
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
                 this.opacity = Math.random() * 0.5 + 0.1;
             }
             
@@ -1199,7 +1068,7 @@
             }
             
             draw() {
-                ctx.fillStyle = `rgba(249, 115, 22, ${this.opacity})`;
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -1225,10 +1094,10 @@
                     const dy = particles[i].y - particles[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
                     
-                    if (distance < 150) {
+                    if (distance < 100) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(249, 115, 22, ${0.1 * (1 - distance / 150)})`;
-                        ctx.lineWidth = 0.5;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 100)})`;
+                        ctx.lineWidth = 1;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
@@ -1245,6 +1114,34 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+        });
+        
+        // Create bubbles
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            const size = Math.random() * 60 + 20;
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.left = Math.random() * window.innerWidth + 'px';
+            bubble.style.animation = `bubble-rise ${Math.random() * 10 + 10}s linear`;
+            document.body.appendChild(bubble);
+            
+            setTimeout(() => bubble.remove(), 20000);
+        }
+        
+        setInterval(createBubble, 2000);
+        
+        // Ripple effect on click
+        document.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.width = '20px';
+            ripple.style.height = '20px';
+            ripple.style.left = e.pageX - 10 + 'px';
+            ripple.style.top = e.pageY - 10 + 'px';
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 1000);
         });
     </script>
 </body>
