@@ -3,179 +3,1142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Series | Корейская чистота в вашем доме</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>K-LIFE — Корейская бытовая химия премиум-класса | Астана</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --primary-blue: #4ECDC4;
+            --primary-purple: #C7B8EA;
+            --accent-pink: #FF6B9D;
+            --accent-gold: #FFD93D;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
+            background: var(--dark);
+            color: var(--light);
             overflow-x: hidden;
-            background: #0a0a0a;
+            cursor: none;
         }
-        
-        .font-playfair {
-            font-family: 'Playfair Display', serif;
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #60a5fa, #a78bfa);
-            border-radius: 4px;
-        }
-        
-        /* Floating Animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-        }
-        
-        @keyframes float-reverse {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(20px) rotate(-2deg); }
-        }
-        
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(96, 165, 250, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(167, 139, 250, 0.8); }
-        }
-        
-        @keyframes bubble-rise {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
-        }
-        
-        .float-anim { animation: float 6s ease-in-out infinite; }
-        .float-anim-reverse { animation: float-reverse 5s ease-in-out infinite; }
-        .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
-        
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.1));
-            backdrop-filter: blur(2px);
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-        
-        /* Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .glass-strong {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Text Gradients */
-        .text-gradient-blue {
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .text-gradient-purple {
-            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .text-gradient-cyan {
-            background: linear-gradient(135deg, #22d3ee, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        /* Magnetic Button */
-        .magnetic-btn {
-            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        /* Product Card 3D */
-        .product-card-3d {
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-        
-        .product-inner {
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            transform-style: preserve-3d;
-        }
-        
-        /* Cursor */
-        .custom-cursor {
+
+        /* Custom Cursor */
+        .cursor {
             width: 20px;
             height: 20px;
-            border: 2px solid white;
+            border: 2px solid var(--primary-blue);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
+            transition: transform 0.1s;
             mix-blend-mode: difference;
-            transition: transform 0.2s;
         }
-        
-        .cursor-dot {
-            width: 4px;
-            height: 4px;
-            background: white;
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(78, 205, 196, 0.3);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
+            z-index: 9998;
+            transition: transform 0.3s ease;
         }
-        
-        /* Loading Screen */
-        .loader {
+
+        /* Preloader */
+        .preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a0a;
-            z-index: 10000;
+            background: var(--dark);
             display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 10000;
             flex-direction: column;
         }
-        
-        .loader-text {
-            font-size: 3rem;
+
+        .preloader-text {
+            font-size: 4rem;
             font-weight: 900;
-            background: linear-gradient(90deg, #60a5fa, #a78bfa, #22d3ee);
-            background-size: 200% auto;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-pink), var(--accent-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
+            background-clip: text;
+            animation: pulse 1.5s ease-in-out infinite;
         }
-        
-        @keyframes shine {
-            to { background-position: 200% center; }
+
+        .preloader-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            margin-top: 20px;
+            border-radius: 2px;
+            overflow: hidden;
         }
-        
-        /* Particle Canvas */
-        #particles-canvas {
+
+        .preloader-progress {
+            height: 100%;
+            background: var(--gradient-3);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s;
+            backdrop-filter: blur(0px);
+        }
+
+        .nav.scrolled {
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 15px 50px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '®';
+            position: absolute;
+            top: -5px;
+            right: -15px;
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-3);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 12px 30px;
+            background: var(--gradient-3);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-cta:hover::before {
+            left: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title .line span {
+            display: inline-block;
+            transform: translateY(100%);
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-pink), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .btn-primary {
+            padding: 18px 40px;
+            background: var(--gradient-3);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(79, 172, 254, 0.6);
+        }
+
+        .btn-secondary {
+            padding: 18px 40px;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--primary-blue);
+        }
+
+        /* Floating Elements */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: move-shape 20s infinite;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary-blue);
+            top: 10%;
+            left: 10%;
+        }
+
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-pink);
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent-gold);
+            bottom: 20%;
+            left: 30%;
+            animation-delay: -10s;
+        }
+
+        @keyframes move-shape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.9); }
+            75% { transform: translate(30px, 50px) scale(1.05); }
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 60px;
+            padding: 30px 50px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 10;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 5px;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 150px 50px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(78, 205, 196, 0.2);
+            border: 1px solid var(--primary-blue);
+            border-radius: 50px;
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(78, 205, 196, 0.15), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(78, 205, 196, 0.5);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: conic-gradient(from 0deg, transparent, var(--primary-blue), transparent 30%);
+            animation: rotate 4s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .product-card:hover .product-image::after {
+            opacity: 0.3;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .product-icon {
+            z-index: 2;
+            font-size: 5rem;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        .product-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .feature-tag {
+            padding: 6px 15px;
+            background: rgba(78, 205, 196, 0.1);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+        }
+
+        .product-price span {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 400;
+        }
+
+        .product-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-3);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 150px 50px;
+            background: linear-gradient(180deg, transparent, rgba(78, 205, 196, 0.05), transparent);
+            position: relative;
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .features-visual {
+            position: relative;
+            height: 600px;
+        }
+
+        .feature-circle {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border: 2px solid rgba(78, 205, 196, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-ring 3s ease-out infinite;
+        }
+
+        .feature-circle:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            animation-delay: 1s;
+            border-color: rgba(255, 107, 157, 0.3);
+        }
+
+        .feature-circle:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            animation-delay: 2s;
+            border-color: rgba(255, 217, 61, 0.3);
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        }
+
+        .feature-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: var(--gradient-3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 20px 60px rgba(79, 172, 254, 0.4);
+        }
+
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            padding: 30px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            background: rgba(255,255,255,0.06);
+            transform: translateX(10px);
+            border-color: var(--primary-blue);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .feature-content p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+        }
+
+        /* Korea Section */
+        .korea {
+            padding: 150px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .korea-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(78,205,196,0.1)" stroke-width="0.5"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.5;
+        }
+
+        .korea-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .korea-flag {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 40px;
+            background: linear-gradient(135deg, #fff, #f0f0f0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: rotate-slow 20s linear infinite;
+        }
+
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .korea-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .korea-card {
+            padding: 40px 30px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .korea-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.2), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .korea-card:hover::after {
+            opacity: 1;
+        }
+
+        .korea-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-blue);
+        }
+
+        .korea-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .korea-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .korea-desc {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Safety Section */
+        .safety {
+            padding: 150px 50px;
+            background: linear-gradient(135deg, rgba(199, 184, 234, 0.1), rgba(78, 205, 196, 0.1));
+        }
+
+        .safety-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .safety-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: all 0.5s;
+            position: relative;
+        }
+
+        .safety-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .safety-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .safety-icon::after {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            border: 2px solid var(--accent-pink);
+            border-radius: 50%;
+            animation: pulse-border 2s ease-out infinite;
+        }
+
+        @keyframes pulse-border {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        .safety-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .safety-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .safety-list li {
+            padding: 10px 0;
+            color: rgba(255,255,255,0.8);
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .safety-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 150px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 80px;
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.2), rgba(199, 184, 234, 0.2));
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
+            animation: rotate-slow 30s linear infinite;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-form {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-input {
+            padding: 18px 30px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            width: 300px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .cta-input:focus {
+            border-color: var(--primary-blue);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .cta-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .discount-badge {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent-gold);
+            color: var(--dark);
+            font-weight: 800;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Footer */
+        .footer {
+            padding: 80px 50px 30px;
+            background: rgba(0,0,0,0.3);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-brand .logo {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-desc {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--primary-blue);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-blue);
+            transition: width 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(78, 205, 196, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 60px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Particles */
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
@@ -184,669 +1147,486 @@
             pointer-events: none;
             z-index: 1;
         }
-        
-        /* Section transitions */
-        .section-reveal {
-            opacity: 0;
-            transform: translateY(50px);
-        }
-        
-        /* Water ripple effect */
-        .ripple {
+
+        .particle {
             position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-blue);
             border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: scale(0);
-            animation: ripple-anim 1s ease-out;
+            opacity: 0.5;
+            animation: particle-float 10s infinite;
         }
-        
-        @keyframes ripple-anim {
-            to { transform: scale(4); opacity: 0; }
+
+        @keyframes particle-float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
-        
-        /* Glow text */
-        .glow-text {
-            text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3);
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+            .features-visual {
+                height: 400px;
+            }
+            .korea-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .safety-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
         }
-        
-        /* Sticky nav blur */
-        .nav-blur {
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(20px);
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .stats-bar {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+            .korea-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
         }
-        
-        /* Product hover glow */
-        .product-hover-glow:hover {
-            box-shadow: 0 0 60px rgba(96, 165, 250, 0.4);
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
         }
-        
-        /* Price tag animation */
-        @keyframes price-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
-        .price-tag { animation: price-pulse 2s ease-in-out infinite; }
+
+        .glitch::before {
+            animation: glitch-1 2s infinite;
+            color: var(--accent-pink);
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 2s infinite;
+            color: var(--primary-blue);
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(20% 0 30% 0); transform: translate(-2px, 2px); }
+            40% { clip-path: inset(50% 0 20% 0); transform: translate(2px, -2px); }
+            60% { clip-path: inset(10% 0 60% 0); transform: translate(-2px, 0); }
+            80% { clip-path: inset(80% 0 5% 0); transform: translate(2px, 2px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -2px); }
+            40% { clip-path: inset(30% 0 40% 0); transform: translate(-2px, 2px); }
+            60% { clip-path: inset(10% 0 70% 0); transform: translate(2px, 0); }
+            80% { clip-path: inset(40% 0 30% 0); transform: translate(-2px, -2px); }
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-3);
+            z-index: 10001;
+            width: 0%;
+        }
     </style>
 </head>
-<body class="text-white">
-
+<body>
     <!-- Custom Cursor -->
-    <div class="custom-cursor" id="cursor"></div>
-    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
 
-    <!-- Loading Screen -->
-    <div class="loader" id="loader">
-        <div class="loader-text mb-4">K-SERIES</div>
-        <div class="w-64 h-1 bg-gray-800 rounded-full overflow-hidden">
-            <div class="h-full bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 w-0 transition-all duration-3000" id="loader-bar"></div>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-text glitch" data-text="K-LIFE">K-LIFE</div>
+        <div class="preloader-bar">
+            <div class="preloader-progress"></div>
         </div>
-        <p class="mt-4 text-gray-400 text-sm tracking-widest">ЗАГРУЗКА КОРЕЙСКОЙ ЧИСТОТЫ...</p>
     </div>
 
-    <!-- Particle Canvas -->
-    <canvas id="particles-canvas"></canvas>
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6" id="navbar">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="text-2xl font-black tracking-tighter cursor-pointer magnetic-btn" data-magnetic>
-                K-SERIES<span class="text-blue-400">.</span>
-            </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#products" class="magnetic-btn hover:text-blue-400 transition-colors text-sm tracking-widest uppercase">Продукты</a>
-                <a href="#features" class="magnetic-btn hover:text-purple-400 transition-colors text-sm tracking-widest uppercase">Преимущества</a>
-                <a href="#reviews" class="magnetic-btn hover:text-cyan-400 transition-colors text-sm tracking-widest uppercase">Отзывы</a>
-                <a href="#order" class="magnetic-btn px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full hover:shadow-lg hover:shadow-blue-500/50 transition-all text-sm font-bold">КУПИТЬ СЕЙЧАС</a>
-            </div>
-            <button class="md:hidden text-white" onclick="toggleMobileMenu()">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-            </button>
-        </div>
+    <nav class="nav">
+        <div class="logo">K-LIFE</div>
+        <ul class="nav-links">
+            <li><a href="#products">Продукты</a></li>
+            <li><a href="#features">Преимущества</a></li>
+            <li><a href="#korea">О Корее</a></li>
+            <li><a href="#safety">Безопасность</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+        <button class="nav-cta">Заказать сейчас</button>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="fixed inset-0 bg-black/95 z-40 transform translate-x-full transition-transform duration-500" id="mobile-menu">
-        <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
-            <a href="#products" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">Продукты</a>
-            <a href="#features" onclick="toggleMobileMenu()" class="hover:text-purple-400 transition-colors">Преимущества</a>
-            <a href="#reviews" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition-colors">Отзывы</a>
-            <a href="#order" onclick="toggleMobileMenu()" class="text-blue-400 font-bold">КУПИТЬ</a>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <!-- Dynamic Background -->
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(96,165,250,0.1),transparent_50%)]"></div>
+    <section class="hero">
+        <div id="canvas-container"></div>
         
-        <!-- Floating Elements -->
-        <div class="absolute top-20 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl float-anim"></div>
-        <div class="absolute bottom-20 right-10 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl float-anim-reverse"></div>
-        
-        <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-            <!-- Text Content -->
-            <div class="space-y-8 hero-text">
-                <div class="overflow-hidden">
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight hero-title opacity-0 transform translate-y-full">
-                        ПОПРОБУЙ<br>
-                        <span class="text-gradient-blue">КАЧЕСТВО</span><br>
-                        <span class="font-playfair italic text-gradient-purple">Кореи!</span>
-                    </h1>
-                </div>
-                
-                <p class="text-xl md:text-2xl text-gray-300 max-w-lg hero-subtitle opacity-0">
-                    Революционная линейка средств для уборки с натуральными ингредиентами. Чистота, которая обнимает каждую нить.
-                </p>
-                
-                <div class="flex flex-wrap gap-4 hero-buttons opacity-0">
-                    <button onclick="scrollToSection('products')" class="magnetic-btn group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50">
-                        <span class="relative z-10 font-bold text-lg">СМОТРЕТЬ ПРОДУКТЫ</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    </button>
-                    
-                    <button onclick="scrollToSection('video')" class="magnetic-btn px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all flex items-center gap-2 group">
-                        <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
-                        <span class="font-semibold">СМОТРЕТЬ ВИДЕО</span>
-                    </button>
-                </div>
-                
-                <div class="flex items-center gap-6 pt-4 hero-stats opacity-0">
-                    <div>
-                        <div class="text-3xl font-bold text-gradient-cyan">50K+</div>
-                        <div class="text-sm text-gray-400">Довольных клиентов</div>
-                    </div>
-                    <div class="w-px h-12 bg-gray-700"></div>
-                    <div>
-                        <div class="text-3xl font-bold text-gradient-purple">99%</div>
-                        <div class="text-sm text-gray-400">Положительных отзывов</div>
-                    </div>
-                    <div class="w-px h-12 bg-gray-700"></div>
-                    <div>
-                        <div class="text-3xl font-bold text-gradient-blue">24ч</div>
-                        <div class="text-sm text-gray-400">Свежести</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hero Image Composition -->
-            <div class="relative h-[600px] flex items-center justify-center hero-image-container">
-                <!-- Main Product Showcase -->
-                <div class="relative z-10 float-anim cursor-pointer" onclick="showProductDetail('all')">
-                    <img src="/mnt/kimi/upload/Gemini_Generated_Image_q8fykpq8fykpq8fy.png" alt="K-Series Products" class="w-full max-w-md drop-shadow-2xl hover:scale-105 transition-transform duration-700">
-                </div>
-                
-                <!-- Orbiting Elements -->
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div class="w-[500px] h-[500px] border border-white/10 rounded-full absolute animate-spin-slow" style="animation-duration: 20s;"></div>
-                    <div class="w-[400px] h-[400px] border border-white/5 rounded-full absolute animate-spin-slow" style="animation-duration: 15s; animation-direction: reverse;"></div>
-                </div>
-                
-                <!-- Floating Product Cards -->
-                <div class="absolute top-10 right-0 glass p-4 rounded-2xl float-anim-reverse cursor-pointer hover:scale-110 transition-transform" onclick="showProductDetail('kfresh')" style="animation-delay: 1s;">
-                    <div class="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mb-2">
-                        <span class="text-2xl">🌸</span>
-                    </div>
-                    <p class="text-xs font-bold text-purple-300">K-FRESH</p>
-                </div>
-                
-                <div class="absolute bottom-20 left-0 glass p-4 rounded-2xl float-anim cursor-pointer hover:scale-110 transition-transform" onclick="showProductDetail('kbubble')" style="animation-delay: 2s;">
-                    <div class="w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center mb-2">
-                        <span class="text-2xl">🫧</span>
-                    </div>
-                    <p class="text-xs font-bold text-blue-300">K-BUBBLE</p>
-                </div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-badge">✨ Доступно в Астане</div>
+            <h1 class="hero-title">
+                <span class="line"><span>Корейская бытовая</span></span>
+                <span class="line"><span class="gradient-text">химия премиум-класса</span></span>
+            </h1>
+            <p class="hero-subtitle">Чистота, которую можно почувствовать. Натурально. Безопасно. Для семьи.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">Выбрать продукты →</button>
+                <button class="btn-secondary">Смотреть видео ▶</button>
             </div>
         </div>
-        
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <svg class="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-number" data-target="60">0</span>
+                <div class="stat-label">лет инноваций</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="98">0</span>
+                <div class="stat-label">% микробов уничтожено</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="1000">0</span>
+                <div class="stat-label">+ довольных клиентов</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="5">0</span>
+                <div class="stat-label">★ рейтинг</div>
+            </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="relative py-32 overflow-hidden">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-20 section-reveal">
-                <h2 class="text-5xl md:text-6xl font-black mb-6">
-                    <span class="text-gradient-blue">ТРИ</span> 
-                    <span class="font-playfair italic text-white">столпа</span><br>
-                    <span class="text-gradient-purple">чистоты</span>
-                </h2>
-                <p class="text-gray-400 text-xl max-w-2xl mx-auto">Каждый продукт создан для особой задачи. Вместе они создают идеальную гармонию чистоты в вашем доме.</p>
-            </div>
-            
-            <!-- Product Cards Grid -->
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- K-CLEASTAR -->
-                <div class="product-card-3d group section-reveal" onclick="flipCard(this)">
-                    <div class="product-inner relative h-[600px] w-full">
-                        <!-- Front -->
-                        <div class="absolute inset-0 glass-strong rounded-3xl p-8 flex flex-col items-center justify-between product-hover-glow transition-all duration-500 backface-hidden">
-                            <div class="w-full flex justify-between items-start">
-                                <span class="px-4 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs font-bold tracking-wider">ДЛЯ ПОСУДЫ</span>
-                                <span class="price-tag px-4 py-1 bg-white/10 rounded-full text-lg font-bold">₽890</span>
-                            </div>
-                            
-                            <div class="relative flex-1 flex items-center justify-center w-full">
-                                <div class="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-transparent rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                                <img src="/mnt/kimi/upload/Gemini_Generated_Image_1ktc421ktc421ktc.png" alt="K-CLEASTAR" class="w-full max-w-xs transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-700 drop-shadow-2xl">
-                            </div>
-                            
-                            <div class="text-center space-y-4">
-                                <h3 class="text-3xl font-black text-gradient-cyan">K-CLEASTAR</h3>
-                                <p class="text-gray-300 text-sm leading-relaxed">Чистота в каждой капле. Мощная формула для безупречной чистоты посуды.</p>
-                                <button class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl font-bold hover:shadow-lg hover:shadow-cyan-500/50 transition-all transform hover:scale-105">
-                                    В КОРЗИНУ →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+    <section class="products" id="products">
+        <div class="section-header">
+            <div class="section-label">Каталог</div>
+            <h2 class="section-title">Наша линейка продуктов</h2>
+            <p class="section-subtitle">Три продукта, три решения для вашего дома. Каждый разработан с заботой о семье и окружающей среде.</p>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card" data-tilt>
+                <div class="product-image">
+                    <div class="product-icon">🧴</div>
                 </div>
-                
-                <!-- K-BUBBLE -->
-                <div class="product-card-3d group section-reveal" style="transition-delay: 0.2s;" onclick="flipCard(this)">
-                    <div class="product-inner relative h-[600px] w-full">
-                        <div class="absolute inset-0 glass-strong rounded-3xl p-8 flex flex-col items-center justify-between product-hover-glow transition-all duration-500">
-                            <div class="w-full flex justify-between items-start">
-                                <span class="px-4 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs font-bold tracking-wider">УНИВЕРСАЛЬНЫЙ</span>
-                                <span class="price-tag px-4 py-1 bg-white/10 rounded-full text-lg font-bold">₽790</span>
-                            </div>
-                            
-                            <div class="relative flex-1 flex items-center justify-center w-full">
-                                <div class="absolute inset-0 bg-gradient-to-t from-blue-500/20 to-transparent rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                                <img src="/mnt/kimi/upload/Gemini_Generated_Image_pxx921pxx921pxx9.png" alt="K-BUBBLE" class="w-full max-w-xs transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-700 drop-shadow-2xl">
-                            </div>
-                            
-                            <div class="text-center space-y-4">
-                                <h3 class="text-3xl font-black text-gradient-blue">K-BUBBLE</h3>
-                                <p class="text-gray-300 text-sm leading-relaxed">Объятия свежести для каждой вещи. Ультраконцентрат для безупречной чистоты.</p>
-                                <button class="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl font-bold hover:shadow-lg hover:shadow-blue-500/50 transition-all transform hover:scale-105">
-                                    В КОРЗИНУ →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <h3 class="product-name">K-CLEASTAR</h3>
+                <p class="product-description">Жидкое моющее средство для посуды и фруктов. Гипоаллергенная формула без фосфатов.</p>
+                <div class="product-features">
+                    <span class="feature-tag">500 мл</span>
+                    <span class="feature-tag">Гипоаллергенно</span>
+                    <span class="feature-tag">Для детей</span>
                 </div>
-                
-                <!-- K-FRESH -->
-                <div class="product-card-3d group section-reveal" style="transition-delay: 0.4s;" onclick="flipCard(this)">
-                    <div class="product-inner relative h-[600px] w-full">
-                        <div class="absolute inset-0 glass-strong rounded-3xl p-8 flex flex-col items-center justify-between product-hover-glow transition-all duration-500">
-                            <div class="w-full flex justify-between items-start">
-                                <span class="px-4 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs font-bold tracking-wider">ДЛЯ БЕЛЬЯ</span>
-                                <span class="price-tag px-4 py-1 bg-white/10 rounded-full text-lg font-bold">₽690</span>
-                            </div>
-                            
-                            <div class="relative flex-1 flex items-center justify-center w-full">
-                                <div class="absolute inset-0 bg-gradient-to-t from-purple-500/20 to-transparent rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                                <img src="/mnt/kimi/upload/Gemini_Generated_Image_l641pml641pml641.png" alt="K-FRESH" class="w-full max-w-xs transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-700 drop-shadow-2xl">
-                            </div>
-                            
-                            <div class="text-center space-y-4">
-                                <h3 class="text-3xl font-black text-gradient-purple">K-FRESH</h3>
-                                <p class="text-gray-300 text-sm leading-relaxed">Аромат, который остаётся с собой. Запах, который обнимает каждую нить.</p>
-                                <button class="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl font-bold hover:shadow-lg hover:shadow-purple-500/50 transition-all transform hover:scale-105">
-                                    В КОРЗИНУ →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="product-footer">
+                    <div class="product-price">1 320 <span>₸</span></div>
+                    <button class="product-btn">+</button>
                 </div>
             </div>
-            
-            <!-- Bundle Offer -->
-            <div class="mt-20 glass-strong rounded-3xl p-8 md:p-12 section-reveal relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20"></div>
-                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div class="text-center md:text-left">
-                        <span class="inline-block px-4 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold rounded-full text-sm mb-4">ВЫГОДНО!</span>
-                        <h3 class="text-3xl md:text-4xl font-black mb-2">НАБОР «ТРИО ЧИСТОТЫ»</h3>
-                        <p class="text-gray-300">Все три продукта со скидкой 25%</p>
-                    </div>
-                    <div class="flex items-center gap-6">
-                        <div class="text-right">
-                            <div class="text-gray-400 line-through text-lg">₽2 370</div>
-                            <div class="text-4xl font-black text-gradient-cyan">₽1 777</div>
-                        </div>
-                        <button onclick="addBundleToCart()" class="magnetic-btn px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all animate-pulse">
-                            КУПИТЬ НАБОР
-                        </button>
-                    </div>
+
+            <div class="product-card" data-tilt>
+                <div class="product-image">
+                    <div class="product-icon">🫧</div>
+                </div>
+                <h3 class="product-name">K-BUBBLE</h3>
+                <p class="product-description">Гель для стирки ультраконцентрат. Пробиотическая формула для 40 стирок.</p>
+                <div class="product-features">
+                    <span class="feature-tag">1200 мл</span>
+                    <span class="feature-tag">40 стирок</span>
+                    <span class="feature-tag">Ультраконцентрат</span>
+                </div>
+                <div class="product-footer">
+                    <div class="product-price">2 137 <span>₸</span></div>
+                    <button class="product-btn">+</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-tilt>
+                <div class="product-image">
+                    <div class="product-icon">🌸</div>
+                </div>
+                <h3 class="product-name">K-FRESH</h3>
+                <p class="product-description">Кондиционер для белья с лавандовым ароматом. Мягкость на 7 дней.</p>
+                <div class="product-features">
+                    <span class="feature-tag">1200 мл</span>
+                    <span class="feature-tag">Лаванда</span>
+                    <span class="feature-tag">7 дней свежести</span>
+                </div>
+                <div class="product-footer">
+                    <div class="product-price">2 155 <span>₸</span></div>
+                    <button class="product-btn">+</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="relative py-32 bg-black/50">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-8 section-reveal">
-                    <h2 class="text-5xl font-black leading-tight">
-                        Почему выбирают<br>
-                        <span class="text-gradient-blue">K-Series</span>?
-                    </h2>
-                    
-                    <div class="space-y-6">
-                        <div class="flex gap-4 group cursor-pointer feature-item">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">🇰🇷</div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Корейское качество</h4>
-                                <p class="text-gray-400">Разработано в Корее с использованием передовых технологий и натуральных ингредиентов.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex gap-4 group cursor-pointer feature-item">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">🌿</div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">Эко-формула</h4>
-                                <p class="text-gray-400">Биоразлагаемые компоненты безопасны для семьи, питомцев и природы.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex gap-4 group cursor-pointer feature-item">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">✨</div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">Долговременный эффект</h4>
-                                <p class="text-gray-400">Аромат и чистота сохраняются до 24 часов после использования.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex gap-4 group cursor-pointer feature-item">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">💧</div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-2 group-hover:text-pink-400 transition-colors">Ультраконцентрат</h4>
-                                <p class="text-gray-400">Одной капли достаточно для идеального результата. Экономия до 3 месяцев!</p>
-                            </div>
-                        </div>
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="features-visual">
+                <div class="feature-circle"></div>
+                <div class="feature-circle"></div>
+                <div class="feature-circle"></div>
+                <div class="feature-center">✨</div>
+            </div>
+            
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">🌿</div>
+                    <div class="feature-content">
+                        <h3>Натуральные компоненты</h3>
+                        <p>Растительные экстракты вместо агрессивной химии. Безопасно для кожи и окружающей среды.</p>
                     </div>
                 </div>
                 
-                <div class="relative section-reveal">
-                    <div class="relative rounded-3xl overflow-hidden aspect-square">
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 animate-pulse"></div>
-                        <img src="/mnt/kimi/upload/Gemini_Generated_Image_q8fykpq8fykpq8fy.png" alt="Products" class="w-full h-full object-cover mix-blend-overlay opacity-50">
-                        
-                        <!-- Floating Stats -->
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="glass-strong p-8 rounded-3xl text-center transform hover:scale-110 transition-transform cursor-pointer">
-                                <div class="text-6xl font-black text-gradient-cyan mb-2 counter" data-target="50000">0</div>
-                                <div class="text-gray-300">Семей уже выбрали<br>K-Series</div>
-                            </div>
-                        </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👶</div>
+                    <div class="feature-content">
+                        <h3>Безопасно для детей</h3>
+                        <p>Гипоаллергенные формулы подходят для мытья детских бутылочек и одежды малышей.</p>
                     </div>
-                    
-                    <!-- Decorative Elements -->
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/30 rounded-full blur-3xl"></div>
-                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500/30 rounded-full blur-3xl"></div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔬</div>
+                    <div class="feature-content">
+                        <h3>Наночастицы</h3>
+                        <p>Проникают в мельчайшие поры тканей и поверхностей для глубокой очистки.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">♻️</div>
+                    <div class="feature-content">
+                        <h3>Эко-формула</h3>
+                        <p>Биоразлагаемые компоненты не вредят природе. Забота о планете — наш приоритет.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Demo Section -->
-    <section class="relative py-32 overflow-hidden">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-5xl font-black mb-16 section-reveal">
-                <span class="text-gradient-purple">Почувствуй</span> разницу
-            </h2>
+    <!-- Korea Section -->
+    <section class="korea" id="korea">
+        <div class="korea-bg"></div>
+        <div class="korea-content">
+            <div class="korea-flag">🇰🇷</div>
+            <div class="section-label">Почему Корея?</div>
+            <h2 class="section-title">Корейская бытовая химия</h2>
+            <p class="section-subtitle">Южная Корея — мировой лидер в производстве бытовой химии с 60-летней историей инноваций</p>
             
-            <!-- Before/After Slider -->
-            <div class="relative max-w-4xl mx-auto h-[500px] rounded-3xl overflow-hidden section-reveal cursor-ew-resize" id="comparison-slider">
-                <div class="absolute inset-0 bg-gray-800 flex items-center justify-center">
-                    <div class="text-6xl opacity-20">ДО</div>
+            <div class="korea-grid">
+                <div class="korea-card">
+                    <div class="korea-number">60+</div>
+                    <div class="korea-label">лет инноваций</div>
+                    <div class="korea-desc">Непрерывное развитие технологий</div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center w-1/2 overflow-hidden" id="after-layer">
-                    <div class="text-6xl text-white font-bold">ПОСЛЕ</div>
+                
+                <div class="korea-card">
+                    <div class="korea-number">FDA</div>
+                    <div class="korea-label">одобрено</div>
+                    <div class="korea-desc">Федеральное агентство США</div>
                 </div>
-                <div class="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-20" style="left: 50%" id="slider-handle">
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-2xl">
-                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                    </div>
+                
+                <div class="korea-card">
+                    <div class="korea-number">100%</div>
+                    <div class="korea-label">экологично</div>
+                    <div class="korea-desc">Биоразлагаемые формулы</div>
+                </div>
+                
+                <div class="korea-card">
+                    <div class="korea-number">TOP</div>
+                    <div class="korea-label">100 брендов</div>
+                    <div class="korea-desc">Лучшие бренды Кореи</div>
                 </div>
             </div>
-            
-            <p class="mt-8 text-gray-400 text-lg section-reveal">Перетащите ползунок, чтобы увидеть эффект до и после использования K-Series</p>
         </div>
     </section>
 
-    <!-- Reviews Section -->
-    <section id="reviews" class="relative py-32 bg-gradient-to-b from-black to-blue-900/20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-black text-center mb-16 section-reveal">
-                Что говорят <span class="text-gradient-cyan">клиенты</span>
-            </h2>
+    <!-- Safety Section -->
+    <section class="safety" id="safety">
+        <div class="safety-container">
+            <div class="section-header">
+                <div class="section-label">Безопасность</div>
+                <h2 class="section-title">Безопасность прежде всего</h2>
+                <p class="section-subtitle">Все продукты K-LIFE разработаны с заботой о вашей семье и окружающей среде</p>
+            </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass p-8 rounded-3xl section-reveal hover:transform hover:scale-105 transition-all duration-500">
-                    <div class="flex gap-1 mb-4">
-                        <span class="text-yellow-400">★★★★★</span>
-                    </div>
-                    <p class="text-gray-300 mb-6">"Невероятный аромат K-FRESH! Белье пахнет свежестью целую неделю. Никогда не думала, что буду в восторге от средства для стирки."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-400"></div>
-                        <div>
-                            <div class="font-bold">Анна М.</div>
-                            <div class="text-sm text-gray-500">Москва</div>
-                        </div>
-                    </div>
+            <div class="safety-grid">
+                <div class="safety-card">
+                    <div class="safety-icon">🚫</div>
+                    <h3 class="safety-title">Без вредных веществ</h3>
+                    <ul class="safety-list">
+                        <li>Без фосфатов — не разрушают структуру тканей</li>
+                        <li>Без парабенов — без гормональных нарушителей</li>
+                        <li>Без консервантов — только натуральная стабилизация</li>
+                    </ul>
                 </div>
                 
-                <div class="glass p-8 rounded-3xl section-reveal hover:transform hover:scale-105 transition-all duration-500" style="transition-delay: 0.2s;">
-                    <div class="flex gap-1 mb-4">
-                        <span class="text-yellow-400">★★★★★</span>
-                    </div>
-                    <p class="text-gray-300 mb-6">"K-CLEASTAR справляется с жиром лучше любого средства. Одна капля — и сковорода как новая! Экономично и эффективно."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400"></div>
-                        <div>
-                            <div class="font-bold">Сергей К.</div>
-                            <div class="text-sm text-gray-500">Санкт-Петербург</div>
-                        </div>
-                    </div>
+                <div class="safety-card">
+                    <div class="safety-icon">✅</div>
+                    <h3 class="safety-title">Одобрено и сертифицировано</h3>
+                    <ul class="safety-list">
+                        <li>FDA одобрено — Федеральное агентство США</li>
+                        <li>Гипоаллергенно — подходит для аллергиков</li>
+                        <li>Безопасно для детей — можно использовать для малышей</li>
+                    </ul>
                 </div>
                 
-                <div class="glass p-8 rounded-3xl section-reveal hover:transform hover:scale-105 transition-all duration-500" style="transition-delay: 0.4s;">
-                    <div class="flex gap-1 mb-4">
-                        <span class="text-yellow-400">★★★★★</span>
-                    </div>
-                    <p class="text-gray-300 mb-6">"K-BUBBLE — это магия! Пятна с детской одежды уходят мгновенно. Наконец-то нашла универсальное средство для всего дома."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-green-400"></div>
-                        <div>
-                            <div class="font-bold">Марина Д.</div>
-                            <div class="text-sm text-gray-500">Казань</div>
-                        </div>
-                    </div>
+                <div class="safety-card">
+                    <div class="safety-icon">🌍</div>
+                    <h3 class="safety-title">Эко-ответственность</h3>
+                    <ul class="safety-list">
+                        <li>Биоразлагаемо — безопасно для природы</li>
+                        <li>Безопасно для животных — не тестируется на них</li>
+                        <li>Не вредит экологии — чистая вода и почва</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section id="order" class="relative py-32 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20"></div>
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
-        
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="max-w-4xl mx-auto glass-strong rounded-3xl p-12 section-reveal">
-                <h2 class="text-5xl md:text-6xl font-black mb-6">
-                    Готовы к <span class="text-gradient-blue">революции</span><br>
-                    <span class="font-playfair italic text-gradient-purple">чистоты?</span>
-                </h2>
-                <p class="text-xl text-gray-300 mb-8">Закажите сейчас и получите бесплатную доставку при заказе от ₽1 500</p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                    <button onclick="showOrderModal()" class="magnetic-btn px-12 py-5 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all animate-pulse">
-                        ЗАКАЗАТЬ СЕЙЧАС
-                    </button>
-                </div>
-                
-                <div class="flex justify-center gap-8 text-sm text-gray-400">
-                    <span class="flex items-center gap-2">✓ Бесплатная доставка</span>
-                    <span class="flex items-center gap-2">✓ Гарантия возврата</span>
-                    <span class="flex items-center gap-2">✓ Оплата при получении</span>
-                </div>
-                
-                <!-- Countdown Timer -->
-                <div class="mt-8 pt-8 border-t border-white/10">
-                    <p class="text-sm text-gray-400 mb-4">До конца акции осталось:</p>
-                    <div class="flex justify-center gap-4" id="countdown">
-                        <div class="text-center">
-                            <div class="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl font-bold" id="hours">04</div>
-                            <div class="text-xs text-gray-500 mt-1">часов</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl font-bold" id="minutes">32</div>
-                            <div class="text-xs text-gray-500 mt-1">минут</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl font-bold" id="seconds">15</div>
-                            <div class="text-xs text-gray-500 mt-1">секунд</div>
-                        </div>
-                    </div>
-                </div>
+    <section class="cta" id="contacts">
+        <div class="cta-container">
+            <h2 class="cta-title">Присоединяйтесь к K-LIFE</h2>
+            <p class="cta-subtitle">Тысячи семей в Астане уже открыли для себя качество корейской бытовой химии. Быстрая доставка в день заказа.</p>
+            
+            <div class="cta-form">
+                <input type="tel" class="cta-input" placeholder="+7 (___) ___-__-__">
+                <button class="btn-primary">Получить скидку 15%</button>
             </div>
+            
+            <div class="discount-badge">🎉 Скидка 15% на первый заказ!</div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-white/10 py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="text-2xl font-black mb-4">K-SERIES<span class="text-blue-400">.</span></div>
-                    <p class="text-gray-400 text-sm">Корейская чистота в каждом доме. Натуральные ингредиенты, максимальная эффективность.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Продукты</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">K-CLEASTAR</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">K-BUBBLE</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">K-FRESH</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Наборы</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Поддержка</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Доставка</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Возврат</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Контакты</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Контакты</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>support@k-series.ru</li>
-                        <li>8 (800) 555-35-35</li>
-                        <li class="flex gap-4 mt-4">
-                            <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">TG</a>
-                            <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">VK</a>
-                            <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">WA</a>
-                        </li>
-                    </ul>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">K-LIFE</div>
+                <p class="footer-desc">Корейская бытовая химия премиум-класса в Астане. Чистота, которую можно почувствовать.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">📱</a>
+                    <a href="#" class="social-link">💬</a>
+                    <a href="#" class="social-link">📸</a>
                 </div>
             </div>
-            <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-500">
-                © 2024 K-Series. Все права защищены. Попробуй качество Кореи!
+            
+            <div class="footer-column">
+                <h4 class="footer-title">Продукты</h4>
+                <ul class="footer-links">
+                    <li><a href="#">K-CLEASTAR</a></li>
+                    <li><a href="#">K-BUBBLE</a></li>
+                    <li><a href="#">K-FRESH</a></li>
+                    <li><a href="#">Наборы</a></li>
+                </ul>
             </div>
+            
+            <div class="footer-column">
+                <h4 class="footer-title">Компания</h4>
+                <ul class="footer-links">
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Доставка</a></li>
+                    <li><a href="#">Оплата</a></li>
+                    <li><a href="#">Возврат</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4 class="footer-title">Контакты</h4>
+                <div class="footer-contact">
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <span>+7 (777) 777-77-77</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <span>info@k-life.kz</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <span>Астана, Казахстан</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 K-LIFE. Все права защищены.</p>
+            <p>Сделано с ❤️ в Астане</p>
         </div>
     </footer>
 
-    <!-- Order Modal -->
-    <div id="order-modal" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
-        <div class="glass-strong rounded-3xl p-8 max-w-md w-full relative transform scale-95 opacity-0 transition-all duration-300" id="modal-content">
-            <button onclick="closeOrderModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">✕</button>
-            
-            <h3 class="text-3xl font-bold mb-2">Оформление заказа</h3>
-            <p class="text-gray-400 mb-6">Заполните форму и мы свяжемся с вами</p>
-            
-            <form class="space-y-4" onsubmit="submitOrder(event)">
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2">Ваше имя</label>
-                    <input type="text" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-blue-500 focus:outline-none transition-colors" placeholder="Иван Иванов">
-                </div>
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2">Телефон</label>
-                    <input type="tel" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-blue-500 focus:outline-none transition-colors" placeholder="+7 (999) 999-99-99">
-                </div>
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2">Выберите продукт</label>
-                    <select class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-blue-500 focus:outline-none transition-colors">
-                        <option>K-CLEASTAR - ₽890</option>
-                        <option>K-BUBBLE - ₽790</option>
-                        <option>K-FRESH - ₽690</option>
-                        <option>Набор Трио - ₽1 777</option>
-                    </select>
-                </div>
-                <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl font-bold hover:shadow-lg transition-all">
-                    ОТПРАВИТЬ ЗАКАЗ
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Success Notification -->
-    <div id="notification" class="fixed bottom-8 right-8 glass-strong px-6 py-4 rounded-2xl transform translate-y-20 opacity-0 transition-all duration-500 z-50 flex items-center gap-3">
-        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">✓</div>
-        <div>
-            <div class="font-bold">Успешно!</div>
-            <div class="text-sm text-gray-400">Товар добавлен в корзину</div>
-        </div>
-    </div>
-
     <script>
-        // Register GSAP
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Loading Screen
+        // Preloader
         window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            const loaderBar = document.getElementById('loader-bar');
+            const preloader = document.querySelector('.preloader');
+            const progress = document.querySelector('.preloader-progress');
+            let width = 0;
             
-            loaderBar.style.width = '100%';
-            
-            setTimeout(() => {
-                gsap.to(loader, {
-                    opacity: 0,
-                    duration: 0.8,
-                    onComplete: () => {
-                        loader.style.display = 'none';
-                        initAnimations();
-                    }
-                });
-            }, 1500);
+            const interval = setInterval(() => {
+                width += Math.random() * 30;
+                if (width >= 100) {
+                    width = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        gsap.to(preloader, {
+                            opacity: 0,
+                            duration: 0.5,
+                            onComplete: () => {
+                                preloader.style.display = 'none';
+                                initAnimations();
+                            }
+                        });
+                    }, 500);
+                }
+                progress.style.width = width + '%';
+            }, 200);
         });
-        
-        function initAnimations() {
-            // Hero animations
-            gsap.to('.hero-title', {
-                opacity: 1,
-                y: 0,
-                duration: 1.2,
-                ease: "power4.out"
-            });
-            
-            gsap.to('.hero-subtitle', {
-                opacity: 1,
-                duration: 1,
-                delay: 0.3,
-                ease: "power3.out"
-            });
-            
-            gsap.to('.hero-buttons', {
-                opacity: 1,
-                duration: 1,
-                delay: 0.5,
-                ease: "power3.out"
-            });
-            
-            gsap.to('.hero-stats', {
-                opacity: 1,
-                duration: 1,
-                delay: 0.7,
-                ease: "power3.out"
-            });
-            
-            // Scroll reveals
-            gsap.utils.toArray('.section-reveal').forEach((element, i) => {
-                gsap.to(element, {
-                    scrollTrigger: {
-                        trigger: element,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    },
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8,
-                    ease: "power3.out"
-                });
-            });
-            
-            // Counter animation
-            const counters = document.querySelectorAll('.counter');
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                gsap.to(counter, {
-                    scrollTrigger: {
-                        trigger: counter,
-                        start: "top 80%"
-                    },
-                    innerHTML: target,
-                    duration: 2,
-                    snap: { innerHTML: 1 },
-                    ease: "power2.out"
-                });
-            });
-        }
-        
+
         // Custom Cursor
-        const cursor = document.getElementById('cursor');
-        const cursorDot = document.getElementById('cursor-dot');
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
         
         document.addEventListener('mousemove', (e) => {
             gsap.to(cursor, {
@@ -854,294 +1634,301 @@
                 y: e.clientY - 10,
                 duration: 0.1
             });
-            gsap.to(cursorDot, {
-                x: e.clientX - 2,
-                y: e.clientY - 2,
-                duration: 0.5
+            gsap.to(follower, {
+                x: e.clientX - 20,
+                y: e.clientY - 20,
+                duration: 0.3
             });
         });
-        
+
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'scale(0.8)';
+            follower.style.transform = 'scale(0.8)';
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'scale(1)';
+            follower.style.transform = 'scale(1)';
+        });
+
+        // Hover effects for cursor
+        document.querySelectorAll('a, button, .product-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                follower.style.transform = 'scale(1.5)';
+                cursor.style.borderColor = '#FF6B9D';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                follower.style.transform = 'scale(1)';
+                cursor.style.borderColor = '#4ECDC4';
+            });
+        });
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrolled / maxScroll) * 100;
+            document.querySelector('.scroll-progress').style.width = progress + '%';
+            
+            // Nav background
+            const nav = document.querySelector('.nav');
+            if (scrolled > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Three.js Background
+        function initThree() {
+            const container = document.getElementById('canvas-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Create particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 1500;
+            const posArray = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 5;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.005,
+                color: 0x4ECDC4,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+            
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+            
+            camera.position.z = 3;
+
+            // Mouse interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            
+            document.addEventListener('mousemove', (event) => {
+                mouseX = event.clientX / window.innerWidth - 0.5;
+                mouseY = event.clientY / window.innerHeight - 0.5;
+            });
+
+            // Animation
+            const clock = new THREE.Clock();
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                const elapsedTime = clock.getElapsedTime();
+                
+                particlesMesh.rotation.y = elapsedTime * 0.05;
+                particlesMesh.rotation.x = mouseY * 0.5;
+                particlesMesh.rotation.y += mouseX * 0.5;
+                
+                // Wave effect
+                const positions = particlesGeometry.attributes.position.array;
+                for(let i = 0; i < particlesCount; i++) {
+                    const i3 = i * 3;
+                    positions[i3 + 1] += Math.sin(elapsedTime + positions[i3]) * 0.002;
+                }
+                particlesGeometry.attributes.position.needsUpdate = true;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+
+            // Resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // GSAP Animations
+        function initAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero animations
+            gsap.to('.hero-title .line span', {
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power4.out'
+            });
+
+            gsap.to('.hero-subtitle', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: 0.6
+            });
+
+            gsap.to('.hero-buttons', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: 0.8
+            });
+
+            // Stats counter animation
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                gsap.to(stat, {
+                    innerHTML: target,
+                    duration: 2,
+                    snap: { innerHTML: 1 },
+                    scrollTrigger: {
+                        trigger: stat,
+                        start: 'top 80%'
+                    }
+                });
+            });
+
+            // Product cards
+            gsap.from('.product-card', {
+                y: 100,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: '.products-grid',
+                    start: 'top 80%'
+                }
+            });
+
+            // Feature items
+            gsap.from('.feature-item', {
+                x: -50,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.15,
+                scrollTrigger: {
+                    trigger: '.features-list',
+                    start: 'top 80%'
+                }
+            });
+
+            // Korea cards
+            gsap.from('.korea-card', {
+                y: 50,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                scrollTrigger: {
+                    trigger: '.korea-grid',
+                    start: 'top 80%'
+                }
+            });
+
+            // Safety cards
+            gsap.from('.safety-card', {
+                scale: 0.8,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: '.safety-grid',
+                    start: 'top 80%'
+                }
+            });
+
+            // CTA container
+            gsap.from('.cta-container', {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: '.cta',
+                    start: 'top 70%'
+                }
+            });
+        }
+
+        // Product card tilt effect
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+                
+                // Update gradient position
+                card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+                card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    gsap.to(window, {
+                        duration: 1,
+                        scrollTo: { y: target, offsetY: 70 },
+                        ease: 'power2.inOut'
+                    });
+                }
+            });
+        });
+
+        // Initialize
+        initThree();
+        createParticles();
+
         // Magnetic buttons
-        document.querySelectorAll('[data-magnetic]').forEach(btn => {
+        document.querySelectorAll('.btn-primary, .nav-cta').forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
                 const rect = btn.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
                 
-                gsap.to(btn, {
-                    x: x * 0.3,
-                    y: y * 0.3,
-                    duration: 0.3
-                });
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
             });
             
             btn.addEventListener('mouseleave', () => {
-                gsap.to(btn, {
-                    x: 0,
-                    y: 0,
-                    duration: 0.3
-                });
+                btn.style.transform = 'translate(0, 0)';
             });
-        });
-        
-        // Navbar scroll effect
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                navbar.classList.add('nav-blur');
-                navbar.classList.remove('py-6');
-                navbar.classList.add('py-3');
-            } else {
-                navbar.classList.remove('nav-blur');
-                navbar.classList.remove('py-3');
-                navbar.classList.add('py-6');
-            }
-            
-            lastScroll = currentScroll;
-        });
-        
-        // Mobile menu
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('translate-x-full')) {
-                menu.classList.remove('translate-x-full');
-            } else {
-                menu.classList.add('translate-x-full');
-            }
-        }
-        
-        // Smooth scroll
-        function scrollToSection(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-        
-        // Product detail modal
-        function showProductDetail(product) {
-            showNotification('Открыта детальная информация о продукте');
-        }
-        
-        // Flip card
-        function flipCard(card) {
-            const inner = card.querySelector('.product-inner');
-            gsap.to(inner, {
-                rotationY: 180,
-                duration: 0.6,
-                ease: "power2.inOut",
-                onComplete: () => {
-                    setTimeout(() => {
-                        gsap.to(inner, {
-                            rotationY: 0,
-                            duration: 0.6,
-                            ease: "power2.inOut"
-                        });
-                    }, 1000);
-                }
-            });
-        }
-        
-        // Add bundle to cart
-        function addBundleToCart() {
-            showNotification('Набор "Трио Чистоты" добавлен в корзину!');
-        }
-        
-        // Order modal
-        function showOrderModal() {
-            const modal = document.getElementById('order-modal');
-            const content = document.getElementById('modal-content');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            setTimeout(() => {
-                content.classList.remove('scale-95', 'opacity-0');
-                content.classList.add('scale-100', 'opacity-100');
-            }, 10);
-        }
-        
-        function closeOrderModal() {
-            const modal = document.getElementById('order-modal');
-            const content = document.getElementById('modal-content');
-            content.classList.remove('scale-100', 'opacity-100');
-            content.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }, 300);
-        }
-        
-        function submitOrder(e) {
-            e.preventDefault();
-            closeOrderModal();
-            setTimeout(() => {
-                showNotification('Заказ успешно оформлен! Мы свяжемся с вами.');
-            }, 500);
-        }
-        
-        // Notification
-        function showNotification(text) {
-            const notif = document.getElementById('notification');
-            notif.querySelector('.text-gray-400').textContent = text;
-            notif.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                notif.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
-        
-        // Comparison slider
-        const slider = document.getElementById('comparison-slider');
-        const afterLayer = document.getElementById('after-layer');
-        const handle = document.getElementById('slider-handle');
-        let isDragging = false;
-        
-        slider.addEventListener('mousedown', () => isDragging = true);
-        window.addEventListener('mouseup', () => isDragging = false);
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            const rect = slider.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const percent = (x / rect.width) * 100;
-            const clamped = Math.max(0, Math.min(100, percent));
-            
-            afterLayer.style.width = clamped + '%';
-            handle.style.left = clamped + '%';
-        });
-        
-        // Countdown timer
-        function updateCountdown() {
-            const hours = document.getElementById('hours');
-            const minutes = document.getElementById('minutes');
-            const seconds = document.getElementById('seconds');
-            
-            let h = parseInt(hours.textContent);
-            let m = parseInt(minutes.textContent);
-            let s = parseInt(seconds.textContent);
-            
-            s--;
-            if (s < 0) {
-                s = 59;
-                m--;
-                if (m < 0) {
-                    m = 59;
-                    h--;
-                    if (h < 0) h = 23;
-                }
-            }
-            
-            hours.textContent = h.toString().padStart(2, '0');
-            minutes.textContent = m.toString().padStart(2, '0');
-            seconds.textContent = s.toString().padStart(2, '0');
-        }
-        
-        setInterval(updateCountdown, 1000);
-        
-        // Particle System
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        const particles = [];
-        const particleCount = 50;
-        
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-                this.opacity = Math.random() * 0.5 + 0.1;
-            }
-            
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
-            
-            draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-        
-        function initParticles() {
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-        
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                
-                // Connect particles
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 100)})`;
-                        ctx.lineWidth = 1;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            
-            requestAnimationFrame(animateParticles);
-        }
-        
-        initParticles();
-        animateParticles();
-        
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-        
-        // Create bubbles
-        function createBubble() {
-            const bubble = document.createElement('div');
-            bubble.className = 'bubble';
-            const size = Math.random() * 60 + 20;
-            bubble.style.width = size + 'px';
-            bubble.style.height = size + 'px';
-            bubble.style.left = Math.random() * window.innerWidth + 'px';
-            bubble.style.animation = `bubble-rise ${Math.random() * 10 + 10}s linear`;
-            document.body.appendChild(bubble);
-            
-            setTimeout(() => bubble.remove(), 20000);
-        }
-        
-        setInterval(createBubble, 2000);
-        
-        // Ripple effect on click
-        document.addEventListener('click', (e) => {
-            const ripple = document.createElement('div');
-            ripple.className = 'ripple';
-            ripple.style.width = '20px';
-            ripple.style.height = '20px';
-            ripple.style.left = e.pageX - 10 + 'px';
-            ripple.style.top = e.pageY - 10 + 'px';
-            document.body.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 1000);
         });
     </script>
 </body>
