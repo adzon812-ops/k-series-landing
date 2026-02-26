@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Series | Корейская чистота в вашем доме</title>
+    <title>K-Series | Корейская чистота в Астане</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         * {
@@ -19,130 +18,137 @@
         body {
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            background: #0a0a0a;
+            background: #FDF8F3;
+            color: #2C1810;
         }
         
         .font-playfair {
             font-family: 'Playfair Display', serif;
         }
         
+        /* Warm Color Palette */
+        .bg-warm-cream { background-color: #FDF8F3; }
+        .bg-warm-sand { background-color: #F5EDE4; }
+        .bg-warm-beige { background-color: #EDE4D3; }
+        .text-warm-brown { color: #2C1810; }
+        .text-warm-gold { color: #D4A574; }
+        .text-warm-orange { color: #E07B39; }
+        
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0a0a0a;
+            background: #FDF8F3;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #60a5fa, #a78bfa);
+            background: #D4A574;
             border-radius: 4px;
         }
         
         /* Floating Animation */
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
         }
         
         @keyframes float-reverse {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(20px) rotate(-2deg); }
+            50% { transform: translateY(15px) rotate(-1deg); }
         }
         
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(96, 165, 250, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(167, 139, 250, 0.8); }
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(212, 165, 116, 0.3); }
+            50% { transform: scale(1.02); box-shadow: 0 8px 30px rgba(212, 165, 116, 0.5); }
         }
         
-        @keyframes bubble-rise {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
         
         .float-anim { animation: float 6s ease-in-out infinite; }
         .float-anim-reverse { animation: float-reverse 5s ease-in-out infinite; }
-        .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+        .pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
         
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.1));
-            backdrop-filter: blur(2px);
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-        
-        /* Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
+        /* Glassmorphism Warm */
+        .glass-warm {
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            box-shadow: 0 8px 32px rgba(139, 69, 19, 0.1);
         }
         
-        .glass-strong {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Text Gradients */
-        .text-gradient-blue {
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+        /* Text Gradients Warm */
+        .text-gradient-warm {
+            background: linear-gradient(135deg, #D4A574, #E07B39);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
-        .text-gradient-purple {
-            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Buttons Warm */
+        .btn-warm {
+            background: linear-gradient(135deg, #E07B39, #D4A574);
+            transition: all 0.3s ease;
+        }
+        .btn-warm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(224, 123, 57, 0.4);
         }
         
-        .text-gradient-cyan {
-            background: linear-gradient(135deg, #22d3ee, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Before/After Slider */
+        .comparison-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            cursor: ew-resize;
         }
         
-        /* Magnetic Button */
-        .magnetic-btn {
-            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        .before-layer, .after-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
         }
         
-        /* Product Card 3D */
-        .product-card-3d {
-            transform-style: preserve-3d;
-            perspective: 1000px;
+        .after-layer {
+            width: 50%;
+            overflow: hidden;
+            border-right: 3px solid white;
         }
         
-        .product-inner {
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            transform-style: preserve-3d;
-        }
-        
-        /* Cursor */
-        .custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid white;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.2s;
-        }
-        
-        .cursor-dot {
-            width: 4px;
-            height: 4px;
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 40px;
             background: white;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
+            cursor: ew-resize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        
+        /* Trust Badges */
+        .trust-badge {
+            background: linear-gradient(135deg, #F5EDE4, #EDE4D3);
+            border: 2px solid #D4A574;
+        }
+        
+        /* Review Card */
+        .review-card {
+            background: white;
+            border: 1px solid #F5EDE4;
+            transition: all 0.3s ease;
+        }
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.1);
         }
         
         /* Loading Screen */
@@ -152,7 +158,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a0a;
+            background: #FDF8F3;
             z-index: 10000;
             display: flex;
             justify-content: center;
@@ -163,315 +169,469 @@
         .loader-text {
             font-size: 3rem;
             font-weight: 900;
-            background: linear-gradient(90deg, #60a5fa, #a78bfa, #22d3ee);
+            background: linear-gradient(90deg, #D4A574, #E07B39, #D4A574);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
+            animation: shimmer 3s linear infinite;
         }
         
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-        
-        /* Particle Canvas */
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        /* Section transitions */
-        .section-reveal {
-            opacity: 0;
-            transform: translateY(50px);
-        }
-        
-        /* Water ripple effect */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: scale(0);
-            animation: ripple-anim 1s ease-out;
-        }
-        
-        @keyframes ripple-anim {
-            to { transform: scale(4); opacity: 0; }
-        }
-        
-        /* Glow text */
-        .glow-text {
-            text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3);
-        }
-        
-        /* Sticky nav blur */
-        .nav-blur {
-            background: rgba(10, 10, 10, 0.8);
+        /* Navigation */
+        .nav-warm {
+            background: rgba(253, 248, 243, 0.95);
             backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 165, 116, 0.2);
         }
         
-        /* Product hover glow */
-        .product-hover-glow:hover {
-            box-shadow: 0 0 60px rgba(96, 165, 250, 0.4);
+        /* Section backgrounds */
+        .section-cream { background: linear-gradient(180deg, #FDF8F3 0%, #F5EDE4 100%); }
+        .section-sand { background: linear-gradient(180deg, #F5EDE4 0%, #EDE4D3 100%); }
+        .section-white { background: #FFFFFF; }
+        
+        /* Product Card */
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid #F5EDE4;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(139, 69, 19, 0.15);
         }
         
-        /* Price tag animation */
-        @keyframes price-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        /* Price Tag */
+        .price-tag {
+            background: linear-gradient(135deg, #E07B39, #D4A574);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
         }
-        .price-tag { animation: price-pulse 2s ease-in-out infinite; }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border-left: 4px solid #E07B39;
+        }
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Telegram Button */
+        .tg-btn {
+            background: #0088cc;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .tg-btn:hover {
+            background: #0099dd;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 136, 204, 0.4);
+        }
+        
+        /* Astana specific */
+        .astana-badge {
+            background: linear-gradient(135deg, #00AFCA, #0095B6);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
     </style>
 </head>
-<body class="text-white">
-
-    <!-- Custom Cursor -->
-    <div class="custom-cursor" id="cursor"></div>
-    <div class="cursor-dot" id="cursor-dot"></div>
+<body class="bg-warm-cream text-warm-brown">
 
     <!-- Loading Screen -->
     <div class="loader" id="loader">
         <div class="loader-text mb-4">K-SERIES</div>
-        <div class="w-64 h-1 bg-gray-800 rounded-full overflow-hidden">
-            <div class="h-full bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 w-0 transition-all duration-3000" id="loader-bar"></div>
+        <div class="w-64 h-1 bg-gray-200 rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-orange-400 to-amber-400 w-0 transition-all duration-1000" id="loader-bar"></div>
         </div>
-        <p class="mt-4 text-gray-400 text-sm tracking-widest">ЗАГРУЗКА КОРЕЙСКОЙ ЧИСТОТЫ...</p>
+        <p class="mt-4 text-gray-500 text-sm tracking-widest">ЗАГРУЗКА...</p>
     </div>
 
-    <!-- Particle Canvas -->
-    <canvas id="particles-canvas"></canvas>
-
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6" id="navbar">
+    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4" id="navbar">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="text-2xl font-black tracking-tighter cursor-pointer magnetic-btn" data-magnetic>
-                K-SERIES<span class="text-blue-400">.</span>
+            <div class="flex items-center gap-3">
+                <div class="text-2xl font-black tracking-tighter text-warm-brown">
+                    K-SERIES<span class="text-orange-500">.</span>
+                </div>
+                <span class="astana-badge">АСТАНА</span>
             </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#products" class="magnetic-btn hover:text-blue-400 transition-colors text-sm tracking-widest uppercase">Продукты</a>
-                <a href="#features" class="magnetic-btn hover:text-purple-400 transition-colors text-sm tracking-widest uppercase">Преимущества</a>
-                <a href="#reviews" class="magnetic-btn hover:text-cyan-400 transition-colors text-sm tracking-widest uppercase">Отзывы</a>
-                <a href="#order" class="magnetic-btn px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full hover:shadow-lg hover:shadow-blue-500/50 transition-all text-sm font-bold">КУПИТЬ СЕЙЧАС</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#products" class="hover:text-orange-500 transition-colors text-sm font-semibold">Продукты</a>
+                <a href="#results" class="hover:text-orange-500 transition-colors text-sm font-semibold">Результаты</a>
+                <a href="#reviews" class="hover:text-orange-500 transition-colors text-sm font-semibold">Отзывы</a>
+                <a href="https://t.me/your_channel" target="_blank" class="tg-btn px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.751-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.121.099.154.232.17.325.015.093.034.305.019.471z"/></svg>
+                    Написать в Telegram
+                </a>
             </div>
-            <button class="md:hidden text-white" onclick="toggleMobileMenu()">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-            </button>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="fixed inset-0 bg-black/95 z-40 transform translate-x-full transition-transform duration-500" id="mobile-menu">
-        <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
-            <a href="#products" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">Продукты</a>
-            <a href="#features" onclick="toggleMobileMenu()" class="hover:text-purple-400 transition-colors">Преимущества</a>
-            <a href="#reviews" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition-colors">Отзывы</a>
-            <a href="#order" onclick="toggleMobileMenu()" class="text-blue-400 font-bold">КУПИТЬ</a>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <!-- Dynamic Background -->
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(96,165,250,0.1),transparent_50%)]"></div>
-        
-        <!-- Floating Elements -->
-        <div class="absolute top-20 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl float-anim"></div>
-        <div class="absolute bottom-20 right-10 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl float-anim-reverse"></div>
-        
-        <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-            <!-- Text Content -->
-            <div class="space-y-8 hero-text">
-                <div class="overflow-hidden">
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight hero-title opacity-0 transform translate-y-full">
-                        ПОПРОБУЙ<br>
-                        <span class="text-gradient-blue">КАЧЕСТВО</span><br>
-                        <span class="font-playfair italic text-gradient-purple">Кореи!</span>
-                    </h1>
+    <section class="relative min-h-screen flex items-center pt-20 section-cream">
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 rounded-full text-orange-700 text-sm font-semibold">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
+                    Уже в Астане с доставкой за 2 часа
                 </div>
                 
-                <p class="text-xl md:text-2xl text-gray-300 max-w-lg hero-subtitle opacity-0">
-                    Революционная линейка средств для уборки с натуральными ингредиентами. Чистота, которая обнимает каждую нить.
+                <h1 class="text-5xl md:text-6xl font-black leading-tight text-warm-brown">
+                    Корейская чистота<br>
+                    <span class="text-gradient-warm font-playfair italic">в вашем доме</span><br>
+                    в Астане
+                </h1>
+                
+                <p class="text-lg text-gray-600 max-w-lg leading-relaxed">
+                    Проверенные корейские средства для уборки, которые реально работают. 
+                    Безопасно для детей и питомцев. Доставка по всему Казахстану.
                 </p>
                 
-                <div class="flex flex-wrap gap-4 hero-buttons opacity-0">
-                    <button onclick="scrollToSection('products')" class="magnetic-btn group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50">
-                        <span class="relative z-10 font-bold text-lg">СМОТРЕТЬ ПРОДУКТЫ</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="scrollToSection('products')" class="btn-warm px-8 py-4 rounded-full text-white font-bold text-lg shadow-lg">
+                        Выбрать средство
                     </button>
-                    
-                    <button onclick="scrollToSection('video')" class="magnetic-btn px-8 py-4 border-2 border-white/30 rounded-full hover:bg-white/10 transition-all flex items-center gap-2 group">
-                        <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
-                        <span class="font-semibold">СМОТРЕТЬ ВИДЕО</span>
+                    <button onclick="scrollToSection('results')" class="px-8 py-4 border-2 border-orange-300 rounded-full font-semibold hover:bg-orange-50 transition-all">
+                        Смотреть результаты
                     </button>
                 </div>
                 
-                <div class="flex items-center gap-6 pt-4 hero-stats opacity-0">
-                    <div>
-                        <div class="text-3xl font-bold text-gradient-cyan">50K+</div>
-                        <div class="text-sm text-gray-400">Довольных клиентов</div>
+                <div class="flex items-center gap-6 pt-4">
+                    <div class="flex -space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-orange-200 border-2 border-white flex items-center justify-center text-xs font-bold">А</div>
+                        <div class="w-10 h-10 rounded-full bg-amber-200 border-2 border-white flex items-center justify-center text-xs font-bold">Б</div>
+                        <div class="w-10 h-10 rounded-full bg-yellow-200 border-2 border-white flex items-center justify-center text-xs font-bold">В</div>
                     </div>
-                    <div class="w-px h-12 bg-gray-700"></div>
-                    <div>
-                        <div class="text-3xl font-bold text-gradient-purple">99%</div>
-                        <div class="text-sm text-gray-400">Положительных отзывов</div>
-                    </div>
-                    <div class="w-px h-12 bg-gray-700"></div>
-                    <div>
-                        <div class="text-3xl font-bold text-gradient-blue">24ч</div>
-                        <div class="text-sm text-gray-400">Свежести</div>
-                    </div>
+                    <p class="text-sm text-gray-600"><strong>1,247 семей</strong> в Астане уже используют</p>
                 </div>
             </div>
             
-            <!-- Hero Image Composition -->
-            <div class="relative h-[600px] flex items-center justify-center hero-image-container">
-                <!-- Main Product Showcase -->
-                <div class="relative z-10 float-anim cursor-pointer" onclick="showProductDetail('all')">
-                    <img src="/mnt/kimi/upload/Gemini_Generated_Image_q8fykpq8fykpq8fy.png" alt="K-Series Products" class="w-full max-w-md drop-shadow-2xl hover:scale-105 transition-transform duration-700">
-                </div>
+            <div class="relative">
+                <div class="absolute inset-0 bg-gradient-to-br from-orange-200/50 to-amber-200/50 rounded-full blur-3xl"></div>
+                <img src="Gemini_Generated_Image_q8fykpq8fykpq8fy.png" alt="K-Series Products" class="relative z-10 w-full max-w-lg mx-auto float-anim drop-shadow-2xl rounded-3xl">
                 
-                <!-- Orbiting Elements -->
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div class="w-[500px] h-[500px] border border-white/10 rounded-full absolute animate-spin-slow" style="animation-duration: 20s;"></div>
-                    <div class="w-[400px] h-[400px] border border-white/5 rounded-full absolute animate-spin-slow" style="animation-duration: 15s; animation-direction: reverse;"></div>
-                </div>
-                
-                <!-- Floating Product Cards -->
-                <div class="absolute top-10 right-0 glass p-4 rounded-2xl float-anim-reverse cursor-pointer hover:scale-110 transition-transform" onclick="showProductDetail('kfresh')" style="animation-delay: 1s;">
-                    <div class="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mb-2">
-                        <span class="text-2xl">🌸</span>
+                <!-- Trust badges -->
+                <div class="absolute -bottom-4 -left-4 glass-warm p-4 rounded-2xl shadow-lg">
+                    <div class="flex items-center gap-3">
+                        <div class="text-3xl">🇰🇷</div>
+                        <div>
+                            <div class="font-bold text-sm">Из Кореи</div>
+                            <div class="text-xs text-gray-500">Оригинал 100%</div>
+                        </div>
                     </div>
-                    <p class="text-xs font-bold text-purple-300">K-FRESH</p>
                 </div>
                 
-                <div class="absolute bottom-20 left-0 glass p-4 rounded-2xl float-anim cursor-pointer hover:scale-110 transition-transform" onclick="showProductDetail('kbubble')" style="animation-delay: 2s;">
-                    <div class="w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center mb-2">
-                        <span class="text-2xl">🫧</span>
+                <div class="absolute top-10 -right-4 glass-warm p-4 rounded-2xl shadow-lg">
+                    <div class="flex items-center gap-3">
+                        <div class="text-3xl">🚚</div>
+                        <div>
+                            <div class="font-bold text-sm">Доставка</div>
+                            <div class="text-xs text-gray-500">2 часа по Астане</div>
+                        </div>
                     </div>
-                    <p class="text-xs font-bold text-blue-300">K-BUBBLE</p>
                 </div>
             </div>
         </div>
-        
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <svg class="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="py-16 bg-white border-y border-orange-100">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl mb-2">🏆</div>
+                    <div class="font-bold text-warm-brown">ТОП-1 в Корее</div>
+                    <div class="text-sm text-gray-500">средство 2023</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">🌿</div>
+                    <div class="font-bold text-warm-brown">Эко-состав</div>
+                    <div class="text-sm text-gray-500">безопасно для детей</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">💰</div>
+                    <div class="font-bold text-warm-brown">Экономия</div>
+                    <div class="text-sm text-gray-500">1 флакон = 3 месяца</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">⭐</div>
+                    <div class="font-bold text-warm-brown">4.9/5</div>
+                    <div class="text-sm text-gray-500">средняя оценка</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before/After Results Section -->
+    <section id="results" class="py-24 section-sand">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black mb-4 text-warm-brown">
+                    Реальные результаты<br>
+                    <span class="text-gradient-warm">в астанинских квартирах</span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Смотрите, как наши средства справляются с самыми сложными загрязнениями. 
+                    Все фото сделаны клиентами из Астаны.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Kitchen Example -->
+                <div class="bg-white p-6 rounded-3xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">🍳</span>
+                        Кухонная плита после жарки
+                    </h3>
+                    <div class="comparison-container h-80 rounded-2xl bg-gray-100 relative" id="slider1">
+                        <div class="absolute inset-0 bg-gray-300 flex items-center justify-center" style="background: linear-gradient(135deg, #8B4513 0%, #654321 100%);">
+                            <div class="text-center text-white/50">
+                                <div class="text-6xl mb-2">🛢️</div>
+                                <div class="font-bold">ЖИР И НАГАР</div>
+                                <div class="text-sm">3 года не мылась</div>
+                            </div>
+                        </div>
+                        <div class="after-layer bg-gradient-to-br from-orange-100 to-amber-50 flex items-center justify-center" style="width: 50%">
+                            <div class="text-center">
+                                <div class="text-6xl mb-2">✨</div>
+                                <div class="font-bold text-orange-600">КАК НОВАЯ!</div>
+                                <div class="text-sm text-gray-600">после K-CLEASTAR</div>
+                            </div>
+                        </div>
+                        <div class="slider-handle" style="left: 50%">
+                            <div class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-4 text-sm font-semibold">
+                        <span class="text-gray-500">ДО — слой жира</span>
+                        <span class="text-orange-600">ПОСЛЕ — идеальная чистота</span>
+                    </div>
+                </div>
+                
+                <!-- Bathroom Example -->
+                <div class="bg-white p-6 rounded-3xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">🛁</span>
+                        Ванна от известкового налета
+                    </h3>
+                    <div class="comparison-container h-80 rounded-2xl bg-gray-100 relative" id="slider2">
+                        <div class="absolute inset-0 bg-gray-400 flex items-center justify-center" style="background: linear-gradient(135deg, #9CA3AF 0%, #6B7280 100%);">
+                            <div class="text-center text-white/50">
+                                <div class="text-6xl mb-2">⚪</div>
+                                <div class="font-bold">ИЗВЕСТКОВЫЙ НАЛЕТ</div>
+                                <div class="text-sm">5 мм слой</div>
+                            </div>
+                        </div>
+                        <div class="after-layer bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center" style="width: 50%">
+                            <div class="text-center">
+                                <div class="text-6xl mb-2">🪞</div>
+                                <div class="font-bold text-blue-600">ЗЕРКАЛЬНАЯ!</div>
+                                <div class="text-sm text-gray-600">после K-BUBBLE</div>
+                            </div>
+                        </div>
+                        <div class="slider-handle" style="left: 50%">
+                            <div class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-4 text-sm font-semibold">
+                        <span class="text-gray-500">ДО — белый налет</span>
+                        <span class="text-blue-600">ПОСЛЕ — блеск</span>
+                    </div>
+                </div>
+                
+                <!-- Fabric Example -->
+                <div class="bg-white p-6 rounded-3xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">👕</span>
+                        Детская футболка с пятнами
+                    </h3>
+                    <div class="comparison-container h-80 rounded-2xl bg-gray-100 relative" id="slider3">
+                        <div class="absolute inset-0 flex items-center justify-center" style="background: linear-gradient(135deg, #7C2D12 0%, #92400E 100%);">
+                            <div class="text-center text-white/50">
+                                <div class="text-6xl mb-2">🎨</div>
+                                <div class="font-bold">СОК + ЗЕМЛЯ</div>
+                                <div class="text-sm">после прогулки</div>
+                            </div>
+                        </div>
+                        <div class="after-layer bg-gradient-to-br from-purple-50 to-pink-50 flex items-center justify-center" style="width: 50%">
+                            <div class="text-center">
+                                <div class="text-6xl mb-2">🌸</div>
+                                <div class="font-bold text-purple-600">БЕЛОСНЕЖНАЯ!</div>
+                                <div class="text-sm text-gray-600">после K-FRESH</div>
+                            </div>
+                        </div>
+                        <div class="slider-handle" style="left: 50%">
+                            <div class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-4 text-sm font-semibold">
+                        <span class="text-gray-500">ДО — сложные пятна</span>
+                        <span class="text-purple-600">ПОСЛЕ — идеально чисто</span>
+                    </div>
+                </div>
+                
+                <!-- Floor Example -->
+                <div class="bg-white p-6 rounded-3xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">🏠</span>
+                        Ламинат после ремонта
+                    </h3>
+                    <div class="comparison-container h-80 rounded-2xl bg-gray-100 relative" id="slider4">
+                        <div class="absolute inset-0 flex items-center justify-center" style="background: linear-gradient(135deg, #44403C 0%, #57534E 100%);">
+                            <div class="text-center text-white/50">
+                                <div class="text-6xl mb-2">🦶</div>
+                                <div class="font-bold">СЛЕДЫ ОТ ОБУВИ</div>
+                                <div class="text-sm">строительная пыль</div>
+                            </div>
+                        </div>
+                        <div class="after-layer bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center" style="width: 50%">
+                            <div class="text-center">
+                                <div class="text-6xl mb-2">🌟</div>
+                                <div class="font-bold text-amber-600">КАК НОВЫЙ!</div>
+                                <div class="text-sm text-gray-600">после K-BUBBLE</div>
+                            </div>
+                        </div>
+                        <div class="slider-handle" style="left: 50%">
+                            <div class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-4 text-sm font-semibold">
+                        <span class="text-gray-500">ДО — серый налет</span>
+                        <span class="text-amber-600">ПОСЛЕ — сияет</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="relative py-32 overflow-hidden">
+    <section id="products" class="py-24 bg-white">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-20 section-reveal">
-                <h2 class="text-5xl md:text-6xl font-black mb-6">
-                    <span class="text-gradient-blue">ТРИ</span> 
-                    <span class="font-playfair italic text-white">столпа</span><br>
-                    <span class="text-gradient-purple">чистоты</span>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black mb-4 text-warm-brown">
+                    Выберите своё средство
                 </h2>
-                <p class="text-gray-400 text-xl max-w-2xl mx-auto">Каждый продукт создан для особой задачи. Вместе они создают идеальную гармонию чистоты в вашем доме.</p>
+                <p class="text-gray-600">Каждый продукт решает конкретную задачу. Или возьмите набор со скидкой.</p>
             </div>
             
-            <!-- Product Cards Grid -->
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- K-CLEASTAR -->
-                <div class="product-card-3d group section-reveal" onclick="flipCard(this)">
-                    <div class="product-inner relative h-[600px] w-full">
-                        <!-- Front -->
-                        <div class="absolute inset-0 glass-strong rounded-3xl p-8 flex flex-col items-center justify-between product-hover-glow transition-all duration-500 backface-hidden">
-                            <div class="w-full flex justify-between items-start">
-                                <span class="px-4 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs font-bold tracking-wider">ДЛЯ ПОСУДЫ</span>
-                                <span class="price-tag px-4 py-1 bg-white/10 rounded-full text-lg font-bold">₽890</span>
+                <div class="product-card">
+                    <div class="p-6 bg-gradient-to-br from-cyan-50 to-blue-50">
+                        <img src="Gemini_Generated_Image_1ktc421ktc421ktc.png" alt="K-CLEASTAR" class="w-full h-64 object-contain mx-auto">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-warm-brown">K-CLEASTAR</h3>
+                                <p class="text-sm text-gray-500">Для посуды и кухни</p>
                             </div>
-                            
-                            <div class="relative flex-1 flex items-center justify-center w-full">
-                                <div class="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-transparent rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                                <img src="/mnt/kimi/upload/Gemini_Generated_Image_1ktc421ktc421ktc.png" alt="K-CLEASTAR" class="w-full max-w-xs transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-700 drop-shadow-2xl">
-                            </div>
-                            
-                            <div class="text-center space-y-4">
-                                <h3 class="text-3xl font-black text-gradient-cyan">K-CLEASTAR</h3>
-                                <p class="text-gray-300 text-sm leading-relaxed">Чистота в каждой капле. Мощная формула для безупречной чистоты посуды.</p>
-                                <button class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl font-bold hover:shadow-lg hover:shadow-cyan-500/50 transition-all transform hover:scale-105">
-                                    В КОРЗИНУ →
-                                </button>
-                            </div>
+                            <span class="price-tag">4 500 ₸</span>
                         </div>
+                        <ul class="space-y-2 mb-6 text-sm text-gray-600">
+                            <li class="flex items-center gap-2">✓ Удаляет застарелый жир</li>
+                            <li class="flex items-center gap-2">✓ Блеск без разводов</li>
+                            <li class="flex items-center gap-2">✓ Хватает на 3 месяца</li>
+                        </ul>
+                        <button onclick="addToCart('K-CLEASTAR')" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl font-bold hover:shadow-lg transition-all">
+                            В корзину
+                        </button>
                     </div>
                 </div>
                 
                 <!-- K-BUBBLE -->
-                <div class="product-card-3d group section-reveal" style="transition-delay: 0.2s;" onclick="flipCard(this)">
-                    <div class="product-inner relative h-[600px] w-full">
-                        <div class="absolute inset-0 glass-strong rounded-3xl p-8 flex flex-col items-center justify-between product-hover-glow transition-all duration-500">
-                            <div class="w-full flex justify-between items-start">
-                                <span class="px-4 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs font-bold tracking-wider">УНИВЕРСАЛЬНЫЙ</span>
-                                <span class="price-tag px-4 py-1 bg-white/10 rounded-full text-lg font-bold">₽790</span>
+                <div class="product-card relative">
+                    <div class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">ХИТ</div>
+                    <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50">
+                        <img src="Gemini_Generated_Image_pxx921pxx921pxx9.png" alt="K-BUBBLE" class="w-full h-64 object-contain mx-auto">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-warm-brown">K-BUBBLE</h3>
+                                <p class="text-sm text-gray-500">Универсальный</p>
                             </div>
-                            
-                            <div class="relative flex-1 flex items-center justify-center w-full">
-                                <div class="absolute inset-0 bg-gradient-to-t from-blue-500/20 to-transparent rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                                <img src="/mnt/kimi/upload/Gemini_Generated_Image_pxx921pxx921pxx9.png" alt="K-BUBBLE" class="w-full max-w-xs transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-700 drop-shadow-2xl">
-                            </div>
-                            
-                            <div class="text-center space-y-4">
-                                <h3 class="text-3xl font-black text-gradient-blue">K-BUBBLE</h3>
-                                <p class="text-gray-300 text-sm leading-relaxed">Объятия свежести для каждой вещи. Ультраконцентрат для безупречной чистоты.</p>
-                                <button class="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl font-bold hover:shadow-lg hover:shadow-blue-500/50 transition-all transform hover:scale-105">
-                                    В КОРЗИНУ →
-                                </button>
-                            </div>
+                            <span class="price-tag">3 900 ₸</span>
                         </div>
+                        <ul class="space-y-2 mb-6 text-sm text-gray-600">
+                            <li class="flex items-center gap-2">✓ Для всех поверхностей</li>
+                            <li class="flex items-center gap-2">✓ Уничтожает 99.9% бактерий</li>
+                            <li class="flex items-center gap-2">✓ Безопасно для детей</li>
+                        </ul>
+                        <button onclick="addToCart('K-BUBBLE')" class="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl font-bold hover:shadow-lg transition-all">
+                            В корзину
+                        </button>
                     </div>
                 </div>
                 
                 <!-- K-FRESH -->
-                <div class="product-card-3d group section-reveal" style="transition-delay: 0.4s;" onclick="flipCard(this)">
-                    <div class="product-inner relative h-[600px] w-full">
-                        <div class="absolute inset-0 glass-strong rounded-3xl p-8 flex flex-col items-center justify-between product-hover-glow transition-all duration-500">
-                            <div class="w-full flex justify-between items-start">
-                                <span class="px-4 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs font-bold tracking-wider">ДЛЯ БЕЛЬЯ</span>
-                                <span class="price-tag px-4 py-1 bg-white/10 rounded-full text-lg font-bold">₽690</span>
+                <div class="product-card">
+                    <div class="p-6 bg-gradient-to-br from-purple-50 to-pink-50">
+                        <img src="Gemini_Generated_Image_l641pml641pml641.png" alt="K-FRESH" class="w-full h-64 object-contain mx-auto">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-warm-brown">K-FRESH</h3>
+                                <p class="text-sm text-gray-500">Для белья</p>
                             </div>
-                            
-                            <div class="relative flex-1 flex items-center justify-center w-full">
-                                <div class="absolute inset-0 bg-gradient-to-t from-purple-500/20 to-transparent rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                                <img src="/mnt/kimi/upload/Gemini_Generated_Image_l641pml641pml641.png" alt="K-FRESH" class="w-full max-w-xs transform group-hover:scale-110 group-hover:-translate-y-4 transition-all duration-700 drop-shadow-2xl">
-                            </div>
-                            
-                            <div class="text-center space-y-4">
-                                <h3 class="text-3xl font-black text-gradient-purple">K-FRESH</h3>
-                                <p class="text-gray-300 text-sm leading-relaxed">Аромат, который остаётся с собой. Запах, который обнимает каждую нить.</p>
-                                <button class="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl font-bold hover:shadow-lg hover:shadow-purple-500/50 transition-all transform hover:scale-105">
-                                    В КОРЗИНУ →
-                                </button>
-                            </div>
+                            <span class="price-tag">3 500 ₸</span>
                         </div>
+                        <ul class="space-y-2 mb-6 text-sm text-gray-600">
+                            <li class="flex items-center gap-2">✓ Аромат 24 часа</li>
+                            <li class="flex items-center gap-2">✓ Мягкость без кондиционера</li>
+                            <li class="flex items-center gap-2">✓ Защита цвета</li>
+                        </ul>
+                        <button onclick="addToCart('K-FRESH')" class="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-bold hover:shadow-lg transition-all">
+                            В корзину
+                        </button>
                     </div>
                 </div>
             </div>
             
-            <!-- Bundle Offer -->
-            <div class="mt-20 glass-strong rounded-3xl p-8 md:p-12 section-reveal relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20"></div>
-                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div class="text-center md:text-left">
-                        <span class="inline-block px-4 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold rounded-full text-sm mb-4">ВЫГОДНО!</span>
-                        <h3 class="text-3xl md:text-4xl font-black mb-2">НАБОР «ТРИО ЧИСТОТЫ»</h3>
-                        <p class="text-gray-300">Все три продукта со скидкой 25%</p>
+            <!-- Bundle -->
+            <div class="mt-12 max-w-4xl mx-auto bg-gradient-to-r from-orange-50 to-amber-50 rounded-3xl p-8 border-2 border-orange-200">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-4">
+                        <div class="text-5xl">🎁</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-warm-brown">Набор "Чистый дом"</h3>
+                            <p class="text-gray-600">Все 3 средства со скидкой 25%</p>
+                        </div>
                     </div>
                     <div class="flex items-center gap-6">
                         <div class="text-right">
-                            <div class="text-gray-400 line-through text-lg">₽2 370</div>
-                            <div class="text-4xl font-black text-gradient-cyan">₽1 777</div>
+                            <div class="text-gray-400 line-through">11 900 ₸</div>
+                            <div class="text-3xl font-bold text-orange-600">8 900 ₸</div>
                         </div>
-                        <button onclick="addBundleToCart()" class="magnetic-btn px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all animate-pulse">
-                            КУПИТЬ НАБОР
+                        <button onclick="addToCart('Набор')" class="btn-warm px-8 py-4 rounded-full text-white font-bold text-lg shadow-lg pulse-soft">
+                            Купить набор
                         </button>
                     </div>
                 </div>
@@ -479,145 +639,103 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="relative py-32 bg-black/50">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-8 section-reveal">
-                    <h2 class="text-5xl font-black leading-tight">
-                        Почему выбирают<br>
-                        <span class="text-gradient-blue">K-Series</span>?
-                    </h2>
-                    
-                    <div class="space-y-6">
-                        <div class="flex gap-4 group cursor-pointer feature-item">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">🇰🇷</div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Корейское качество</h4>
-                                <p class="text-gray-400">Разработано в Корее с использованием передовых технологий и натуральных ингредиентов.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex gap-4 group cursor-pointer feature-item">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">🌿</div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">Эко-формула</h4>
-                                <p class="text-gray-400">Биоразлагаемые компоненты безопасны для семьи, питомцев и природы.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex gap-4 group cursor-pointer feature-item">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">✨</div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">Долговременный эффект</h4>
-                                <p class="text-gray-400">Аромат и чистота сохраняются до 24 часов после использования.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex gap-4 group cursor-pointer feature-item">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">💧</div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-2 group-hover:text-pink-400 transition-colors">Ультраконцентрат</h4>
-                                <p class="text-gray-400">Одной капли достаточно для идеального результата. Экономия до 3 месяцев!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative section-reveal">
-                    <div class="relative rounded-3xl overflow-hidden aspect-square">
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 animate-pulse"></div>
-                        <img src="/mnt/kimi/upload/Gemini_Generated_Image_q8fykpq8fykpq8fy.png" alt="Products" class="w-full h-full object-cover mix-blend-overlay opacity-50">
-                        
-                        <!-- Floating Stats -->
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="glass-strong p-8 rounded-3xl text-center transform hover:scale-110 transition-transform cursor-pointer">
-                                <div class="text-6xl font-black text-gradient-cyan mb-2 counter" data-target="50000">0</div>
-                                <div class="text-gray-300">Семей уже выбрали<br>K-Series</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Decorative Elements -->
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/30 rounded-full blur-3xl"></div>
-                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500/30 rounded-full blur-3xl"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Demo Section -->
-    <section class="relative py-32 overflow-hidden">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-5xl font-black mb-16 section-reveal">
-                <span class="text-gradient-purple">Почувствуй</span> разницу
-            </h2>
-            
-            <!-- Before/After Slider -->
-            <div class="relative max-w-4xl mx-auto h-[500px] rounded-3xl overflow-hidden section-reveal cursor-ew-resize" id="comparison-slider">
-                <div class="absolute inset-0 bg-gray-800 flex items-center justify-center">
-                    <div class="text-6xl opacity-20">ДО</div>
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center w-1/2 overflow-hidden" id="after-layer">
-                    <div class="text-6xl text-white font-bold">ПОСЛЕ</div>
-                </div>
-                <div class="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-20" style="left: 50%" id="slider-handle">
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-2xl">
-                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                    </div>
-                </div>
-            </div>
-            
-            <p class="mt-8 text-gray-400 text-lg section-reveal">Перетащите ползунок, чтобы увидеть эффект до и после использования K-Series</p>
-        </div>
-    </section>
-
     <!-- Reviews Section -->
-    <section id="reviews" class="relative py-32 bg-gradient-to-b from-black to-blue-900/20">
+    <section id="reviews" class="py-24 section-sand">
         <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-black text-center mb-16 section-reveal">
-                Что говорят <span class="text-gradient-cyan">клиенты</span>
-            </h2>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black mb-4 text-warm-brown">
+                    Отзывы из Астаны
+                </h2>
+                <p class="text-gray-600">Реальные люди, реальные результаты</p>
+            </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass p-8 rounded-3xl section-reveal hover:transform hover:scale-105 transition-all duration-500">
-                    <div class="flex gap-1 mb-4">
-                        <span class="text-yellow-400">★★★★★</span>
+            <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Review 1 -->
+                <div class="review-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-amber-400 text-lg">★★★★★</span>
                     </div>
-                    <p class="text-gray-300 mb-6">"Невероятный аромат K-FRESH! Белье пахнет свежестью целую неделю. Никогда не думала, что буду в восторге от средства для стирки."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-400"></div>
+                    <p class="text-gray-700 mb-4">"Живу в ЖК Нурлы Тау. K-CLEASTAR справился с жиром на кухне, который не отмывался 2 года! Теперь заказываю только его."</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-300 to-amber-300 flex items-center justify-center font-bold text-white">А</div>
                         <div>
-                            <div class="font-bold">Анна М.</div>
-                            <div class="text-sm text-gray-500">Москва</div>
+                            <div class="font-bold text-sm">Айгуль Н.</div>
+                            <div class="text-xs text-gray-500">ЖК Нурлы Тау, Астана</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="glass p-8 rounded-3xl section-reveal hover:transform hover:scale-105 transition-all duration-500" style="transition-delay: 0.2s;">
-                    <div class="flex gap-1 mb-4">
-                        <span class="text-yellow-400">★★★★★</span>
+                <!-- Review 2 -->
+                <div class="review-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-amber-400 text-lg">★★★★★</span>
                     </div>
-                    <p class="text-gray-300 mb-6">"K-CLEASTAR справляется с жиром лучше любого средства. Одна капля — и сковорода как новая! Экономично и эффективно."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400"></div>
+                    <p class="text-gray-700 mb-4">"K-FRESH просто волшебный! После стирки постельное белье пахнет свежестью всю неделю. Дети довольны, я тоже."</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-300 to-cyan-300 flex items-center justify-center font-bold text-white">М</div>
                         <div>
-                            <div class="font-bold">Сергей К.</div>
-                            <div class="text-sm text-gray-500">Санкт-Петербург</div>
+                            <div class="font-bold text-sm">Марат К.</div>
+                            <div class="text-xs text-gray-500">р-н Есиль, Астана</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="glass p-8 rounded-3xl section-reveal hover:transform hover:scale-105 transition-all duration-500" style="transition-delay: 0.4s;">
-                    <div class="flex gap-1 mb-4">
-                        <span class="text-yellow-400">★★★★★</span>
+                <!-- Review 3 -->
+                <div class="review-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-amber-400 text-lg">★★★★★</span>
                     </div>
-                    <p class="text-gray-300 mb-6">"K-BUBBLE — это магия! Пятна с детской одежды уходят мгновенно. Наконец-то нашла универсальное средство для всего дома."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-green-400"></div>
+                    <p class="text-gray-700 mb-4">"Доставили за час в ЖК London. K-BUBBLE отмыл следы от обуви на светлом ламинате после ремонта. Рекомендую!"</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-300 to-pink-300 flex items-center justify-center font-bold text-white">Д</div>
                         <div>
-                            <div class="font-bold">Марина Д.</div>
-                            <div class="text-sm text-gray-500">Казань</div>
+                            <div class="font-bold text-sm">Дана С.</div>
+                            <div class="text-xs text-gray-500">ЖК London, Астана</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review 4 -->
+                <div class="review-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-amber-400 text-lg">★★★★★</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Пробовала много средств, но K-BUBBLE реально работает. Ванна сияет, никакого налета. Заказала второй флакон."</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-300 to-emerald-300 flex items-center justify-center font-bold text-white">С</div>
+                        <div>
+                            <div class="font-bold text-sm">Серик А.</div>
+                            <div class="text-xs text-gray-500">р-н Алматинский, Астана</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review 5 -->
+                <div class="review-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-amber-400 text-lg">★★★★★</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Взяла набор. Выгодно и удобно — всё для уборки в одном месте. Доставка быстрая, курьер вежливый."</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red-300 to-orange-300 flex items-center justify-center font-bold text-white">Г</div>
+                        <div>
+                            <div class="font-bold text-sm">Гульнара М.</div>
+                            <div class="text-xs text-gray-500">ЖК Expo Plaza, Астана</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review 6 -->
+                <div class="review-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-amber-400 text-lg">★★★★★</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"K-CLEASTAR отмыл сковороду, которую я уже хотела выбросить! Экономия денег и нервов. Спасибо!"</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-300 to-yellow-300 flex items-center justify-center font-bold text-white">Т</div>
+                        <div>
+                            <div class="font-bold text-sm">Тимур Р.</div>
+                            <div class="text-xs text-gray-500">р-н Сарыарка, Астана</div>
                         </div>
                     </div>
                 </div>
@@ -626,522 +744,252 @@
     </section>
 
     <!-- CTA Section -->
-    <section id="order" class="relative py-32 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20"></div>
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
-        
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="max-w-4xl mx-auto glass-strong rounded-3xl p-12 section-reveal">
-                <h2 class="text-5xl md:text-6xl font-black mb-6">
-                    Готовы к <span class="text-gradient-blue">революции</span><br>
-                    <span class="font-playfair italic text-gradient-purple">чистоты?</span>
+    <section class="py-24 bg-gradient-to-br from-orange-50 to-amber-50">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-black mb-6 text-warm-brown">
+                    Готовы к идеальной чистоте?
                 </h2>
-                <p class="text-xl text-gray-300 mb-8">Закажите сейчас и получите бесплатную доставку при заказе от ₽1 500</p>
+                <p class="text-xl text-gray-600 mb-8">
+                    Доставим сегодня по Астане. Оплата при получении. 
+                    Гарантия возврата если не понравится.
+                </p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                    <button onclick="showOrderModal()" class="magnetic-btn px-12 py-5 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all animate-pulse">
-                        ЗАКАЗАТЬ СЕЙЧАС
+                    <button onclick="openOrderModal()" class="btn-warm px-10 py-5 rounded-full text-white font-bold text-xl shadow-xl pulse-soft">
+                        Заказать сейчас
                     </button>
+                    <a href="https://t.me/your_channel" target="_blank" class="tg-btn px-10 py-5 rounded-full font-bold text-xl flex items-center justify-center gap-2">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.751-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.121.099.154.232.17.325.015.093.034.305.019.471z"/></svg>
+                        Написать в Telegram
+                    </a>
                 </div>
                 
-                <div class="flex justify-center gap-8 text-sm text-gray-400">
-                    <span class="flex items-center gap-2">✓ Бесплатная доставка</span>
-                    <span class="flex items-center gap-2">✓ Гарантия возврата</span>
+                <div class="flex justify-center gap-8 text-sm text-gray-500">
+                    <span class="flex items-center gap-2">✓ Доставка 2 часа</span>
                     <span class="flex items-center gap-2">✓ Оплата при получении</span>
-                </div>
-                
-                <!-- Countdown Timer -->
-                <div class="mt-8 pt-8 border-t border-white/10">
-                    <p class="text-sm text-gray-400 mb-4">До конца акции осталось:</p>
-                    <div class="flex justify-center gap-4" id="countdown">
-                        <div class="text-center">
-                            <div class="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl font-bold" id="hours">04</div>
-                            <div class="text-xs text-gray-500 mt-1">часов</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl font-bold" id="minutes">32</div>
-                            <div class="text-xs text-gray-500 mt-1">минут</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-16 h-16 glass rounded-xl flex items-center justify-center text-2xl font-bold" id="seconds">15</div>
-                            <div class="text-xs text-gray-500 mt-1">секунд</div>
-                        </div>
-                    </div>
+                    <span class="flex items-center gap-2">✓ Гарантия 14 дней</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-white/10 py-12">
+    <footer class="bg-warm-brown text-white py-12">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
-                    <div class="text-2xl font-black mb-4">K-SERIES<span class="text-blue-400">.</span></div>
-                    <p class="text-gray-400 text-sm">Корейская чистота в каждом доме. Натуральные ингредиенты, максимальная эффективность.</p>
+                    <div class="text-2xl font-black mb-4">K-SERIES<span class="text-orange-400">.</span></div>
+                    <p class="text-gray-300 text-sm">Официальный дистрибьютор в Казахстане. Корейское качество для вашего дома.</p>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Продукты</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">K-CLEASTAR</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">K-BUBBLE</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">K-FRESH</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Наборы</a></li>
+                    <h4 class="font-bold mb-4 text-orange-400">Продукты</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>K-CLEASTAR — для посуды</li>
+                        <li>K-BUBBLE — универсальный</li>
+                        <li>K-FRESH — для белья</li>
+                        <li>Наборы со скидкой</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Поддержка</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Доставка</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Возврат</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Контакты</a></li>
+                    <h4 class="font-bold mb-4 text-orange-400">Доставка</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>Астана — 2 часа</li>
+                        <li>Алматы — 1-2 дня</li>
+                        <li>Другие города — 2-5 дней</li>
+                        <li>Бесплатно от 10 000 ₸</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Контакты</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>support@k-series.ru</li>
-                        <li>8 (800) 555-35-35</li>
-                        <li class="flex gap-4 mt-4">
-                            <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">TG</a>
-                            <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">VK</a>
-                            <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">WA</a>
+                    <h4 class="font-bold mb-4 text-orange-400">Контакты</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>Астана, ул. Кабанбай батыра 11</li>
+                        <li>+7 (777) 123-45-67</li>
+                        <li>+7 (771) 987-65-43 (WhatsApp)</li>
+                        <li class="pt-2">
+                            <a href="https://t.me/your_channel" class="tg-btn inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.751-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.121.099.154.232.17.325.015.093.034.305.019.471z"/></svg>
+                                Написать в Telegram
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-500">
-                © 2024 K-Series. Все права защищены. Попробуй качество Кореи!
+            <div class="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
+                <p>© 2024 K-Series Kazakhstan. Официальный представитель в РК.</p>
+                <p class="mt-2">Все цены указаны в тенге (₸). Товары сертифицированы.</p>
             </div>
         </div>
     </footer>
 
     <!-- Order Modal -->
-    <div id="order-modal" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
-        <div class="glass-strong rounded-3xl p-8 max-w-md w-full relative transform scale-95 opacity-0 transition-all duration-300" id="modal-content">
-            <button onclick="closeOrderModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">✕</button>
+    <div id="orderModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full relative">
+            <button onclick="closeOrderModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">✕</button>
+            <h3 class="text-2xl font-bold mb-2 text-warm-brown">Оформить заказ</h3>
+            <p class="text-gray-500 mb-6 text-sm">Заполните форму — мы перезвоним для подтверждения</p>
             
-            <h3 class="text-3xl font-bold mb-2">Оформление заказа</h3>
-            <p class="text-gray-400 mb-6">Заполните форму и мы свяжемся с вами</p>
-            
-            <form class="space-y-4" onsubmit="submitOrder(event)">
+            <form onsubmit="submitOrder(event)" class="space-y-4">
                 <div>
-                    <label class="block text-sm text-gray-400 mb-2">Ваше имя</label>
-                    <input type="text" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-blue-500 focus:outline-none transition-colors" placeholder="Иван Иванов">
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Ваше имя</label>
+                    <input type="text" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-orange-400 focus:outline-none" placeholder="Айгуль">
                 </div>
                 <div>
-                    <label class="block text-sm text-gray-400 mb-2">Телефон</label>
-                    <input type="tel" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-blue-500 focus:outline-none transition-colors" placeholder="+7 (999) 999-99-99">
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Телефон</label>
+                    <input type="tel" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-orange-400 focus:outline-none" placeholder="+7 (777) 000-00-00">
                 </div>
                 <div>
-                    <label class="block text-sm text-gray-400 mb-2">Выберите продукт</label>
-                    <select class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-blue-500 focus:outline-none transition-colors">
-                        <option>K-CLEASTAR - ₽890</option>
-                        <option>K-BUBBLE - ₽790</option>
-                        <option>K-FRESH - ₽690</option>
-                        <option>Набор Трио - ₽1 777</option>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Район Астаны</label>
+                    <select class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-orange-400 focus:outline-none">
+                        <option>Есиль</option>
+                        <option>Алматинский</option>
+                        <option>Сарыарка</option>
+                        <option>Байконур</option>
+                        <option>Нура</option>
+                        <option>Другой город</option>
                     </select>
                 </div>
-                <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl font-bold hover:shadow-lg transition-all">
-                    ОТПРАВИТЬ ЗАКАЗ
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Товар</label>
+                    <select id="productSelect" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-orange-400 focus:outline-none">
+                        <option>K-CLEASTAR — 4 500 ₸</option>
+                        <option>K-BUBBLE — 3 900 ₸</option>
+                        <option>K-FRESH — 3 500 ₸</option>
+                        <option>Набор "Чистый дом" — 8 900 ₸</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold text-lg hover:shadow-lg transition-all">
+                    Отправить заказ
                 </button>
             </form>
+            
+            <p class="text-center text-xs text-gray-400 mt-4">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</p>
         </div>
     </div>
 
-    <!-- Success Notification -->
-    <div id="notification" class="fixed bottom-8 right-8 glass-strong px-6 py-4 rounded-2xl transform translate-y-20 opacity-0 transition-all duration-500 z-50 flex items-center gap-3">
-        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">✓</div>
-        <div>
-            <div class="font-bold">Успешно!</div>
-            <div class="text-sm text-gray-400">Товар добавлен в корзину</div>
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-xl">✓</div>
+            <div>
+                <div class="font-bold text-warm-brown">Добавлено!</div>
+                <div class="text-sm text-gray-500" id="notifText">Товар в корзине</div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Register GSAP
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Loading Screen
+        // Loading
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
-            const loaderBar = document.getElementById('loader-bar');
-            
-            loaderBar.style.width = '100%';
-            
+            const bar = document.getElementById('loader-bar');
+            bar.style.width = '100%';
             setTimeout(() => {
-                gsap.to(loader, {
-                    opacity: 0,
-                    duration: 0.8,
-                    onComplete: () => {
-                        loader.style.display = 'none';
-                        initAnimations();
-                    }
-                });
-            }, 1500);
+                loader.style.opacity = '0';
+                setTimeout(() => loader.remove(), 500);
+            }, 1000);
         });
-        
-        function initAnimations() {
-            // Hero animations
-            gsap.to('.hero-title', {
-                opacity: 1,
-                y: 0,
-                duration: 1.2,
-                ease: "power4.out"
-            });
-            
-            gsap.to('.hero-subtitle', {
-                opacity: 1,
-                duration: 1,
-                delay: 0.3,
-                ease: "power3.out"
-            });
-            
-            gsap.to('.hero-buttons', {
-                opacity: 1,
-                duration: 1,
-                delay: 0.5,
-                ease: "power3.out"
-            });
-            
-            gsap.to('.hero-stats', {
-                opacity: 1,
-                duration: 1,
-                delay: 0.7,
-                ease: "power3.out"
-            });
-            
-            // Scroll reveals
-            gsap.utils.toArray('.section-reveal').forEach((element, i) => {
-                gsap.to(element, {
-                    scrollTrigger: {
-                        trigger: element,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    },
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8,
-                    ease: "power3.out"
-                });
-            });
-            
-            // Counter animation
-            const counters = document.querySelectorAll('.counter');
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                gsap.to(counter, {
-                    scrollTrigger: {
-                        trigger: counter,
-                        start: "top 80%"
-                    },
-                    innerHTML: target,
-                    duration: 2,
-                    snap: { innerHTML: 1 },
-                    ease: "power2.out"
-                });
-            });
-        }
-        
-        // Custom Cursor
-        const cursor = document.getElementById('cursor');
-        const cursorDot = document.getElementById('cursor-dot');
-        
-        document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, {
-                x: e.clientX - 10,
-                y: e.clientY - 10,
-                duration: 0.1
-            });
-            gsap.to(cursorDot, {
-                x: e.clientX - 2,
-                y: e.clientY - 2,
-                duration: 0.5
-            });
-        });
-        
-        // Magnetic buttons
-        document.querySelectorAll('[data-magnetic]').forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                gsap.to(btn, {
-                    x: x * 0.3,
-                    y: y * 0.3,
-                    duration: 0.3
-                });
-            });
-            
-            btn.addEventListener('mouseleave', () => {
-                gsap.to(btn, {
-                    x: 0,
-                    y: 0,
-                    duration: 0.3
-                });
-            });
-        });
-        
-        // Navbar scroll effect
-        let lastScroll = 0;
+
+        // Navbar scroll
         window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                navbar.classList.add('nav-blur');
-                navbar.classList.remove('py-6');
-                navbar.classList.add('py-3');
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-warm');
             } else {
-                navbar.classList.remove('nav-blur');
-                navbar.classList.remove('py-3');
-                navbar.classList.add('py-6');
+                nav.classList.remove('nav-warm');
             }
-            
-            lastScroll = currentScroll;
         });
-        
-        // Mobile menu
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('translate-x-full')) {
-                menu.classList.remove('translate-x-full');
-            } else {
-                menu.classList.add('translate-x-full');
-            }
-        }
-        
+
         // Smooth scroll
         function scrollToSection(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Comparison sliders
+        function initSlider(id) {
+            const container = document.getElementById(id);
+            const afterLayer = container.querySelector('.after-layer');
+            const handle = container.querySelector('.slider-handle');
+            let isDragging = false;
+
+            function updateSlider(x) {
+                const rect = container.getBoundingClientRect();
+                let percent = ((x - rect.left) / rect.width) * 100;
+                percent = Math.max(0, Math.min(100, percent));
+                afterLayer.style.width = percent + '%';
+                handle.style.left = percent + '%';
             }
-        }
-        
-        // Product detail modal
-        function showProductDetail(product) {
-            showNotification('Открыта детальная информация о продукте');
-        }
-        
-        // Flip card
-        function flipCard(card) {
-            const inner = card.querySelector('.product-inner');
-            gsap.to(inner, {
-                rotationY: 180,
-                duration: 0.6,
-                ease: "power2.inOut",
-                onComplete: () => {
-                    setTimeout(() => {
-                        gsap.to(inner, {
-                            rotationY: 0,
-                            duration: 0.6,
-                            ease: "power2.inOut"
-                        });
-                    }, 1000);
-                }
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                updateSlider(e.clientX);
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (isDragging) updateSlider(e.clientX);
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            // Touch support
+            container.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                updateSlider(e.touches[0].clientX);
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (isDragging) updateSlider(e.touches[0].clientX);
+            });
+
+            window.addEventListener('touchend', () => {
+                isDragging = false;
             });
         }
+
+        initSlider('slider1');
+        initSlider('slider2');
+        initSlider('slider3');
+        initSlider('slider4');
+
+        // Cart functionality
+        let cart = [];
         
-        // Add bundle to cart
-        function addBundleToCart() {
-            showNotification('Набор "Трио Чистоты" добавлен в корзину!');
+        function addToCart(product) {
+            cart.push(product);
+            showNotification(product + ' добавлен в корзину!');
         }
-        
-        // Order modal
-        function showOrderModal() {
-            const modal = document.getElementById('order-modal');
-            const content = document.getElementById('modal-content');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            setTimeout(() => {
-                content.classList.remove('scale-95', 'opacity-0');
-                content.classList.add('scale-100', 'opacity-100');
-            }, 10);
+
+        function showNotification(text) {
+            const notif = document.getElementById('notification');
+            document.getElementById('notifText').textContent = text;
+            notif.classList.add('show');
+            setTimeout(() => notif.classList.remove('show'), 3000);
         }
-        
+
+        // Modal
+        function openOrderModal() {
+            document.getElementById('orderModal').classList.remove('hidden');
+            document.getElementById('orderModal').classList.add('flex');
+        }
+
         function closeOrderModal() {
-            const modal = document.getElementById('order-modal');
-            const content = document.getElementById('modal-content');
-            content.classList.remove('scale-100', 'opacity-100');
-            content.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }, 300);
+            document.getElementById('orderModal').classList.add('hidden');
+            document.getElementById('orderModal').classList.remove('flex');
         }
-        
+
         function submitOrder(e) {
             e.preventDefault();
             closeOrderModal();
-            setTimeout(() => {
-                showNotification('Заказ успешно оформлен! Мы свяжемся с вами.');
-            }, 500);
+            showNotification('Заказ отправлен! Мы перезвоним вам.');
         }
-        
-        // Notification
-        function showNotification(text) {
-            const notif = document.getElementById('notification');
-            notif.querySelector('.text-gray-400').textContent = text;
-            notif.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                notif.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
-        
-        // Comparison slider
-        const slider = document.getElementById('comparison-slider');
-        const afterLayer = document.getElementById('after-layer');
-        const handle = document.getElementById('slider-handle');
-        let isDragging = false;
-        
-        slider.addEventListener('mousedown', () => isDragging = true);
-        window.addEventListener('mouseup', () => isDragging = false);
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            const rect = slider.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const percent = (x / rect.width) * 100;
-            const clamped = Math.max(0, Math.min(100, percent));
-            
-            afterLayer.style.width = clamped + '%';
-            handle.style.left = clamped + '%';
-        });
-        
-        // Countdown timer
-        function updateCountdown() {
-            const hours = document.getElementById('hours');
-            const minutes = document.getElementById('minutes');
-            const seconds = document.getElementById('seconds');
-            
-            let h = parseInt(hours.textContent);
-            let m = parseInt(minutes.textContent);
-            let s = parseInt(seconds.textContent);
-            
-            s--;
-            if (s < 0) {
-                s = 59;
-                m--;
-                if (m < 0) {
-                    m = 59;
-                    h--;
-                    if (h < 0) h = 23;
-                }
+
+        // Close modal on outside click
+        document.getElementById('orderModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('orderModal')) {
+                closeOrderModal();
             }
-            
-            hours.textContent = h.toString().padStart(2, '0');
-            minutes.textContent = m.toString().padStart(2, '0');
-            seconds.textContent = s.toString().padStart(2, '0');
-        }
-        
-        setInterval(updateCountdown, 1000);
-        
-        // Particle System
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        const particles = [];
-        const particleCount = 50;
-        
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-                this.opacity = Math.random() * 0.5 + 0.1;
-            }
-            
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
-            
-            draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-        
-        function initParticles() {
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-        
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                
-                // Connect particles
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 100)})`;
-                        ctx.lineWidth = 1;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            
-            requestAnimationFrame(animateParticles);
-        }
-        
-        initParticles();
-        animateParticles();
-        
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-        
-        // Create bubbles
-        function createBubble() {
-            const bubble = document.createElement('div');
-            bubble.className = 'bubble';
-            const size = Math.random() * 60 + 20;
-            bubble.style.width = size + 'px';
-            bubble.style.height = size + 'px';
-            bubble.style.left = Math.random() * window.innerWidth + 'px';
-            bubble.style.animation = `bubble-rise ${Math.random() * 10 + 10}s linear`;
-            document.body.appendChild(bubble);
-            
-            setTimeout(() => bubble.remove(), 20000);
-        }
-        
-        setInterval(createBubble, 2000);
-        
-        // Ripple effect on click
-        document.addEventListener('click', (e) => {
-            const ripple = document.createElement('div');
-            ripple.className = 'ripple';
-            ripple.style.width = '20px';
-            ripple.style.height = '20px';
-            ripple.style.left = e.pageX - 10 + 'px';
-            ripple.style.top = e.pageY - 10 + 'px';
-            document.body.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 1000);
         });
     </script>
 </body>
