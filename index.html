@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K-LIFE — Корейская бытовая химия премиум-класса | Астана</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -29,31 +29,6 @@
             background: var(--dark);
             color: var(--light);
             overflow-x: hidden;
-            cursor: none;
-        }
-
-        /* Custom Cursor */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--primary-blue);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s;
-            mix-blend-mode: difference;
-        }
-
-        .cursor-follower {
-            width: 40px;
-            height: 40px;
-            background: rgba(78, 205, 196, 0.3);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transition: transform 0.3s ease;
         }
 
         /* Preloader */
@@ -116,7 +91,7 @@
         }
 
         .nav.scrolled {
-            background: rgba(26, 26, 46, 0.9);
+            background: rgba(26, 26, 46, 0.95);
             backdrop-filter: blur(20px);
             padding: 15px 50px;
         }
@@ -127,16 +102,6 @@
             background: linear-gradient(45deg, var(--primary-blue), var(--accent-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            position: relative;
-        }
-
-        .logo::after {
-            content: '®';
-            position: absolute;
-            top: -5px;
-            right: -15px;
-            font-size: 0.8rem;
-            color: var(--accent-gold);
         }
 
         .nav-links {
@@ -176,8 +141,6 @@
             color: white;
             font-weight: 600;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
             transition: transform 0.3s;
         }
 
@@ -185,30 +148,16 @@
             transform: scale(1.05);
         }
 
-        .nav-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-        }
-
-        .nav-cta:hover::before {
-            left: 100%;
-        }
-
         /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: var(--dark);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding-top: 80px;
         }
 
         #canvas-container {
@@ -220,22 +169,65 @@
             z-index: 0;
         }
 
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: move-shape 20s infinite;
+        }
+
+        .shape-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--primary-blue);
+            top: -10%;
+            right: -10%;
+        }
+
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-pink);
+            bottom: -10%;
+            left: -10%;
+            animation-delay: -7s;
+        }
+
+        @keyframes move-shape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
         .hero-content {
             position: relative;
             z-index: 10;
             text-align: center;
-            max-width: 1200px;
+            max-width: 900px;
             padding: 0 20px;
         }
 
         .hero-badge {
-            display: inline-block;
-            padding: 10px 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 30px;
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 50px;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
+            font-size: 1rem;
+            margin-bottom: 40px;
             backdrop-filter: blur(10px);
             animation: float 3s ease-in-out infinite;
         }
@@ -246,21 +238,12 @@
         }
 
         .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(3rem, 6vw, 5rem);
             font-weight: 900;
             line-height: 1.1;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .hero-title .line {
-            display: block;
-            overflow: hidden;
-        }
-
-        .hero-title .line span {
-            display: inline-block;
-            transform: translateY(100%);
+            margin-bottom: 30px;
+            opacity: 1;
+            transform: none;
         }
 
         .gradient-text {
@@ -279,14 +262,15 @@
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 40px;
-            max-width: 600px;
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 50px;
+            line-height: 1.6;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            opacity: 0;
-            transform: translateY(20px);
+            opacity: 1;
+            transform: none;
         }
 
         .hero-buttons {
@@ -294,37 +278,35 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            opacity: 0;
-            transform: translateY(20px);
+            opacity: 1;
+            transform: none;
         }
 
         .btn-primary {
-            padding: 18px 40px;
+            padding: 20px 50px;
             background: linear-gradient(135deg, var(--primary-blue), #00f2fe);
             border: none;
             border-radius: 50px;
             color: white;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
             transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(79, 172, 254, 0.6);
+            box-shadow: 0 20px 40px rgba(78, 205, 196, 0.6);
         }
 
         .btn-secondary {
-            padding: 18px 40px;
+            padding: 20px 50px;
             background: transparent;
             border: 2px solid rgba(255,255,255,0.3);
             border-radius: 50px;
             color: white;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
@@ -336,58 +318,6 @@
             border-color: var(--primary-blue);
         }
 
-        /* Floating Elements */
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-            animation: move-shape 20s infinite;
-        }
-
-        .shape-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--primary-blue);
-            top: 10%;
-            left: 10%;
-        }
-
-        .shape-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent-pink);
-            top: 60%;
-            right: 10%;
-            animation-delay: -5s;
-        }
-
-        .shape-3 {
-            width: 250px;
-            height: 250px;
-            background: var(--accent-gold);
-            bottom: 20%;
-            left: 30%;
-            animation-delay: -10s;
-        }
-
-        @keyframes move-shape {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(50px, -50px) scale(1.1); }
-            50% { transform: translate(-30px, 30px) scale(0.9); }
-            75% { transform: translate(30px, 50px) scale(1.05); }
-        }
-
         /* Stats Bar */
         .stats-bar {
             position: absolute;
@@ -396,7 +326,7 @@
             transform: translateX(-50%);
             display: flex;
             gap: 60px;
-            padding: 30px 50px;
+            padding: 30px 60px;
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(20px);
             border-radius: 20px;
@@ -409,7 +339,7 @@
         }
 
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--primary-blue), #00f2fe);
             -webkit-background-clip: text;
@@ -418,16 +348,21 @@
         }
 
         .stat-label {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
             margin-top: 5px;
         }
 
-        /* Products Section */
-        .products {
-            padding: 150px 50px;
-            position: relative;
+        /* Product Showcase - Slide Style */
+        .product-showcase {
+            padding: 100px 50px;
             background: var(--dark);
+            position: relative;
+        }
+
+        .showcase-container {
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .section-header {
@@ -437,12 +372,12 @@
 
         .section-label {
             display: inline-block;
-            padding: 8px 20px;
+            padding: 10px 25px;
             background: rgba(78, 205, 196, 0.2);
             border: 1px solid var(--primary-blue);
             border-radius: 50px;
             color: var(--primary-blue);
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 20px;
             text-transform: uppercase;
@@ -456,293 +391,179 @@
         }
 
         .section-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: rgba(255,255,255,0.7);
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
-        .products-grid {
+        /* Slides */
+        .slides-container {
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+        }
+
+        .slide {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .product-card {
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
             background: rgba(255,255,255,0.03);
+            border-radius: 40px;
+            padding: 60px;
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 30px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
             transition: all 0.5s;
-            cursor: pointer;
         }
 
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(78, 205, 196, 0.15), transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .product-card:hover::before {
-            opacity: 1;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(78, 205, 196, 0.5);
+        .slide:hover {
+            border-color: rgba(78, 205, 196, 0.3);
+            transform: translateY(-5px);
             box-shadow: 0 30px 60px rgba(0,0,0,0.3);
         }
 
-        .product-image {
-            width: 100%;
+        .slide:nth-child(even) {
+            direction: rtl;
+        }
+
+        .slide:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .slide-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        .slide-image img {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 20px;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+            transition: transform 0.5s;
+        }
+
+        .slide:hover .slide-image img {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .slide-glow {
+            position: absolute;
+            width: 300px;
             height: 300px;
+            background: radial-gradient(circle, var(--primary-blue), transparent 70%);
+            opacity: 0.3;
+            filter: blur(60px);
+            z-index: -1;
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .slide-content h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-tagline {
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .slide-description {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
             margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .slide-features {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .slide-feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .slide-feature-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-pink));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
+            font-size: 1.5rem;
         }
 
-        .product-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            transition: transform 0.5s;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        .slide-feature-text {
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
-        .product-card:hover .product-image img {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .product-name {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .product-description {
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .product-features {
+        .slide-footer {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .feature-tag {
-            padding: 6px 15px;
-            background: rgba(78, 205, 196, 0.1);
-            border: 1px solid rgba(78, 205, 196, 0.3);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--primary-blue);
-        }
-
-        .product-footer {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 40px;
         }
 
-        .product-price {
-            font-size: 2rem;
+        .slide-price {
+            font-size: 3rem;
             font-weight: 800;
             color: var(--accent-gold);
         }
 
-        .product-price span {
-            font-size: 1rem;
+        .slide-price span {
+            font-size: 1.2rem;
             color: rgba(255,255,255,0.5);
             font-weight: 400;
         }
 
-        .product-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-blue), #00f2fe);
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .product-btn:hover {
-            transform: scale(1.1) rotate(90deg);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 150px 50px;
-            background: linear-gradient(180deg, transparent, rgba(78, 205, 196, 0.05), transparent);
-            position: relative;
-        }
-
-        .features-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 100px;
-            align-items: center;
-        }
-
-        .features-visual {
-            position: relative;
-            height: 600px;
-        }
-
-        .feature-circle {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            border: 2px solid rgba(78, 205, 196, 0.3);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulse-ring 3s ease-out infinite;
-        }
-
-        .feature-circle:nth-child(2) {
-            width: 300px;
-            height: 300px;
-            animation-delay: 1s;
-            border-color: rgba(255, 107, 157, 0.3);
-        }
-
-        .feature-circle:nth-child(3) {
-            width: 200px;
-            height: 200px;
-            animation-delay: 2s;
-            border-color: rgba(255, 217, 61, 0.3);
-        }
-
-        @keyframes pulse-ring {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-        }
-
-        .feature-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, var(--primary-blue), #00f2fe);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            box-shadow: 0 20px 60px rgba(79, 172, 254, 0.4);
-        }
-
-        .features-list {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .feature-item {
-            display: flex;
-            gap: 25px;
-            align-items: flex-start;
-            padding: 30px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s;
-        }
-
-        .feature-item:hover {
-            background: rgba(255,255,255,0.06);
-            transform: translateX(10px);
-            border-color: var(--primary-blue);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-blue), #00f2fe);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            flex-shrink: 0;
-        }
-
-        .feature-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--light);
-        }
-
-        .feature-content p {
-            color: rgba(255,255,255,0.7);
-            line-height: 1.6;
-        }
-
         /* Korea Section */
         .korea {
-            padding: 150px 50px;
+            padding: 120px 50px;
+            background: linear-gradient(135deg, rgba(199, 184, 234, 0.1), rgba(78, 205, 196, 0.1));
             position: relative;
-            overflow: hidden;
-            background: var(--dark);
-        }
-
-        .korea-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(78,205,196,0.1)" stroke-width="0.5"/></svg>');
-            background-size: 100px 100px;
-            opacity: 0.5;
         }
 
         .korea-content {
             max-width: 1400px;
             margin: 0 auto;
             text-align: center;
-            position: relative;
-            z-index: 2;
         }
 
         .korea-flag {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             margin: 0 auto 40px;
             background: linear-gradient(135deg, #fff, #f0f0f0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 4rem;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             animation: rotate-slow 20s linear infinite;
         }
@@ -761,65 +582,42 @@
 
         .korea-card {
             padding: 40px 30px;
-            background: rgba(255,255,255,0.03);
+            background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 25px;
             transition: all 0.5s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .korea-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(78, 205, 196, 0.2), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .korea-card:hover::after {
-            opacity: 1;
         }
 
         .korea-card:hover {
             transform: translateY(-10px);
             border-color: var(--primary-blue);
+            background: rgba(255,255,255,0.08);
         }
 
         .korea-number {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
             background: linear-gradient(135deg, var(--primary-blue), #00f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
-            position: relative;
-            z-index: 2;
         }
 
         .korea-label {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 10px;
-            position: relative;
-            z-index: 2;
         }
 
         .korea-desc {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: rgba(255,255,255,0.6);
-            position: relative;
-            z-index: 2;
         }
 
         /* Safety Section */
         .safety {
-            padding: 150px 50px;
-            background: linear-gradient(135deg, rgba(199, 184, 234, 0.1), rgba(78, 205, 196, 0.1));
+            padding: 120px 50px;
+            background: var(--dark);
         }
 
         .safety-container {
@@ -836,18 +634,16 @@
 
         .safety-card {
             background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 30px;
             padding: 50px 40px;
             text-align: center;
             transition: all 0.5s;
-            position: relative;
         }
 
         .safety-card:hover {
             transform: scale(1.05);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border-color: var(--accent-pink);
         }
 
         .safety-icon {
@@ -879,9 +675,9 @@
         }
 
         .safety-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }
 
         .safety-list {
@@ -890,10 +686,16 @@
         }
 
         .safety-list li {
-            padding: 10px 0;
-            color: rgba(255,255,255,0.8);
+            padding: 15px 0;
+            color: rgba(255,255,255,0.9);
             position: relative;
-            padding-left: 30px;
+            padding-left: 35px;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .safety-list li:last-child {
+            border-bottom: none;
         }
 
         .safety-list li::before {
@@ -902,14 +704,14 @@
             left: 0;
             color: var(--primary-blue);
             font-weight: 700;
+            font-size: 1.3rem;
         }
 
         /* CTA Section */
         .cta {
-            padding: 150px 50px;
+            padding: 120px 50px;
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
             position: relative;
-            overflow: hidden;
-            background: var(--dark);
         }
 
         .cta-container {
@@ -924,29 +726,18 @@
             overflow: hidden;
         }
 
-        .cta-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
-            animation: rotate-slow 30s linear infinite;
-        }
-
         .cta-title {
-            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             position: relative;
             z-index: 2;
         }
 
         .cta-subtitle {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 40px;
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 50px;
             position: relative;
             z-index: 2;
         }
@@ -961,13 +752,13 @@
         }
 
         .cta-input {
-            padding: 18px 30px;
+            padding: 20px 35px;
             background: rgba(255,255,255,0.1);
             border: 2px solid rgba(255,255,255,0.2);
             border-radius: 50px;
             color: white;
-            font-size: 1rem;
-            width: 300px;
+            font-size: 1.1rem;
+            width: 350px;
             outline: none;
             transition: all 0.3s;
         }
@@ -983,13 +774,13 @@
 
         .discount-badge {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 20px 50px;
             background: var(--accent-gold);
             color: var(--dark);
             font-weight: 800;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             border-radius: 50px;
-            margin-top: 30px;
+            margin-top: 40px;
             position: relative;
             z-index: 2;
             animation: bounce 2s infinite;
@@ -998,6 +789,46 @@
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
+        }
+
+        .delivery-info {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .delivery-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .delivery-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .delivery-text {
+            text-align: left;
+        }
+
+        .delivery-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .delivery-desc {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
         }
 
         /* Footer */
@@ -1022,9 +853,10 @@
         }
 
         .footer-desc {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
             line-height: 1.8;
             margin-bottom: 30px;
+            font-size: 1.1rem;
         }
 
         .footer-social {
@@ -1033,8 +865,8 @@
         }
 
         .social-link {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
@@ -1043,7 +875,7 @@
             color: white;
             text-decoration: none;
             transition: all 0.3s;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
 
         .social-link:hover {
@@ -1052,7 +884,7 @@
         }
 
         .footer-title {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 700;
             margin-bottom: 25px;
             color: var(--primary-blue);
@@ -1067,53 +899,40 @@
         }
 
         .footer-links a {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
             text-decoration: none;
             transition: color 0.3s;
-            position: relative;
-        }
-
-        .footer-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--primary-blue);
-            transition: width 0.3s;
+            font-size: 1.1rem;
         }
 
         .footer-links a:hover {
             color: white;
         }
 
-        .footer-links a:hover::after {
-            width: 100%;
-        }
-
         .footer-contact {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
             gap: 15px;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
         }
 
         .contact-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: rgba(78, 205, 196, 0.2);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary-blue);
+            font-size: 1.2rem;
         }
 
         .footer-bottom {
@@ -1124,8 +943,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
         }
 
         /* Scroll Progress */
@@ -1133,7 +952,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            height: 3px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary-blue), var(--accent-pink));
             z-index: 10001;
             width: 0%;
@@ -1141,11 +960,12 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .features-container {
+            .slide {
                 grid-template-columns: 1fr;
+                gap: 40px;
             }
-            .features-visual {
-                height: 400px;
+            .slide:nth-child(even) {
+                direction: ltr;
             }
             .korea-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1156,17 +976,22 @@
             .footer-content {
                 grid-template-columns: 1fr 1fr;
             }
+            .stats-bar {
+                flex-direction: column;
+                gap: 20px;
+                width: 90%;
+            }
         }
 
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
-            .stats-bar {
-                flex-direction: column;
-                gap: 20px;
-                padding: 20px;
-                width: 90%;
+            .hero {
+                padding-top: 100px;
+            }
+            .slide {
+                padding: 30px;
             }
             .korea-grid {
                 grid-template-columns: 1fr;
@@ -1174,19 +999,17 @@
             .footer-content {
                 grid-template-columns: 1fr;
             }
-            .footer-bottom {
+            .cta-container {
+                padding: 40px 20px;
+            }
+            .delivery-info {
                 flex-direction: column;
-                gap: 20px;
-                text-align: center;
+                gap: 30px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-
     <!-- Scroll Progress -->
     <div class="scroll-progress"></div>
 
@@ -1203,7 +1026,6 @@
         <div class="logo">K-LIFE</div>
         <ul class="nav-links">
             <li><a href="#products">Продукты</a></li>
-            <li><a href="#features">Преимущества</a></li>
             <li><a href="#korea">О Корее</a></li>
             <li><a href="#safety">Безопасность</a></li>
             <li><a href="#contacts">Контакты</a></li>
@@ -1218,19 +1040,21 @@
         <div class="floating-shapes">
             <div class="shape shape-1"></div>
             <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
         </div>
 
         <div class="hero-content">
             <div class="hero-badge">✨ Доступно в Астане</div>
             <h1 class="hero-title">
-                <span class="line"><span>Корейская бытовая</span></span>
-                <span class="line"><span class="gradient-text">химия премиум-класса</span></span>
+                Корейская бытовая <br>
+                <span class="gradient-text">химия премиум-класса</span>
             </h1>
-            <p class="hero-subtitle">Чистота, которую можно почувствовать. Натурально. Безопасно. Для семьи.</p>
+            <p class="hero-subtitle">
+                Чистота, которую можно почувствовать. Натурально. Безопасно. Для семьи. 
+                K-LIFE — это не просто бытовая химия. Это философия чистоты, пришедшая из страны утренней свежести.
+            </p>
             <div class="hero-buttons">
                 <button class="btn-primary">Выбрать продукты →</button>
-                <button class="btn-secondary">Смотреть видео ▶</button>
+                <button class="btn-secondary">Узнать больше</button>
             </div>
         </div>
 
@@ -1254,108 +1078,112 @@
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section class="products" id="products">
-        <div class="section-header">
-            <div class="section-label">Каталог</div>
-            <h2 class="section-title">Наша линейка продуктов</h2>
-            <p class="section-subtitle">Три продукта, три решения для вашего дома. Каждый разработан с заботой о семье и окружающей среде.</p>
-        </div>
-
-        <div class="products-grid">
-            <div class="product-card" data-tilt>
-                <div class="product-image">
-                    <img src="https://kimi-web-img.moonshot.cn/img/mnt/kimi/upload/Gemini_Generated_Image_1ktc421ktc421ktc.png" alt="K-CLEASTAR" onerror="this.style.display='none'">
-                </div>
-                <h3 class="product-name">K-CLEASTAR</h3>
-                <p class="product-description">Жидкое моющее средство для посуды и фруктов. Гипоаллергенная формула без фосфатов.</p>
-                <div class="product-features">
-                    <span class="feature-tag">500 мл</span>
-                    <span class="feature-tag">Гипоаллергенно</span>
-                    <span class="feature-tag">Для детей</span>
-                </div>
-                <div class="product-footer">
-                    <div class="product-price">1 320 <span>₸</span></div>
-                    <button class="product-btn">+</button>
-                </div>
+    <!-- Product Showcase - Slides -->
+    <section class="product-showcase" id="products">
+        <div class="showcase-container">
+            <div class="section-header">
+                <div class="section-label">Каталог</div>
+                <h2 class="section-title">Наша линейка продуктов</h2>
+                <p class="section-subtitle">Три продукта, три решения для вашего дома. Каждый разработан с заботой о семье и окружающей среде.</p>
             </div>
 
-            <div class="product-card" data-tilt>
-                <div class="product-image">
-                    <img src="https://kimi-web-img.moonshot.cn/img/mnt/kimi/upload/Gemini_Generated_Image_l641pml641pml641.png" alt="K-BUBBLE" onerror="this.style.display='none'">
-                </div>
-                <h3 class="product-name">K-BUBBLE</h3>
-                <p class="product-description">Гель для стирки ультраконцентрат. Пробиотическая формула для 40 стирок.</p>
-                <div class="product-features">
-                    <span class="feature-tag">1200 мл</span>
-                    <span class="feature-tag">40 стирок</span>
-                    <span class="feature-tag">Ультраконцентрат</span>
-                </div>
-                <div class="product-footer">
-                    <div class="product-price">2 137 <span>₸</span></div>
-                    <button class="product-btn">+</button>
-                </div>
-            </div>
-
-            <div class="product-card" data-tilt>
-                <div class="product-image">
-                    <img src="https://kimi-web-img.moonshot.cn/img/mnt/kimi/upload/Gemini_Generated_Image_pxx921pxx921pxx9.png" alt="K-FRESH" onerror="this.style.display='none'">
-                </div>
-                <h3 class="product-name">K-FRESH</h3>
-                <p class="product-description">Кондиционер для белья с лавандовым ароматом. Мягкость на 7 дней.</p>
-                <div class="product-features">
-                    <span class="feature-tag">1200 мл</span>
-                    <span class="feature-tag">Лаванда</span>
-                    <span class="feature-tag">7 дней свежести</span>
-                </div>
-                <div class="product-footer">
-                    <div class="product-price">2 155 <span>₸</span></div>
-                    <button class="product-btn">+</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="features-container">
-            <div class="features-visual">
-                <div class="feature-circle"></div>
-                <div class="feature-circle"></div>
-                <div class="feature-circle"></div>
-                <div class="feature-center">✨</div>
-            </div>
-            
-            <div class="features-list">
-                <div class="feature-item">
-                    <div class="feature-icon">🌿</div>
-                    <div class="feature-content">
-                        <h3>Натуральные компоненты</h3>
-                        <p>Растительные экстракты вместо агрессивной химии. Безопасно для кожи и окружающей среды.</p>
+            <div class="slides-container">
+                <!-- Slide 1: K-CLEASTAR -->
+                <div class="slide">
+                    <div class="slide-image">
+                        <div class="slide-glow"></div>
+                        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop" alt="K-CLEASTAR">
+                    </div>
+                    <div class="slide-content">
+                        <h3>K-CLEASTAR</h3>
+                        <div class="slide-tagline">"Чистота в каждой капле"</div>
+                        <p class="slide-description">
+                            Главный герой нашей линейки. Жидкое моющее средство с дозатором для идеальной чистки посуды, овощей и фруктов. Гипоаллергенная формула без фосфатов и парабенов.
+                        </p>
+                        <div class="slide-features">
+                            <div class="slide-feature">
+                                <div class="slide-feature-icon">🌿</div>
+                                <span class="slide-feature-text">Гипоаллергенная формула — без фосфатов и парабенов</span>
+                            </div>
+                            <div class="slide-feature">
+                                <div class="slide-feature-icon">👶</div>
+                                <span class="slide-feature-text">Безопасно для детей — можно мыть детские бутылочки</span>
+                            </div>
+                            <div class="slide-feature">
+                                <div class="slide-feature-icon">💧</div>
+                                <span class="slide-feature-text">Уход за кожей — натуральные растительные экстракты</span>
+                            </div>
+                        </div>
+                        <div class="slide-footer">
+                            <div class="slide-price">1 320 <span>₸ / 500 мл</span></div>
+                            <button class="btn-primary">В корзину</button>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">👶</div>
-                    <div class="feature-content">
-                        <h3>Безопасно для детей</h3>
-                        <p>Гипоаллергенные формулы подходят для мытья детских бутылочек и одежды малышей.</p>
+
+                <!-- Slide 2: K-BUBBLE -->
+                <div class="slide">
+                    <div class="slide-image">
+                        <div class="slide-glow" style="background: radial-gradient(circle, var(--accent-pink), transparent 70%);"></div>
+                        <img src="https://images.unsplash.com/photo-1583947581924-860bda6a26df?w=600&h=600&fit=crop" alt="K-BUBBLE">
+                    </div>
+                    <div class="slide-content">
+                        <h3 style="background: linear-gradient(135deg, var(--accent-pink), var(--accent-gold)); -webkit-background-clip: text;">K-BUBBLE</h3>
+                        <div class="slide-tagline">"Объятия свежести для каждой вещи"</div>
+                        <p class="slide-description">
+                            Гель для стирки с пробиотической формулой. Удаляет даже застарелые пятна с первого раза, сохраняя яркость цветов и структуру тканей. Ультраконцентрат для безупречной чистоты.
+                        </p>
+                        <div class="slide-features">
+                            <div class="slide-feature">
+                                <div class="slide-feature-icon" style="background: linear-gradient(135deg, var(--accent-pink), var(--accent-gold));">🦠</div>
+                                <span class="slide-feature-text">98% микробов уничтожено</span>
+                            </div>
+                            <div class="slide-feature">
+                                <div class="slide-feature-icon" style="background: linear-gradient(135deg, var(--accent-pink), var(--accent-gold));">👕</div>
+                                <span class="slide-feature-text">40 стирок из одной упаковки</span>
+                            </div>
+                            <div class="slide-feature">
+                                <div class="slide-feature-icon" style="background: linear-gradient(135deg, var(--accent-pink), var(--accent-gold));">🌈</div>
+                                <span class="slide-feature-text">Цвета сохраняют яркость — биоразлагаемо</span>
+                            </div>
+                        </div>
+                        <div class="slide-footer">
+                            <div class="slide-price">2 137 <span>₸ / 1200 мл</span></div>
+                            <button class="btn-primary" style="background: linear-gradient(135deg, var(--accent-pink), var(--accent-gold));">В корзину</button>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">🔬</div>
-                    <div class="feature-content">
-                        <h3>Наночастицы</h3>
-                        <p>Проникают в мельчайшие поры тканей и поверхностей для глубокой очистки.</p>
+
+                <!-- Slide 3: K-FRESH -->
+                <div class="slide">
+                    <div class="slide-image">
+                        <div class="slide-glow" style="background: radial-gradient(circle, var(--primary-purple), transparent 70%);"></div>
+                        <img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=600&h=600&fit=crop" alt="K-FRESH">
                     </div>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">♻️</div>
-                    <div class="feature-content">
-                        <h3>Эко-формула</h3>
-                        <p>Биоразлагаемые компоненты не вредят природе. Забота о планете — наш приоритет.</p>
+                    <div class="slide-content">
+                        <h3 style="background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink)); -webkit-background-clip: text;">K-FRESH</h3>
+                        <div class="slide-tagline">"Аромат, который остаётся с тобой"</div>
+                        <p class="slide-description">
+                            Кондиционер для белья с натуральными эссенциями. Придаёт белью невероятную мягкость и лёгкость в глажке. Нежный лавандовый аромат сохраняется до 7 дней.
+                        </p>
+                        <div class="slide-features">
+                            <div class="slide-feature">
+                                <div class="slide-feature-icon" style="background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));">🌸</div>
+                                <span class="slide-feature-text">Нежный лавандовый аромат — 7 дней свежести</span>
+                            </div>
+                            <div class="slide-feature">
+                                <div class="slide-feature-icon" style="background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));">🤲</div>
+                                <span class="slide-feature-text">Гипоаллергенно — для чувствительной кожи</span>
+                            </div>
+                            <div class="slide-feature">
+                                <div class="slide-feature-icon" style="background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));">🛡️</div>
+                                <span class="slide-feature-text">Защита тканей — предотвращает износ</span>
+                            </div>
+                        </div>
+                        <div class="slide-footer">
+                            <div class="slide-price">2 155 <span>₸ / 1200 мл</span></div>
+                            <button class="btn-primary" style="background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));">В корзину</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1364,7 +1192,6 @@
 
     <!-- Korea Section -->
     <section class="korea" id="korea">
-        <div class="korea-bg"></div>
         <div class="korea-content">
             <div class="korea-flag">🇰🇷</div>
             <div class="section-label">Почему Корея?</div>
@@ -1375,7 +1202,7 @@
                 <div class="korea-card">
                     <div class="korea-number">60+</div>
                     <div class="korea-label">лет инноваций</div>
-                    <div class="korea-desc">Непрерывное развитие технологий</div>
+                    <div class="korea-desc">Непрерывное развитие технологий очистки</div>
                 </div>
                 
                 <div class="korea-card">
@@ -1425,7 +1252,7 @@
                     <ul class="safety-list">
                         <li>FDA одобрено — Федеральное агентство США</li>
                         <li>Гипоаллергенно — подходит для аллергиков</li>
-                        <li>Безопасно для детей — можно использовать для малышей</li>
+                        <li>Безопасно для детей — можно для малышей</li>
                     </ul>
                 </div>
                 
@@ -1449,11 +1276,35 @@
             <p class="cta-subtitle">Тысячи семей в Астане уже открыли для себя качество корейской бытовой химии. Быстрая доставка в день заказа.</p>
             
             <div class="cta-form">
-                <input type="tel" class="cta-input" placeholder="+7 (___) ___-__-__">
+                <input type="tel" class="cta-input" placeholder="+7 (777) 777-77-77">
                 <button class="btn-primary">Получить скидку 15%</button>
             </div>
             
             <div class="discount-badge">🎉 Скидка 15% на первый заказ!</div>
+
+            <div class="delivery-info">
+                <div class="delivery-item">
+                    <div class="delivery-icon">🚚</div>
+                    <div class="delivery-text">
+                        <div class="delivery-title">Быстрая доставка</div>
+                        <div class="delivery-desc">По Астане — в день заказа</div>
+                    </div>
+                </div>
+                <div class="delivery-item">
+                    <div class="delivery-icon">💬</div>
+                    <div class="delivery-text">
+                        <div class="delivery-title">Консультация</div>
+                        <div class="delivery-desc">Бесплатный подбор средств</div>
+                    </div>
+                </div>
+                <div class="delivery-item">
+                    <div class="delivery-icon">🛡️</div>
+                    <div class="delivery-text">
+                        <div class="delivery-title">Гарантия качества</div>
+                        <div class="delivery-desc">Вернём деньги без вопросов</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1542,47 +1393,6 @@
             }, 200);
         });
 
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const follower = document.querySelector('.cursor-follower');
-        
-        document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, {
-                x: e.clientX - 10,
-                y: e.clientY - 10,
-                duration: 0.1
-            });
-            gsap.to(follower, {
-                x: e.clientX - 20,
-                y: e.clientY - 20,
-                duration: 0.3
-            });
-        });
-
-        document.addEventListener('mousedown', () => {
-            cursor.style.transform = 'scale(0.8)';
-            follower.style.transform = 'scale(0.8)';
-        });
-
-        document.addEventListener('mouseup', () => {
-            cursor.style.transform = 'scale(1)';
-            follower.style.transform = 'scale(1)';
-        });
-
-        // Hover effects for cursor
-        document.querySelectorAll('a, button, .product-card').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(1.5)';
-                follower.style.transform = 'scale(1.5)';
-                cursor.style.borderColor = '#FF6B9D';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                follower.style.transform = 'scale(1)';
-                cursor.style.borderColor = '#4ECDC4';
-            });
-        });
-
         // Scroll Progress
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
@@ -1655,7 +1465,6 @@
                 particlesMesh.rotation.x = mouseY * 0.5;
                 particlesMesh.rotation.y += mouseX * 0.5;
                 
-                // Wave effect
                 const positions = particlesGeometry.attributes.position.array;
                 for(let i = 0; i < particlesCount; i++) {
                     const i3 = i * 3;
@@ -1668,7 +1477,6 @@
             
             animate();
 
-            // Resize
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
@@ -1680,26 +1488,13 @@
         function initAnimations() {
             gsap.registerPlugin(ScrollTrigger);
 
-            // Hero animations
-            gsap.to('.hero-title .line span', {
-                y: 0,
-                duration: 1,
+            // Hero animations - fade in
+            gsap.from('.hero-content > *', {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
                 stagger: 0.2,
-                ease: 'power4.out'
-            });
-
-            gsap.to('.hero-subtitle', {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                delay: 0.6
-            });
-
-            gsap.to('.hero-buttons', {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                delay: 0.8
+                ease: 'power3.out'
             });
 
             // Stats counter animation
@@ -1717,28 +1512,30 @@
                 });
             });
 
-            // Product cards
-            gsap.from('.product-card', {
-                y: 100,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.2,
-                scrollTrigger: {
-                    trigger: '.products-grid',
-                    start: 'top 80%'
-                }
-            });
-
-            // Feature items
-            gsap.from('.feature-item', {
-                x: -50,
-                opacity: 0,
-                duration: 0.6,
-                stagger: 0.15,
-                scrollTrigger: {
-                    trigger: '.features-list',
-                    start: 'top 80%'
-                }
+            // Slides animation
+            gsap.utils.toArray('.slide').forEach((slide, i) => {
+                const image = slide.querySelector('.slide-image');
+                const content = slide.querySelector('.slide-content');
+                
+                gsap.from(image, {
+                    x: i % 2 === 0 ? -100 : 100,
+                    opacity: 0,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: slide,
+                        start: 'top 70%'
+                    }
+                });
+                
+                gsap.from(content, {
+                    x: i % 2 === 0 ? 100 : -100,
+                    opacity: 0,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: slide,
+                        start: 'top 70%'
+                    }
+                });
             });
 
             // Korea cards
@@ -1765,7 +1562,7 @@
                 }
             });
 
-            // CTA container
+            // CTA
             gsap.from('.cta-container', {
                 y: 50,
                 opacity: 0,
@@ -1776,31 +1573,6 @@
                 }
             });
         }
-
-        // Product card tilt effect
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = (y - centerY) / 20;
-                const rotateY = (centerX - x) / 20;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
-                
-                // Update gradient position
-                card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
-                card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-            });
-        });
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1818,21 +1590,6 @@
 
         // Initialize
         initThree();
-
-        // Magnetic buttons
-        document.querySelectorAll('.btn-primary, .nav-cta').forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-            });
-            
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'translate(0, 0)';
-            });
-        });
     </script>
 </body>
 </html>
