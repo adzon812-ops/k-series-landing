@@ -16,12 +16,13 @@
         }
 
         :root {
-            --primary-blue: #4ECDC4;
-            --primary-purple: #C7B8EA;
-            --accent-pink: #FF6B9D;
-            --accent-gold: #FFD93D;
-            --dark: #0f0f1e;
-            --darker: #0a0a14;
+            --primary-blue: #00d4ff;
+            --primary-purple: #b967ff;
+            --accent-pink: #ff6b9d;
+            --accent-gold: #ffd700;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --card-bg: #1a1a2e;
             --light: #ffffff;
         }
 
@@ -93,10 +94,9 @@
         }
 
         .nav.scrolled {
-            background: rgba(15, 15, 30, 0.98);
+            background: rgba(10, 10, 18, 0.98);
             backdrop-filter: blur(20px);
             padding: 15px 50px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
         }
 
         .logo {
@@ -147,12 +147,12 @@
             font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(78, 205, 196, 0.4);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
         }
 
         .nav-cta:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.6);
         }
 
         /* Hero Section */
@@ -163,7 +163,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a3e 50%, #0f0f1e 100%);
+            background: linear-gradient(135deg, #0a0a12 0%, #1a1a3e 50%, #0a0a12 100%);
             padding-top: 100px;
         }
 
@@ -234,7 +234,7 @@
             align-items: center;
             gap: 10px;
             padding: 15px 35px;
-            background: rgba(78, 205, 196, 0.2);
+            background: rgba(0, 212, 255, 0.2);
             border: 2px solid var(--primary-blue);
             border-radius: 50px;
             font-size: 1.1rem;
@@ -255,7 +255,7 @@
             line-height: 1.1;
             margin-bottom: 30px;
             color: white;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .gradient-text {
@@ -275,7 +275,7 @@
 
         .hero-subtitle {
             font-size: 1.5rem;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.95);
             margin-bottom: 50px;
             line-height: 1.8;
             max-width: 800px;
@@ -300,12 +300,12 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.6);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.6);
         }
 
         .btn-secondary {
@@ -334,10 +334,10 @@
             display: flex;
             gap: 80px;
             padding: 35px 70px;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.6);
             backdrop-filter: blur(20px);
             border-radius: 25px;
-            border: 2px solid rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.15);
             z-index: 10;
         }
 
@@ -357,16 +357,15 @@
 
         .stat-label {
             font-size: 1.1rem;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
             margin-top: 10px;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         /* Product Slides */
         .product-showcase {
             padding: 120px 50px;
             background: var(--darker);
-            position: relative;
         }
 
         .section-header {
@@ -377,7 +376,7 @@
         .section-label {
             display: inline-block;
             padding: 12px 30px;
-            background: rgba(78, 205, 196, 0.2);
+            background: rgba(0, 212, 255, 0.2);
             border: 2px solid var(--primary-blue);
             border-radius: 50px;
             color: var(--primary-blue);
@@ -397,7 +396,7 @@
 
         .section-subtitle {
             font-size: 1.4rem;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.6;
@@ -416,28 +415,11 @@
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             align-items: center;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            background: var(--card-bg);
             border-radius: 40px;
             padding: 60px;
             border: 2px solid rgba(255,255,255,0.1);
             position: relative;
-            overflow: hidden;
-        }
-
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(78, 205, 196, 0.1), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-
-        .slide:hover::before {
-            opacity: 1;
         }
 
         .slide:nth-child(even) {
@@ -454,7 +436,6 @@
             justify-content: center;
             align-items: center;
             min-height: 450px;
-            z-index: 2;
         }
 
         .slide-image img {
@@ -486,10 +467,6 @@
             50% { transform: scale(1.2); opacity: 0.6; }
         }
 
-        .slide-content {
-            z-index: 2;
-        }
-
         .slide-content h3 {
             font-size: 3.5rem;
             font-weight: 900;
@@ -502,14 +479,14 @@
 
         .slide-tagline {
             font-size: 1.5rem;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.95);
             margin-bottom: 30px;
             font-style: italic;
             font-weight: 500;
         }
 
         .slide-description {
-            color: rgba(255,255,255,0.85);
+            color: rgba(255,255,255,0.9);
             line-height: 1.8;
             margin-bottom: 35px;
             font-size: 1.2rem;
@@ -571,17 +548,28 @@
 
         .slide-price span {
             font-size: 1.3rem;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.7);
             font-weight: 500;
         }
 
-        /* Korea Section - Dark Background */
+        /* KOREA SECTION - BRIGHT VERSION */
         .korea {
             padding: 150px 50px;
-            background: linear-gradient(180deg, var(--darker) 0%, #1a1a3e 50%, var(--darker) 100%);
+            background: linear-gradient(180deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%);
             position: relative;
-            border-top: 2px solid rgba(78, 205, 196, 0.2);
-            border-bottom: 2px solid rgba(78, 205, 196, 0.2);
+            overflow: hidden;
+        }
+
+        .korea::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.3)"/></svg>');
+            background-size: 50px 50px;
+            opacity: 0.5;
         }
 
         .korea-content {
@@ -595,20 +583,37 @@
         .korea-flag {
             width: 140px;
             height: 140px;
-            margin: 0 auto 50px;
-            background: linear-gradient(135deg, #fff, #e0e0e0);
+            margin: 0 auto 40px;
+            background: linear-gradient(135deg, #fff, #f0f0f0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 4.5rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(78, 205, 196, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             animation: rotateSlow 20s linear infinite;
         }
 
         @keyframes rotateSlow {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+
+        .korea .section-label {
+            background: rgba(255,255,255,0.3);
+            border-color: white;
+            color: white;
+        }
+
+        .korea .section-title {
+            color: white;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .korea .section-subtitle {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.5rem;
+            font-weight: 500;
         }
 
         .korea-grid {
@@ -619,54 +624,51 @@
         }
 
         .korea-card {
-            padding: 50px 30px;
-            background: rgba(255,255,255,0.05);
-            border: 2px solid rgba(255,255,255,0.15);
-            border-radius: 30px;
+            padding: 40px 25px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
             transition: all 0.5s;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
 
         .korea-card:hover {
             transform: translateY(-15px);
-            border-color: var(--primary-blue);
-            background: rgba(78, 205, 196, 0.1);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
         }
 
         .korea-icon {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
+            font-size: 3rem;
+            margin-bottom: 20px;
         }
 
         .korea-number {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-gold));
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             line-height: 1;
         }
 
         .korea-label {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: white;
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #1e3a8a;
         }
 
         .korea-desc {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            color: #4b5563;
             line-height: 1.5;
+            font-weight: 500;
         }
 
-        /* Safety Section - Dark with Contrast */
+        /* SAFETY SECTION - BRIGHT VERSION */
         .safety {
             padding: 150px 50px;
-            background: var(--dark);
+            background: linear-gradient(180deg, #0f766e 0%, #14b8a6 50%, #0d9488 100%);
             position: relative;
         }
 
@@ -677,7 +679,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(78, 205, 196, 0.1), transparent 50%);
+            background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.2), transparent 50%);
         }
 
         .safety-container {
@@ -685,6 +687,23 @@
             margin: 0 auto;
             position: relative;
             z-index: 2;
+        }
+
+        .safety .section-label {
+            background: rgba(255,255,255,0.3);
+            border-color: white;
+            color: white;
+        }
+
+        .safety .section-title {
+            color: white;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .safety .section-subtitle {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.5rem;
+            font-weight: 500;
         }
 
         .safety-grid {
@@ -695,42 +714,39 @@
         }
 
         .safety-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-            border: 2px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.95);
             border-radius: 35px;
-            padding: 60px 40px;
+            padding: 50px 35px;
             text-align: center;
             transition: all 0.5s;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
         }
 
         .safety-card:hover {
             transform: scale(1.03);
-            border-color: var(--accent-pink);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
         }
 
         .safety-icon {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 35px;
-            background: linear-gradient(135deg, var(--accent-pink), var(--accent-gold));
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #0d9488, #14b8a6);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.5rem;
+            font-size: 3rem;
             position: relative;
-            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            box-shadow: 0 10px 30px rgba(13, 148, 136, 0.4);
         }
 
         .safety-icon::after {
             content: '';
             position: absolute;
-            width: 140%;
-            height: 140%;
-            border: 3px solid var(--accent-pink);
+            width: 120%;
+            height: 120%;
+            border: 3px solid #14b8a6;
             border-radius: 50%;
             animation: pulseBorder 2s ease-out infinite;
         }
@@ -741,10 +757,10 @@
         }
 
         .safety-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            margin-bottom: 30px;
-            color: white;
+            margin-bottom: 25px;
+            color: #0f766e;
         }
 
         .safety-list {
@@ -753,13 +769,13 @@
         }
 
         .safety-list li {
-            padding: 18px 0;
-            color: rgba(255,255,255,0.95);
+            padding: 15px 0;
+            color: #374151;
             position: relative;
-            padding-left: 45px;
-            font-size: 1.2rem;
-            font-weight: 500;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-left: 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
 
         .safety-list li:last-child {
@@ -770,9 +786,9 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: var(--primary-blue);
+            color: #0d9488;
             font-weight: 900;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             top: 50%;
             transform: translateY(-50%);
         }
@@ -780,20 +796,8 @@
         /* CTA Section */
         .cta {
             padding: 150px 50px;
-            background: linear-gradient(135deg, #1a1a3e 0%, #0f0f1e 100%);
+            background: linear-gradient(135deg, #1a1a3e 0%, #0a0a12 100%);
             position: relative;
-            overflow: hidden;
-        }
-
-        .cta::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(78, 205, 196, 0.1), transparent 70%);
-            animation: rotateSlow 30s linear infinite;
         }
 
         .cta-container {
@@ -801,7 +805,7 @@
             margin: 0 auto;
             text-align: center;
             padding: 80px 60px;
-            background: linear-gradient(135deg, rgba(78, 205, 196, 0.25), rgba(199, 184, 234, 0.25));
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(185, 103, 255, 0.3));
             border-radius: 50px;
             border: 3px solid rgba(255,255,255,0.2);
             position: relative;
@@ -814,7 +818,7 @@
             font-weight: 900;
             margin-bottom: 25px;
             color: white;
-            text-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            text-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
 
         .cta-subtitle {
@@ -834,8 +838,8 @@
 
         .cta-input {
             padding: 22px 35px;
-            background: rgba(255,255,255,0.15);
-            border: 3px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.2);
+            border: 3px solid rgba(255,255,255,0.3);
             border-radius: 50px;
             color: white;
             font-size: 1.2rem;
@@ -846,23 +850,23 @@
 
         .cta-input:focus {
             border-color: var(--primary-blue);
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.25);
         }
 
         .cta-input::placeholder {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.7);
         }
 
         .discount-badge {
             display: inline-block;
             padding: 25px 50px;
             background: var(--accent-gold);
-            color: var(--dark);
+            color: #1a1a2e;
             font-weight: 900;
             font-size: 2rem;
             border-radius: 50px;
             animation: bounce 2s infinite;
-            box-shadow: 0 10px 30px rgba(255, 217, 61, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
         }
 
         @keyframes bounce {
@@ -887,13 +891,13 @@
         .delivery-icon {
             width: 70px;
             height: 70px;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.2);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.2rem;
-            border: 2px solid rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
         }
 
         .delivery-text {
@@ -909,13 +913,13 @@
 
         .delivery-desc {
             font-size: 1.1rem;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
         }
 
         /* Footer */
         .footer {
             padding: 100px 50px 40px;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.5);
             border-top: 2px solid rgba(255,255,255,0.1);
         }
 
@@ -934,7 +938,7 @@
         }
 
         .footer-desc {
-            color: rgba(255,255,255,0.85);
+            color: rgba(255,255,255,0.9);
             line-height: 1.8;
             margin-bottom: 35px;
             font-size: 1.2rem;
@@ -948,7 +952,7 @@
         .social-link {
             width: 55px;
             height: 55px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -982,7 +986,7 @@
         }
 
         .footer-links a {
-            color: rgba(255,255,255,0.85);
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
             transition: all 0.3s;
             font-size: 1.15rem;
@@ -1012,14 +1016,14 @@
         .contact-icon {
             width: 50px;
             height: 50px;
-            background: rgba(78, 205, 196, 0.2);
+            background: rgba(0, 212, 255, 0.2);
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary-blue);
             font-size: 1.3rem;
-            border: 2px solid rgba(78, 205, 196, 0.3);
+            border: 2px solid rgba(0, 212, 255, 0.3);
         }
 
         .footer-bottom {
@@ -1030,7 +1034,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
             font-size: 1.1rem;
         }
 
@@ -1283,13 +1287,13 @@
         </div>
     </section>
 
-    <!-- Korea Section -->
+    <!-- Korea Section - BRIGHT BLUE -->
     <section class="korea" id="korea">
         <div class="korea-content">
             <div class="korea-flag">🇰🇷</div>
             <div class="section-label">Почему Корея?</div>
             <h2 class="section-title">Корейская бытовая химия</h2>
-            <p class="section-subtitle" style="color: rgba(255,255,255,0.9); font-size: 1.4rem; max-width: 900px; margin: 0 auto; line-height: 1.7;">
+            <p class="section-subtitle">
                 Южная Корея — мировой лидер в производстве бытовой химии с 60-летней историей инноваций. Корейские технологии сочетают древние традиции натуральных компонентов с передовыми научными разработками.
             </p>
             
@@ -1325,13 +1329,13 @@
         </div>
     </section>
 
-    <!-- Safety Section -->
+    <!-- Safety Section - BRIGHT TEAL -->
     <section class="safety" id="safety">
         <div class="safety-container">
             <div class="section-header">
                 <div class="section-label">Безопасность</div>
                 <h2 class="section-title">Безопасность прежде всего</h2>
-                <p class="section-subtitle" style="color: rgba(255,255,255,0.9); font-size: 1.4rem;">
+                <p class="section-subtitle">
                     Все продукты K-LIFE разработаны с заботой о вашей семье и окружающей среде. Мы используем только проверенные и безопасные компоненты.
                 </p>
             </div>
@@ -1348,7 +1352,7 @@
                 </div>
                 
                 <div class="safety-card">
-                    <div class="safety-icon" style="background: linear-gradient(135deg, var(--primary-blue), #00f2fe);">✅</div>
+                    <div class="safety-icon" style="background: linear-gradient(135deg, #0d9488, #14b8a6);">✅</div>
                     <h3 class="safety-title">Одобрено и сертифицировано</h3>
                     <ul class="safety-list">
                         <li>FDA одобрено — Федеральное агентство США</li>
@@ -1358,7 +1362,7 @@
                 </div>
                 
                 <div class="safety-card">
-                    <div class="safety-icon" style="background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));">🌍</div>
+                    <div class="safety-icon" style="background: linear-gradient(135deg, #0d9488, #14b8a6);">🌍</div>
                     <h3 class="safety-title">Эко-ответственность</h3>
                     <ul class="safety-list">
                         <li>Биоразлагаемо — безопасно для природы</li>
@@ -1535,7 +1539,7 @@
             
             const particlesMaterial = new THREE.PointsMaterial({
                 size: 0.005,
-                color: 0x4ECDC4,
+                color: 0x00d4ff,
                 transparent: true,
                 opacity: 0.8,
                 blending: THREE.AdditiveBlending
